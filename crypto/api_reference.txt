@@ -1,0 +1,58 @@
+CryptoBot API Reference
+
+Base URL: https://pay.crypt.bot/api
+
+Authentication:
+- All requests must include the Crypto-Pay-API-Token header with your API token.
+
+Available Methods:
+
+1. GET /getMe
+   - Description: Get information about the app.
+   - Parameters: None
+
+2. POST /createInvoice
+   - Description: Create a new invoice.
+   - Parameters:
+     - asset: String (required) - Currency code (BTC, TON, ETH, USDT, USDC, BUSD)
+     - amount: Number (required) - Amount in the specified currency
+     - description: String (optional) - Description of the invoice
+     - hidden_message: String (optional) - Hidden message for the invoice
+     - payload: String (optional) - Custom data to pass with the invoice
+     - allow_comments: Boolean (optional) - Allow comments for the invoice
+     - allow_anonymous: Boolean (optional) - Allow anonymous payments
+
+3. GET /getInvoices
+   - Description: Get a list of invoices.
+   - Parameters:
+     - asset: String (optional) - Filter by currency
+     - invoice_ids: String (optional) - Comma-separated list of invoice IDs
+     - status: String (optional) - Filter by status (active, paid, expired)
+     - offset: Number (optional) - Offset for pagination
+     - count: Number (optional) - Number of invoices to return
+
+4. GET /getBalance
+   - Description: Get the current balance.
+   - Parameters: None
+
+5. GET /getExchangeRates
+   - Description: Get current exchange rates.
+   - Parameters: None
+
+Example Response Format:
+{
+  "ok": true,
+  "result": {
+    // Response data
+  }
+}
+
+Error Response Format:
+{
+  "ok": false,
+  "error": {
+    "code": 123,
+    "name": "ERROR_NAME",
+    "description": "Error description"
+  }
+}

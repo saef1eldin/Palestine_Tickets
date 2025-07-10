@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#f9f7ff"/>
+  <circle cx="250" cy="250" r="100" fill="#e9d5ff" opacity="0.7"/>
+  <circle cx="400" cy="200" r="100" fill="#e9d5ff" opacity="0.7"/>
+  <circle cx="550" cy="250" r="100" fill="#e9d5ff" opacity="0.7"/>
+  
+  <!-- Person 1 -->
+  <circle cx="250" cy="200" r="40" fill="#9333ea"/>
+  <circle cx="250" cy="320" r="60" fill="#9333ea"/>
+  
+  <!-- Person 2 -->
+  <circle cx="400" cy="150" r="40" fill="#9333ea"/>
+  <circle cx="400" cy="270" r="60" fill="#9333ea"/>
+  
+  <!-- Person 3 -->
+  <circle cx="550" cy="200" r="40" fill="#9333ea"/>
+  <circle cx="550" cy="320" r="60" fill="#9333ea"/>
+  
+  <!-- Connection lines -->
+  <path d="M310,270 L350,270" stroke="#9333ea" stroke-width="5"/>
+  <path d="M460,270 L500,270" stroke="#9333ea" stroke-width="5"/>
+</svg>

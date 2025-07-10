@@ -1,0 +1,104 @@
+/* تنسيقات مخصصة للوحة الإدارة */
+
+/* تنسيق جدول بطاقات الدفع */
+.payment-cards-table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.payment-cards-table thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.payment-cards-table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.payment-cards-table td {
+    vertical-align: middle;
+    padding: 12px 15px;
+}
+
+/* تنسيق الأزرار */
+.action-buttons .btn {
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+/* تنسيق البطاقات */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px 20px;
+}
+
+.card-header h5 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* تنسيق الشارات */
+.badge {
+    padding: 6px 10px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+/* تنسيق أرقام البطاقات */
+.card-number {
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+/* تنسيق المبالغ */
+.amount {
+    font-weight: 600;
+    color: #28a745;
+}
+
+/* تنسيق التاريخ */
+.date-time {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+/* تنسيق معلومات المستخدم */
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 600;
+}
+
+.user-email {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* تنسيق حالة الدفع */
+.status-processed {
+    background-color: #28a745;
+}
+
+.status-pending {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.status-failed {
+    background-color: #dc3545;
+}
