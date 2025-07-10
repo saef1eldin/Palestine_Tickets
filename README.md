@@ -1,5 +1,6 @@
-# Event Management & Transport Booking System
-# نظام إدارة الفعاليات وحجز المواصلات
+# Palestine_Tickets
+
+# تذاكر فلسطين
 
 ## Overview | نظرة عامة
 A comprehensive web-based platform that combines event management and transport booking capabilities. This system allows users to browse events, purchase tickets, and arrange transportation, while providing administrators with powerful management tools.
