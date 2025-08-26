@@ -50,7 +50,11 @@ function get_trips_by_event_and_starting_point($event_id, $starting_point_id) {
             d.phone as driver_phone,
             d.rating as driver_rating,
             d.photo as driver_photo,
-            d.experience_years
+            d.experience_years,
+            CASE
+                WHEN t.departure_time < NOW() THEN 1
+                ELSE 0
+            END as is_expired
         FROM transport_trips t
         JOIN transport_starting_points sp ON t.starting_point_id = sp.id
         JOIN transport_types tt ON t.transport_type_id = tt.id
@@ -59,8 +63,9 @@ function get_trips_by_event_and_starting_point($event_id, $starting_point_id) {
         WHERE t.event_id = :event_id
         AND t.starting_point_id = :starting_point_id
         AND t.is_active = 1
-        AND t.available_seats > 0
-        ORDER BY t.departure_time ASC
+        ORDER BY
+            CASE WHEN t.departure_time < NOW() THEN 1 ELSE 0 END ASC,
+            t.departure_time ASC
     ");
 
     $db->bind(':event_id', $event_id);

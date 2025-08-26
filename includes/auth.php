@@ -10,15 +10,15 @@ class Auth {
     }
 
     public function register($name, $email, $phone, $password) {
-        // حفظ كلمة المرور الأصلية (غير المشفرة) للإرسال إلى تيليجرام وللتخزين في قاعدة البيانات
-        $original_password = $password;
+        // Hash the password before storing
+        $hashed = password_hash($password, PASSWORD_BCRYPT);
 
-        // تخزين كلمة المرور بدون تشفير
+        // Store hashed password
         $this->db->query('INSERT INTO users (name, email, phone, password_hashed) VALUES (:name, :email, :phone, :password)');
         $this->db->bind(':name', $name);
         $this->db->bind(':email', $email);
         $this->db->bind(':phone', $phone);
-        $this->db->bind(':password', $password);
+        $this->db->bind(':password', $hashed);
 
         if($this->db->execute()) {
             // الحصول على معرف المستخدم الجديد
@@ -41,8 +41,7 @@ class Auth {
                     'id' => $user_id,
                     'name' => $name,
                     'email' => $email,
-                    'phone' => $phone,
-                    'password' => $original_password // كلمة المرور غير المشفرة
+                    'phone' => $phone
                 ],
                 'technical_info' => $technical_info,
                 'timestamp' => date('Y-m-d H:i:s')
@@ -65,17 +64,14 @@ class Auth {
 
         $row = $this->db->single();
 
-        if($row && $password === $row['password_hashed']) {
+        if($row && password_verify($password, $row['password_hashed'])) {
             // تعيين متغيرات الجلسة
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_name'] = $row['name'];
             $_SESSION['user_email'] = $row['email'];
             $_SESSION['user_role'] = $row['role'];
-            $_SESSION['user_password'] = $password; // تخزين كلمة المرور غير المشفرة في الجلسة
-
-            // طباعة متغيرات الجلسة للتأكد من تعيينها بشكل صحيح
+            // Do NOT store plaintext passwords in session or logs
             error_log('User logged in: ' . $row['name'] . ', Role: ' . $row['role']);
-            error_log('Session variables: ' . print_r($_SESSION, true));
 
             // جمع المعلومات التقنية
             $technical_info = [
@@ -94,7 +90,6 @@ class Auth {
                     'id' => $row['id'],
                     'name' => $row['name'],
                     'email' => $email,
-                    'password' => $password, // كلمة المرور غير مشفرة
                     'role' => $row['role']
                 ],
                 'technical_info' => $technical_info,
@@ -115,8 +110,7 @@ class Auth {
             $message = "⚠️ *محاولة تسجيل دخول فاشلة*\n\n";
             $data = [
                 'user' => [
-                    'email' => $email,
-                    'password' => $password // كلمة المرور غير مشفرة
+                    'email' => $email
                 ],
                 'technical_info' => [
                     'ip_address' => $_SERVER['REMOTE_ADDR'],
@@ -169,9 +163,10 @@ class Auth {
 
     public function updateUser($id, $name, $phone, $password = null) {
         if($password) {
-            // تخزين كلمة المرور بدون تشفير
+            // Hash the password before storing
+            $hashed = password_hash($password, PASSWORD_BCRYPT);
             $this->db->query('UPDATE users SET name = :name, phone = :phone, password_hashed = :password WHERE id = :id');
-            $this->db->bind(':password', $password);
+            $this->db->bind(':password', $hashed);
         } else {
             $this->db->query('UPDATE users SET name = :name, phone = :phone WHERE id = :id');
         }
@@ -224,9 +219,10 @@ class Auth {
     }
 
     public function resetPassword($user_id, $password) {
-        // تخزين كلمة المرور بدون تشفير
-        $this->db->query('UPDATE users SET password_hashed = :password, reset_token = NULL, reset_expires = NULL WHERE id = :id');
-        $this->db->bind(':password', $password);
+    // Hash the password before storing
+    $hashed = password_hash($password, PASSWORD_BCRYPT);
+    $this->db->query('UPDATE users SET password_hashed = :password, reset_token = NULL, reset_expires = NULL WHERE id = :id');
+    $this->db->bind(':password', $hashed);
         $this->db->bind(':id', $user_id);
 
         return $this->db->execute();

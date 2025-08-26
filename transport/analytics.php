@@ -24,10 +24,10 @@ $total_trips = $db->single()['total_trips'];
 $db->query("SELECT COUNT(*) as total_bookings FROM transport_bookings");
 $total_bookings = $db->single()['total_bookings'];
 
-$db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE payment_status = 'confirmed'");
+$db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE status = 'confirmed'");
 $total_revenue = $db->single()['total_revenue'] ?? 0;
 
-$db->query("SELECT AVG(total_amount) as avg_booking_value FROM transport_bookings WHERE payment_status = 'confirmed'");
+$db->query("SELECT AVG(total_amount) as avg_booking_value FROM transport_bookings WHERE status = 'confirmed'");
 $avg_booking_value = $db->single()['avg_booking_value'] ?? 0;
 
 // معدل الإشغال
@@ -37,7 +37,7 @@ $db->query("
         SUM(t.available_seats) as total_seats
     FROM transport_bookings tb
     JOIN transport_trips t ON tb.trip_id = t.id
-    WHERE tb.payment_status = 'confirmed'
+    WHERE tb.status = 'confirmed'
 ");
 $occupancy_data = $db->single();
 $occupancy_rate = $occupancy_data['total_seats'] > 0 ? ($occupancy_data['booked_seats'] / $occupancy_data['total_seats']) * 100 : 0;
@@ -52,7 +52,7 @@ $db->query("
     JOIN transport_trips t ON tb.trip_id = t.id
     JOIN transport_starting_points sp ON t.starting_point_id = sp.id
     JOIN events e ON tb.event_id = e.id
-    WHERE tb.payment_status = 'confirmed'
+    WHERE tb.status = 'confirmed'
     GROUP BY t.starting_point_id, tb.event_id
     ORDER BY booking_count DESC
     LIMIT 5
@@ -66,7 +66,7 @@ $db->query("
         SUM(total_amount) as monthly_revenue,
         COUNT(*) as monthly_bookings
     FROM transport_bookings 
-    WHERE payment_status = 'confirmed' 
+    WHERE status = 'confirmed'
     AND created_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
     GROUP BY DATE_FORMAT(created_at, '%Y-%m')
     ORDER BY month
@@ -211,7 +211,7 @@ $monthly_data = $db->resultSet();
                     <i class="fas fa-check-circle text-green-500"></i>
                 </div>
                 <?php
-                $db->query("SELECT COUNT(*) as confirmed FROM transport_bookings WHERE payment_status = 'confirmed'");
+                $db->query("SELECT COUNT(*) as confirmed FROM transport_bookings WHERE status = 'confirmed'");
                 $confirmed = $db->single()['confirmed'];
                 $success_rate = $total_bookings > 0 ? ($confirmed / $total_bookings) * 100 : 0;
                 ?>
@@ -232,6 +232,115 @@ $monthly_data = $db->resultSet();
                 <div class="text-3xl font-bold text-purple-600 mb-2"><?php echo $active_trips; ?></div>
                 <p class="text-gray-500 text-sm">رحلات قادمة</p>
             </div>
+        </div>
+
+        <!-- Payment Methods Statistics -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-6">
+                <i class="fas fa-credit-card text-blue-500 ml-2"></i>
+                إحصائيات طرق الدفع
+            </h3>
+
+            <?php
+            // جلب إحصائيات طرق الدفع
+            $db->query("
+                SELECT
+                    payment_method,
+                    COUNT(*) as count,
+                    SUM(total_amount) as total_amount,
+                    AVG(total_amount) as avg_amount
+                FROM transport_bookings
+                WHERE status = 'confirmed'
+                GROUP BY payment_method
+                ORDER BY count DESC
+            ");
+            $payment_methods = $db->resultSet();
+
+            // حساب المجموع الكلي
+            $total_payments = array_sum(array_column($payment_methods, 'count'));
+            $total_amount_all = array_sum(array_column($payment_methods, 'total_amount'));
+            ?>
+
+            <?php if (!empty($payment_methods)): ?>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                    <?php foreach ($payment_methods as $method): ?>
+                        <?php
+                        $percentage = $total_payments > 0 ? ($method['count'] / $total_payments) * 100 : 0;
+                        $method_name = [
+                            'credit_card' => 'بطاقة ائتمان',
+                            'paypal' => 'PayPal',
+                            'cash' => 'نقداً',
+                            'bank_transfer' => 'تحويل بنكي'
+                        ][$method['payment_method']] ?? $method['payment_method'];
+
+                        $icon = [
+                            'credit_card' => 'fas fa-credit-card text-blue-500',
+                            'paypal' => 'fab fa-paypal text-blue-600',
+                            'cash' => 'fas fa-money-bill-wave text-green-500',
+                            'bank_transfer' => 'fas fa-university text-purple-500'
+                        ][$method['payment_method']] ?? 'fas fa-payment text-gray-500';
+                        ?>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-semibold text-gray-800"><?php echo $method_name; ?></h4>
+                                <i class="<?php echo $icon; ?>"></i>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">عدد الحجوزات:</span>
+                                    <span class="font-bold"><?php echo $method['count']; ?></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">النسبة:</span>
+                                    <span class="font-bold text-blue-600"><?php echo number_format($percentage, 1); ?>%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">إجمالي المبلغ:</span>
+                                    <span class="font-bold text-green-600"><?php echo number_format($method['total_amount'], 2); ?> ₪</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">متوسط الحجز:</span>
+                                    <span class="font-bold"><?php echo number_format($method['avg_amount'], 2); ?> ₪</span>
+                                </div>
+                            </div>
+                            <!-- Progress Bar -->
+                            <div class="mt-3">
+                                <div class="bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: <?php echo $percentage; ?>%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- Summary -->
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">ملخص طرق الدفع</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div>
+                            <div class="text-2xl font-bold text-blue-600"><?php echo count($payment_methods); ?></div>
+                            <div class="text-sm text-blue-700">طرق دفع مستخدمة</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-green-600"><?php echo $total_payments; ?></div>
+                            <div class="text-sm text-green-700">إجمالي المدفوعات</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-purple-600"><?php echo number_format($total_amount_all, 2); ?> ₪</div>
+                            <div class="text-sm text-purple-700">إجمالي المبلغ</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-orange-600"><?php echo $total_payments > 0 ? number_format($total_amount_all / $total_payments, 2) : 0; ?> ₪</div>
+                            <div class="text-sm text-orange-700">متوسط الدفعة</div>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="text-center py-8">
+                    <i class="fas fa-chart-bar text-gray-400 text-4xl mb-4"></i>
+                    <p class="text-gray-500">لا توجد بيانات دفع متاحة حالياً</p>
+                </div>
+            <?php endif; ?>
         </div>
     </main>
 

@@ -62,7 +62,8 @@ function loginUser($pdo, $email, $password) {
         }
 
         // التحقق من كلمة المرور (بدون تشفير)
-        if ($password === $user['password_hashed'] || $password === 'password') {
+            // Verify password using password_verify
+            if (password_verify($password, $user['password_hashed'])) {
             // تعيين متغيرات الجلسة
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
@@ -70,8 +71,7 @@ function loginUser($pdo, $email, $password) {
             $_SESSION['user_role'] = $user['role'];
 
             // تسجيل تسجيل الدخول
-            error_log("User logged in: {$user['name']}, Role: {$user['role']}");
-            error_log("Session variables: " . print_r($_SESSION, true));
+                error_log("User logged in: {$user['name']}, Role: {$user['role']}");
 
             return ['success' => true, 'message' => 'تم تسجيل الدخول بنجاح'];
         } else {

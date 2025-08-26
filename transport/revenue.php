@@ -17,17 +17,34 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'transport_admi
 
 $db = new Database();
 
-// جلب إحصائيات الإيرادات
+// جلب إحصائيات الإيرادات من المواصلات
 $db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE payment_status = 'confirmed'");
-$total_revenue = $db->single()['total_revenue'] ?? 0;
+$transport_revenue = $db->single()['total_revenue'] ?? 0;
 
-// إيرادات هذا الشهر
+// جلب إحصائيات الإيرادات من التذاكر العادية (بما في ذلك المنتهية)
+$db->query("SELECT SUM(total_amount) as tickets_revenue FROM orders WHERE payment_status = 'confirmed'");
+$tickets_revenue = $db->single()['tickets_revenue'] ?? 0;
+
+// إجمالي الإيرادات
+$total_revenue = $transport_revenue + $tickets_revenue;
+
+// إيرادات هذا الشهر (مواصلات + تذاكر)
 $db->query("SELECT SUM(total_amount) as monthly_revenue FROM transport_bookings WHERE payment_status = 'confirmed' AND MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW())");
-$monthly_revenue = $db->single()['monthly_revenue'] ?? 0;
+$monthly_transport = $db->single()['monthly_revenue'] ?? 0;
 
-// إيرادات الشهر الماضي
+$db->query("SELECT SUM(total_amount) as monthly_revenue FROM orders WHERE payment_status = 'confirmed' AND MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW())");
+$monthly_tickets = $db->single()['monthly_revenue'] ?? 0;
+
+$monthly_revenue = $monthly_transport + $monthly_tickets;
+
+// إيرادات الشهر الماضي (مواصلات + تذاكر)
 $db->query("SELECT SUM(total_amount) as last_month_revenue FROM transport_bookings WHERE payment_status = 'confirmed' AND MONTH(created_at) = MONTH(NOW()) - 1 AND YEAR(created_at) = YEAR(NOW())");
-$last_month_revenue = $db->single()['last_month_revenue'] ?? 0;
+$last_month_transport = $db->single()['last_month_revenue'] ?? 0;
+
+$db->query("SELECT SUM(total_amount) as last_month_revenue FROM orders WHERE payment_status = 'confirmed' AND MONTH(created_at) = MONTH(NOW()) - 1 AND YEAR(created_at) = YEAR(NOW())");
+$last_month_tickets = $db->single()['last_month_revenue'] ?? 0;
+
+$last_month_revenue = $last_month_transport + $last_month_tickets;
 
 // متوسط سعر الرحلة
 $db->query("SELECT AVG(total_amount) as avg_trip_price FROM transport_bookings WHERE payment_status = 'confirmed'");
@@ -50,19 +67,49 @@ $db->query("
 ");
 $revenue_by_route = $db->resultSet();
 
-// الإيرادات اليومية للأسبوع الماضي
+// الإيرادات اليومية للأسبوع الماضي (مواصلات + تذاكر)
 $db->query("
-    SELECT 
+    SELECT
         DATE(created_at) as date,
         SUM(total_amount) as daily_revenue,
-        COUNT(*) as daily_bookings
-    FROM transport_bookings 
-    WHERE payment_status = 'confirmed' 
+        COUNT(*) as daily_bookings,
+        'transport' as source
+    FROM transport_bookings
+    WHERE payment_status = 'confirmed'
     AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
     GROUP BY DATE(created_at)
+
+    UNION ALL
+
+    SELECT
+        DATE(created_at) as date,
+        SUM(total_amount) as daily_revenue,
+        COUNT(*) as daily_bookings,
+        'tickets' as source
+    FROM orders
+    WHERE payment_status = 'confirmed'
+    AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+    GROUP BY DATE(created_at)
+
     ORDER BY date
 ");
-$daily_revenue = $db->resultSet();
+$daily_data = $db->resultSet();
+
+// دمج البيانات اليومية
+$daily_revenue = [];
+foreach ($daily_data as $row) {
+    $date = $row['date'];
+    if (!isset($daily_revenue[$date])) {
+        $daily_revenue[$date] = [
+            'date' => $date,
+            'daily_revenue' => 0,
+            'daily_bookings' => 0
+        ];
+    }
+    $daily_revenue[$date]['daily_revenue'] += $row['daily_revenue'];
+    $daily_revenue[$date]['daily_bookings'] += $row['daily_bookings'];
+}
+$daily_revenue = array_values($daily_revenue);
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +147,61 @@ $daily_revenue = $db->resultSet();
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
-        <!-- Revenue Cards -->
+        <!-- Revenue Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <!-- إجمالي الإيرادات -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">إجمالي الإيرادات</p>
+                        <h3 class="text-2xl font-bold text-purple-600"><?php echo number_format($total_revenue, 2); ?> ₪</h3>
+                        <p class="text-sm text-purple-500">
+                            <i class="fas fa-coins ml-1"></i>
+                            مواصلات + تذاكر
+                        </p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-full">
+                        <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إيرادات المواصلات -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">إيرادات المواصلات</p>
+                        <h3 class="text-2xl font-bold text-blue-600"><?php echo number_format($transport_revenue, 2); ?> ₪</h3>
+                        <p class="text-sm text-blue-500">
+                            <i class="fas fa-bus ml-1"></i>
+                            <?php echo $total_revenue > 0 ? number_format(($transport_revenue / $total_revenue) * 100, 1) : 0; ?>% من الإجمالي
+                        </p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <i class="fas fa-bus text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إيرادات التذاكر -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">إيرادات التذاكر</p>
+                        <h3 class="text-2xl font-bold text-green-600"><?php echo number_format($tickets_revenue, 2); ?> ₪</h3>
+                        <p class="text-sm text-green-500">
+                            <i class="fas fa-ticket-alt ml-1"></i>
+                            <?php echo $total_revenue > 0 ? number_format(($tickets_revenue / $total_revenue) * 100, 1) : 0; ?>% من الإجمالي
+                        </p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fas fa-ticket-alt text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Revenue Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div class="bg-white rounded-xl shadow-md p-6">
                 <div class="flex items-center justify-between">

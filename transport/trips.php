@@ -170,6 +170,44 @@ try {
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
+        .expired-trip {
+            opacity: 0.6;
+            position: relative;
+        }
+
+        .expired-trip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 0, 0, 0.1) 10px,
+                rgba(255, 0, 0, 0.1) 20px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .expired-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -283,9 +321,45 @@ try {
             </div>
             <?php else: ?>
 
+            <?php
+            // فحص وجود رحلات منتهية
+            $expiredTrips = array_filter($trips, function($trip) {
+                return isset($trip['is_expired']) && $trip['is_expired'];
+            });
+            $activeTrips = array_filter($trips, function($trip) {
+                return !isset($trip['is_expired']) || !$trip['is_expired'];
+            });
+            ?>
+
+            <?php if (!empty($expiredTrips)): ?>
+            <!-- Expired Trips Notice -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle text-yellow-600 text-xl ml-3"></i>
+                    <div>
+                        <h4 class="text-yellow-800 font-semibold">ملاحظة</h4>
+                        <p class="text-yellow-700 text-sm">
+                            يتم عرض <?php echo count($expiredTrips); ?> رحلة منتهية للمراجعة فقط.
+                            الرحلات المنتهية غير متاحة للحجز.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
             <!-- View Toggle -->
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-purple-800">الرحلات المتاحة (<?php echo count($trips); ?>)</h2>
+                <div>
+                    <h2 class="text-2xl font-bold text-purple-800">
+                        الرحلات
+                        <span class="text-lg text-gray-600">
+                            (<?php echo count($activeTrips); ?> متاحة
+                            <?php if (!empty($expiredTrips)): ?>
+                                • <?php echo count($expiredTrips); ?> منتهية
+                            <?php endif; ?>)
+                        </span>
+                    </h2>
+                </div>
                 <div class="flex space-x-2">
                     <button id="card-view" class="bg-purple-100 text-purple-700 p-2 rounded-lg active">
                         <i class="fas fa-th-large"></i>
@@ -299,7 +373,8 @@ try {
             <!-- Cards View -->
             <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <?php foreach ($trips as $trip): ?>
-                <div class="trip-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <?php $isExpired = isset($trip['is_expired']) && $trip['is_expired']; ?>
+                <div class="trip-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 <?php echo $isExpired ? 'expired-trip' : ''; ?> relative">
                     <div class="p-6">
                         <!-- Trip Header -->
                         <div class="flex justify-between items-start mb-4">
@@ -310,9 +385,15 @@ try {
                                 <div class="text-xs text-gray-500 mt-1"><?php echo $trip['model'] . ' ' . $trip['year']; ?> - <?php echo $trip['plate_number']; ?></div>
                                 <?php endif; ?>
                             </div>
-                            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                                <?php echo $trip['available_seats']; ?> مقاعد متبقية
-                            </span>
+                            <?php if ($isExpired): ?>
+                                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    <i class="fas fa-clock mr-1"></i>منتهية
+                                </span>
+                            <?php else: ?>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    <?php echo $trip['available_seats']; ?> مقاعد متبقية
+                                </span>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Driver Info -->
@@ -371,10 +452,22 @@ try {
                         <!-- Price and Book Button -->
                         <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-100">
                             <div class="text-2xl font-bold text-purple-700"><?php echo $trip['price']; ?> ₪</div>
-                            <a href="Booking_details.php?trip_id=<?php echo $trip['id']; ?>" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-medium transition">
-                                <i class="fas fa-ticket-alt mr-2"></i>احجز الآن
-                            </a>
+                            <?php if ($isExpired): ?>
+                                <button disabled class="bg-gray-400 text-white py-2 px-4 rounded-lg font-medium cursor-not-allowed">
+                                    <i class="fas fa-clock mr-2"></i>منتهية
+                                </button>
+                            <?php else: ?>
+                                <a href="Booking_details.php?trip_id=<?php echo $trip['id']; ?>" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-medium transition">
+                                    <i class="fas fa-ticket-alt mr-2"></i>احجز الآن
+                                </a>
+                            <?php endif; ?>
                         </div>
+
+                        <?php if ($isExpired): ?>
+                        <div class="expired-overlay">
+                            <i class="fas fa-clock mr-2"></i>منتهية
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -396,7 +489,8 @@ try {
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <?php foreach ($trips as $trip): ?>
-                        <tr class="hover:bg-gray-50">
+                        <?php $isExpired = isset($trip['is_expired']) && $trip['is_expired']; ?>
+                        <tr class="hover:bg-gray-50 <?php echo $isExpired ? 'opacity-60' : ''; ?>">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?php echo format_time($trip['departure_time']); ?></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo format_time($trip['arrival_time']); ?></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -422,9 +516,15 @@ try {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-purple-700"><?php echo $trip['price']; ?> ₪</td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="Booking_details.php?trip_id=<?php echo $trip['id']; ?>" class="text-white bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-sm">
-                                    <i class="fas fa-ticket-alt mr-1"></i>حجز
-                                </a>
+                                <?php if ($isExpired): ?>
+                                    <span class="text-white bg-gray-400 px-3 py-1 rounded-md text-sm cursor-not-allowed">
+                                        <i class="fas fa-clock mr-1"></i>منتهية
+                                    </span>
+                                <?php else: ?>
+                                    <a href="Booking_details.php?trip_id=<?php echo $trip['id']; ?>" class="text-white bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-sm">
+                                        <i class="fas fa-ticket-alt mr-1"></i>حجز
+                                    </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

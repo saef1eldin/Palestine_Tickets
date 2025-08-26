@@ -25,7 +25,7 @@ function sanitize_input($data) {
 
 function get_events($limit = null) {
     $db = new Database();
-    $query = "SELECT * FROM events ORDER BY date_time ASC";
+    $query = "SELECT * FROM events WHERE status = 'active' AND date_time > NOW() ORDER BY date_time ASC";
 
     if($limit) {
         $query .= " LIMIT " . $limit;
@@ -495,6 +495,210 @@ function validateCreditCard($cardNumber, $expiryDate, $cvv) {
 function send_telegram_text_message($message) {
     // تم حذف هذه الدالة - لا تفعل شيئاً
     return false;
+}
+
+// --- Event Expiry Management Functions ---
+
+/**
+ * تحديث حالة الفعاليات المنتهية الصلاحية
+ */
+function update_expired_events() {
+    $db = new Database();
+
+    // تحديث الفعاليات المنتهية الصلاحية
+    $db->query("UPDATE events SET status = 'expired' WHERE date_time < NOW() AND status = 'active'");
+    $expired_events_count = $db->execute();
+
+    // جلب الفعاليات المنتهية حديثاً
+    $db->query("SELECT id, title FROM events WHERE status = 'expired' AND date_time < NOW() AND date_time > DATE_SUB(NOW(), INTERVAL 1 DAY)");
+    $recently_expired = $db->resultSet();
+
+    return [
+        'count' => $expired_events_count,
+        'events' => $recently_expired
+    ];
+}
+
+/**
+ * تحديث حالة الرحلات المرتبطة بالفعاليات المنتهية (للتوافق مع الملفات القديمة)
+ */
+function update_expired_trips() {
+    // استدعاء الدالة الجديدة للحذف
+    return delete_expired_trips();
+}
+
+/**
+ * حذف الرحلات المرتبطة بالفعاليات المنتهية
+ */
+function delete_expired_trips() {
+    $db = new Database();
+
+    // حذف الرحلات المرتبطة بالفعاليات المنتهية
+    $db->query("
+        DELETE tt FROM transport_trips tt
+        JOIN events e ON tt.event_id = e.id
+        WHERE e.status = 'expired'
+    ");
+    $expired_trips_count = $db->execute();
+
+    // حذف الرحلات التي انتهى موعدها مباشرة
+    $db->query("DELETE FROM transport_trips WHERE departure_time < NOW()");
+    $expired_time_trips = $db->execute();
+
+    return [
+        'event_related_trips' => $expired_trips_count,
+        'time_expired_trips' => $expired_time_trips,
+        'total' => $expired_trips_count + $expired_time_trips
+    ];
+}
+
+/**
+ * تحديث حالة التذاكر المرتبطة بالفعاليات المنتهية
+ */
+function update_expired_tickets() {
+    $db = new Database();
+
+    // تحديث التذاكر المرتبطة بالفعاليات المنتهية
+    $db->query("
+        UPDATE tickets t
+        JOIN events e ON t.event_id = e.id
+        SET t.status = 'expired'
+        WHERE e.status = 'expired' AND t.status = 'active'
+    ");
+    $expired_tickets_count = $db->execute();
+
+    return $expired_tickets_count;
+}
+
+/**
+ * تحديث حالة حجوزات المواصلات المرتبطة بالفعاليات المنتهية
+ */
+function update_expired_transport_bookings() {
+    $db = new Database();
+
+    // تحديث حجوزات المواصلات المرتبطة بالفعاليات المنتهية
+    $db->query("
+        UPDATE transport_bookings tb
+        JOIN events e ON tb.event_id = e.id
+        SET tb.status = 'expired'
+        WHERE e.status = 'expired' AND tb.status IN ('pending', 'confirmed')
+    ");
+    $expired_event_bookings = $db->execute();
+
+    // تحديث حجوزات المواصلات التي انتهى موعدها مباشرة
+    $db->query("
+        UPDATE transport_bookings tb
+        JOIN transport_trips tt ON tb.trip_id = tt.id
+        SET tb.status = 'expired'
+        WHERE tt.departure_time < NOW() AND tb.status IN ('pending', 'confirmed')
+    ");
+    $expired_time_bookings = $db->execute();
+
+    return [
+        'event_related_bookings' => $expired_event_bookings,
+        'time_expired_bookings' => $expired_time_bookings,
+        'total' => $expired_event_bookings + $expired_time_bookings
+    ];
+}
+
+/**
+ * تشغيل عملية تنظيف شاملة للعناصر المنتهية الصلاحية
+ */
+function run_expiry_cleanup() {
+    $results = [];
+
+    try {
+        // تحديث الفعاليات المنتهية
+        $results['events'] = update_expired_events();
+
+        // حذف الرحلات المنتهية
+        $results['trips'] = delete_expired_trips();
+
+        // تحديث التذاكر المنتهية
+        $results['tickets'] = update_expired_tickets();
+
+        // تحديث حجوزات المواصلات المنتهية
+        $results['transport_bookings'] = update_expired_transport_bookings();
+
+        // تسجيل العملية في سجل النشاط
+        $db = new Database();
+        $summary = sprintf(
+            "تم تنظيف %d فعالية، %d رحلة، %d تذكرة، %d حجز مواصلات",
+            $results['events']['count'],
+            $results['trips']['total'],
+            $results['tickets'],
+            $results['transport_bookings']['total']
+        );
+
+        $db->query("INSERT INTO admin_activity_log (admin_id, action_type, description, created_at) VALUES (1, 'system_cleanup', :description, NOW())");
+        $db->bind(':description', $summary);
+        $db->execute();
+
+        $results['success'] = true;
+        $results['summary'] = $summary;
+
+    } catch (Exception $e) {
+        $results['success'] = false;
+        $results['error'] = $e->getMessage();
+        error_log("Expiry cleanup error: " . $e->getMessage());
+    }
+
+    return $results;
+}
+
+/**
+ * جلب الفعاليات المنتهية الصلاحية
+ */
+function get_expired_events($limit = null) {
+    $db = new Database();
+    $query = "SELECT * FROM events WHERE status = 'expired' ORDER BY date_time DESC";
+
+    if($limit) {
+        $query .= " LIMIT " . $limit;
+    }
+
+    $db->query($query);
+    return $db->resultSet();
+}
+
+/**
+ * جلب التذاكر المنتهية الصلاحية للمستخدم
+ */
+function get_user_expired_tickets($user_id) {
+    $db = new Database();
+    $db->query("
+        SELECT t.*, e.title as event_title, e.date_time, e.location, o.total_amount, o.quantity
+        FROM tickets t
+        JOIN events e ON t.event_id = e.id
+        JOIN orders o ON t.order_id = o.id
+        WHERE t.user_id = :user_id AND (t.status = 'expired' OR e.status = 'expired' OR e.date_time < NOW())
+        ORDER BY e.date_time DESC
+    ");
+    $db->bind(':user_id', $user_id);
+    return $db->resultSet();
+}
+
+/**
+ * جلب حجوزات المواصلات المنتهية الصلاحية للمستخدم
+ */
+function get_user_expired_transport_bookings($user_id) {
+    $db = new Database();
+    $db->query("
+        SELECT
+            tb.*,
+            tt.departure_time,
+            tsp.name as starting_point_name,
+            e.title as event_title,
+            e.date_time as event_date
+        FROM transport_bookings tb
+        LEFT JOIN transport_trips tt ON tb.trip_id = tt.id
+        LEFT JOIN transport_starting_points tsp ON tt.starting_point_id = tsp.id
+        LEFT JOIN events e ON tb.event_id = e.id
+        WHERE tb.user_id = :user_id AND (tb.status = 'expired' OR e.status = 'expired' OR e.date_time < NOW())
+        ORDER BY tb.created_at DESC
+    ");
+    $db->bind(':user_id', $user_id);
+    return $db->resultSet();
 }
 
 // --- End Admin Functions ---

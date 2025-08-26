@@ -153,19 +153,35 @@ $user_id = $_SESSION['user_id'] ?? null;
 $has_event_ticket = false;
 $event_ticket_info = null;
 
-// بيانات تجريبية للأحداث
-$events_data = [
-    1 => [
-        'id' => 1,
-        'title' => 'حفلة محمد عساف',
-        'price' => 50
-    ]
-];
+// جلب بيانات الحدث من قاعدة البيانات
+$event = get_event_by_id($event_id);
+if (!$event) {
+    $_SESSION['error'] = 'الحدث غير موجود';
+    header('Location: ../events.php');
+    exit();
+}
 
-$event = $events_data[$event_id] ?? $events_data[1];
+// التحقق الفعلي من وجود تذكرة للمستخدم لهذا الحدث
+if ($user_id) {
+    $db = new Database();
+    $db->query("
+        SELECT t.*, o.total_amount
+        FROM tickets t
+        JOIN orders o ON t.order_id = o.id
+        WHERE t.user_id = :user_id AND t.event_id = :event_id AND t.status IN ('active', 'confirmed')
+        LIMIT 1
+    ");
+    $db->bind(':user_id', $user_id);
+    $db->bind(':event_id', $event_id);
+    $event_ticket_info = $db->single();
 
-// محاكاة التحقق من وجود تذكرة (افتراض أن المستخدم لا يملك تذكرة)
-$has_event_ticket = false;
+    if ($event_ticket_info) {
+        $has_event_ticket = true;
+        file_put_contents('../debug_booking.log', "User {$user_id} has ticket for event {$event_id}: " . json_encode($event_ticket_info, JSON_UNESCAPED_UNICODE) . "\n\n", FILE_APPEND);
+    } else {
+        file_put_contents('../debug_booking.log', "User {$user_id} does NOT have ticket for event {$event_id}\n\n", FILE_APPEND);
+    }
+}
 
 // حساب المبلغ الإجمالي
 $transport_amount = $trip['price'] * $passengers;
@@ -177,6 +193,8 @@ if (!$has_event_ticket && $event['price'] > 0) {
     $ticket_amount = $event['price'] * $passengers;
     $total_amount = $transport_amount + $ticket_amount;
 }
+
+file_put_contents('../debug_booking.log', "Booking calculation: has_ticket={$has_event_ticket}, transport_amount={$transport_amount}, ticket_amount={$ticket_amount}, total_amount={$total_amount}\n\n", FILE_APPEND);
 
 // حفظ بيانات الحجز في الجلسة للانتقال لصفحة الدفع
 $_SESSION['booking_data'] = [
