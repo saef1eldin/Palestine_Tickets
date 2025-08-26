@@ -224,7 +224,7 @@ if ($with_transport && isset($_SESSION['booking_data'])) {
                         </div>
                         <div class="text-center">
                             <p class="text-gray-700 mb-4"><?php echo $lang['paypal_redirect_message'] ?? 'سيتم توجيهك إلى صفحة تسجيل الدخول إلى PayPal عند النقر على زر إكمال الدفع'; ?></p>
-                            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo" class="mx-auto" style="width: 120px;">
+                            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo" class="mx-auto w-30 max-w-full" />
                         </div>
                     </div>
 

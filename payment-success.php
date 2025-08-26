@@ -10,12 +10,22 @@ if(!$auth->isLoggedIn()) {
     redirect('login.php');
 }
 
-if(!isset($_GET['order_id'])) {
+if(!isset($_GET['order_id']) || !ctype_digit($_GET['order_id'])) {
     redirect('events.php');
 }
 
-$order_id = $_GET['order_id'];
+$order_id = (int)$_GET['order_id'];
 $order = get_order_details($order_id);
+
+// بعد التأكد من أن لدينا order_id، أرسل إشعار النجاح مرة واحدة
+try {
+    if (!empty($_SESSION['user_id'])) {
+        require_once 'includes/notification_functions.php';
+        $success_message = 'تمت عملية الدفع بنجاح. رقم الطلب: ' . $order_id;
+        add_notification($_SESSION['user_id'], 'نجاح الدفع', $success_message, '', 'booking_success');
+        $_SESSION['success_message'] = $success_message;
+    }
+} catch (Exception $e) { /* log only */ }
 
 if(!$order || $order['user_id'] != $_SESSION['user_id']) {
     // إذا لم يتم العثور على الطلب، نحاول البحث عن التذكرة مباشرة

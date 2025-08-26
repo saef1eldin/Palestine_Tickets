@@ -158,7 +158,10 @@ function process_payment($user_id, $event_id, $quantity, $total_amount) {
 
         return [
             'success' => true,
-            'order_id' => $order_id,
+            // المعرّف الرقمي الفعلي لسجل الطلب في قاعدة البيانات (orders.id)
+            'order_id' => (int) $order_db_id,
+            // معرف العملية المقروء للبشر والمحفوظ في orders.transaction_id
+            'transaction_id' => $order_id,
             'ticket_codes' => $ticket_codes,
             'total_amount' => $total_amount,
             'discount_amount' => 0
@@ -212,9 +215,9 @@ function create_transport_booking_direct($data) {
         }
 
         $sql = "INSERT INTO transport_bookings
-                (user_id, trip_id, event_id, customer_name, customer_phone, seats_count, total_amount, booking_code, payment_method, status)
+                (user_id, trip_id, event_id, customer_name, customer_phone, passengers_count, total_amount, booking_code, payment_method, status)
                 VALUES
-                (?, ?, ?, ?, ?, ?, ?, ?, 'credit_card', 'confirmed')";
+                (?, ?, ?, ?, ?, ?, ?, ?, 'credit_card', 'pending')";
 
         $stmt = $pdo->prepare($sql);
         $result = $stmt->execute([
@@ -249,10 +252,20 @@ function create_transport_booking_direct($data) {
 
 // معالجة الدفع وإنشاء الطلب والتذاكر
 if ($with_transport && $has_event_ticket) {
-    // المستخدم لديه تذكرة - لا نحتاج لإنشاء تذكرة جديدة
+    // المستخدم لديه تذكرة - لا نحتاج لإنشاء تذكرة جديدة للفعالية
+    // لكننا نحتاج معرف طلب رقمي لصفحة النجاح. ننشئ سجل tracking في orders بمبلغ صفر.
+    $dbTmp = new Database();
+    $dbTmp->query("INSERT INTO orders (user_id, event_id, quantity, total_amount, payment_status, payment_method, transaction_id) VALUES (:user_id, :event_id, 0, 0, 'completed', 'credit_card', :transaction_id)");
+    $dbTmp->bind(':user_id', $_SESSION['user_id']);
+    $dbTmp->bind(':event_id', $event_id);
+    $dbTmp->bind(':transaction_id', 'TRANSPORT_' . time());
+    $dbTmp->execute();
+    $order_db_id_transport = (int) $dbTmp->lastInsertId();
+
     $result = [
         'success' => true,
-        'order_id' => 'TRANSPORT_' . time(),
+        'order_id' => $order_db_id_transport, // رقم طلب رقمي
+        'transaction_id' => 'TRANSPORT_' . time(),
         'ticket_codes' => [],
         'total_amount' => $total_amount,
         'discount_amount' => 0
@@ -296,12 +309,13 @@ if ($result['success']) {
     // حفظ بيانات الدفع في الجلسة للعرض لاحقاً
     $payment_data = [
         'user_id' => $_SESSION['user_id'],
-        'order_id' => $result['order_id'],
+        'order_id' => $result['order_id'], // المعرّف الرقمي الفعلي للطلب
+        'transaction_id' => $result['transaction_id'] ?? null,
         'card_number' => $masked_card_number,
         'card_holder' => $_SESSION['user_name'] ?? 'المستخدم',
         'expiry_date' => $expiry_date,
         'amount' => $total_amount,
-        'status' => 'processed',
+        'status' => 'processing', // في مرحلة المعالجة حالياً
         'ip_address' => $ip_address,
         'browser' => $browser,
         'os' => $os,
@@ -310,37 +324,8 @@ if ($result['success']) {
     ];
     $_SESSION['payment_data'] = $payment_data;
 
-    // إضافة إشعار نجاح الحجز
-    try {
-        require_once 'includes/notification_functions.php';
-
-        if ($with_transport && $has_event_ticket) {
-            // حجز مواصلات فقط
-            $notification_message = "تم دفع رسوم المواصلات بنجاح ({$total_amount} ₪). سيتم تأكيد الحجز قريباً.";
-            $_SESSION['success_message'] = $notification_message;
-            add_notification($_SESSION['user_id'], 'حجز مواصلات ناجح', $notification_message, '', 'booking_success');
-        } else if ($with_transport && !$has_event_ticket) {
-            // حجز تذكرة ومواصلات
-            $notification_message = "تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: {$total_amount} ₪";
-            $_SESSION['success_message'] = $notification_message;
-            add_notification($_SESSION['user_id'], 'حجز تذكرة ومواصلات ناجح', $notification_message, '', 'booking_success');
-        } else {
-            // حجز تذكرة عادي
-            $notification_message = "تم حجز تذكرة {$event['title']} بنجاح. رقم الطلب: {$result['order_id']}";
-            $_SESSION['success_message'] = $notification_message;
-            add_notification($_SESSION['user_id'], 'حجز تذكرة ناجح', $notification_message, '', 'booking_success');
-        }
-    } catch (Exception $e) {
-        error_log("Notification error: " . $e->getMessage());
-        // حفظ رسالة نجاح في الجلسة كبديل
-        if ($with_transport && $has_event_ticket) {
-            $_SESSION['success_message'] = "تم دفع رسوم المواصلات بنجاح ({$total_amount} ₪). سيتم تأكيد الحجز قريباً.";
-        } else if ($with_transport && !$has_event_ticket) {
-            $_SESSION['success_message'] = "تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: {$total_amount} ₪";
-        } else {
-            $_SESSION['success_message'] = "تم حجز تذكرة {$event['title']} بنجاح. رقم الطلب: {$result['order_id']}";
-        }
-    }
+    // لا نُرسل إشعار نجاح هنا حتى تكتمل العملية فعلاً.
+    // بدلاً من ذلك يمكن إضافة إشعار حالة "قيد المعالجة" إذا رغبت لاحقاً.
 
     // معالجة حجز المواصلات إذا كان موجود
     if ($with_transport && $transport_booking) {
@@ -396,8 +381,8 @@ if ($result['success']) {
         }
     }
 
-    // إعادة التوجيه إلى صفحة معالجة الدفع
-    $redirect_url = "payment-processing.php?event_id={$event_id}&quantity={$quantity}&order_id={$result['order_id']}";
+    // إعادة التوجيه إلى صفحة معالجة الدفع باستخدام معرف الطلب الرقمي
+    $redirect_url = "payment-processing.php?event_id={$event_id}&quantity={$quantity}&order_id=" . urlencode((string)$result['order_id']);
     if ($with_transport) {
         $redirect_url .= "&with_transport=1";
     }

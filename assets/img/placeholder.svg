@@ -1,0 +1,34 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8a2be2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4b0082;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- خلفية متدرجة -->
+  <rect width="100%" height="100%" fill="url(#grad1)" opacity="0.1"/>
+  
+  <!-- إطار -->
+  <rect x="10" y="10" width="380" height="280" fill="none" stroke="#8a2be2" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- أيقونة الصورة -->
+  <g transform="translate(200,150)">
+    <!-- دائرة الخلفية -->
+    <circle cx="0" cy="0" r="40" fill="#8a2be2" opacity="0.2"/>
+    
+    <!-- أيقونة الصورة -->
+    <path d="M-20,-15 L20,-15 L20,15 L-20,15 Z" fill="none" stroke="#8a2be2" stroke-width="2"/>
+    <circle cx="-10" cy="-5" r="3" fill="#8a2be2"/>
+    <path d="M-15,5 L-5,-5 L5,5 L15,-5 L15,15 L-15,15 Z" fill="#8a2be2" opacity="0.3"/>
+  </g>
+  
+  <!-- النص -->
+  <text x="200" y="220" text-anchor="middle" font-family="Tajawal, Arial, sans-serif" font-size="16" fill="#8a2be2" font-weight="bold">
+    صورة غير متوفرة
+  </text>
+  
+  <text x="200" y="240" text-anchor="middle" font-family="Tajawal, Arial, sans-serif" font-size="12" fill="#666" opacity="0.8">
+    Image Not Available
+  </text>
+</svg>

@@ -1,0 +1,173 @@
+{
+  "name": "تذاكر فلسطين - حجز تذاكر الفعاليات",
+  "short_name": "تذاكر فلسطين",
+  "description": "منصة حجز تذاكر الحفلات والفعاليات الثقافية والفنية في فلسطين",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#8a2be2",
+  "theme_color": "#8a2be2",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["entertainment", "lifestyle", "music"],
+  "screenshots": [
+    {
+      "src": "assets/img/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "الصفحة الرئيسية على الهاتف المحمول"
+    },
+    {
+      "src": "assets/img/screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "الصفحة الرئيسية على الحاسوب"
+    }
+  ],
+  "icons": [
+    {
+      "src": "assets/img/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/img/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/img/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/img/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/img/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/img/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/img/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/img/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "الفعاليات",
+      "short_name": "الفعاليات",
+      "description": "استعرض جميع الفعاليات المتاحة",
+      "url": "/events.php",
+      "icons": [
+        {
+          "src": "assets/img/shortcut-events.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "تذاكري",
+      "short_name": "تذاكري",
+      "description": "عرض التذاكر المحجوزة",
+      "url": "/my-tickets.php",
+      "icons": [
+        {
+          "src": "assets/img/shortcut-tickets.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "حجز سريع",
+      "short_name": "حجز سريع",
+      "description": "حجز تذكرة بسرعة",
+      "url": "/quick-booking.php",
+      "icons": [
+        {
+          "src": "assets/img/shortcut-booking.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.ticketspalestine.app",
+      "id": "com.ticketspalestine.app"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/tickets-palestine/id123456789"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "protocol_handlers": [
+    {
+      "protocol": "web+ticketspalestine",
+      "url": "/handle-protocol?url=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/handle-ticket",
+      "accept": {
+        "application/pdf": [".pdf"],
+        "image/png": [".png"],
+        "image/jpeg": [".jpg", ".jpeg"]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "/share-event",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "images",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  },
+  "capture_links": "existing-client-navigate",
+  "display_override": ["window-controls-overlay", "minimal-ui"],
+  "id": "tickets-palestine-pwa",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7"
+}

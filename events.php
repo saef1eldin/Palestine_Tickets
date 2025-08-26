@@ -9,6 +9,9 @@ try {
     require_once 'includes/functions.php';
     require_once 'includes/header.php';
 
+    // تشغيل تنظيف العناصر المنتهية قبل عرض الفعاليات
+    run_expiry_cleanup();
+
     $events = get_events();
 } catch (Exception $e) {
     die("خطأ في تحميل الملفات: " . $e->getMessage());

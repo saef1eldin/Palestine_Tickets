@@ -14,11 +14,28 @@ try {
         redirect('login.php');
     }
 
-    // استرجاع تذاكر المستخدم
-    $tickets = get_user_tickets($_SESSION['user_id']);
+    // تشغيل التنظيف التلقائي للعناصر المنتهية
+    run_expiry_cleanup();
 
-    // استرجاع حجوزات المواصلات بطريقة آمنة
+    // استرجاع تذاكر المستخدم النشطة فقط (غير المنتهية)
+    $db = new Database();
+    $db->query("
+        SELECT t.*, e.title as event_title, e.date_time, e.location, o.total_amount, o.quantity
+        FROM tickets t
+        JOIN events e ON t.event_id = e.id
+        JOIN orders o ON t.order_id = o.id
+        WHERE t.user_id = :user_id AND t.status != 'expired' AND e.status != 'expired' AND e.date_time > NOW()
+        ORDER BY e.date_time ASC
+    ");
+    $db->bind(':user_id', $_SESSION['user_id']);
+    $tickets = $db->resultSet();
+
+    // استرجاع تذاكر المستخدم المنتهية الصلاحية
+    $expired_tickets = get_user_expired_tickets($_SESSION['user_id']);
+
+    // استرجاع حجوزات المواصلات النشطة بطريقة آمنة
     $transport_bookings = [];
+    $expired_transport_bookings = [];
     try {
         // التحقق من وجود جدول المواصلات أولاً
         $db = new Database();
@@ -26,6 +43,7 @@ try {
         $table_exists = $db->single();
 
         if ($table_exists) {
+            // حجوزات المواصلات النشطة (غير المنتهية)
             $db->query("
                 SELECT
                     tb.id,
@@ -53,14 +71,21 @@ try {
                 LEFT JOIN transport_vehicles v ON t.vehicle_id = v.id
                 LEFT JOIN transport_drivers d ON v.driver_id = d.id
                 WHERE tb.user_id = :user_id
+                    AND tb.status NOT IN ('expired', 'cancelled')
+                    AND (e.status != 'expired' OR e.status IS NULL)
+                    AND (e.date_time > NOW() OR e.date_time IS NULL)
                 ORDER BY tb.created_at DESC
             ");
             $db->bind(':user_id', $_SESSION['user_id']);
             $transport_bookings = $db->resultSet();
+
+            // حجوزات المواصلات المنتهية
+            $expired_transport_bookings = get_user_expired_transport_bookings($_SESSION['user_id']);
         }
     } catch (Exception $e) {
         // في حالة الخطأ، اتركه فارغ ولا تعطل الصفحة
         $transport_bookings = [];
+        $expired_transport_bookings = [];
         error_log("Transport bookings error: " . $e->getMessage());
     }
 
@@ -149,6 +174,68 @@ try {
         </div>
     </div>
 
+    <?php endif; ?>
+
+    <!-- قسم التذاكر المنتهية الصلاحية -->
+    <?php if(!empty($expired_tickets)): ?>
+    <div class="mt-16">
+        <h2 class="text-2xl font-bold text-center text-red-800 mb-8">التذاكر المنتهية الصلاحية</h2>
+
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-red-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                رمز التذكرة
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                الفعالية
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                التاريخ
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                المكان
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                المبلغ
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                الحالة
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <?php foreach($expired_tickets as $ticket): ?>
+                        <tr class="hover:bg-red-50 opacity-75">
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm font-medium text-gray-900 text-improved"><?php echo $ticket['ticket_code']; ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm font-medium text-gray-900 text-improved"><?php echo $ticket['event_title']; ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm text-gray-500 text-improved"><?php echo format_date($ticket['date_time']); ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm text-gray-500 text-improved"><?php echo $ticket['location']; ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm font-medium text-gray-900 text-improved"><?php echo format_price($ticket['total_amount'] / $ticket['quantity']); ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    منتهية الصلاحية
+                                </span>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <?php endif; ?>
 
     <!-- قسم حجوزات المواصلات -->
@@ -244,13 +331,15 @@ try {
                                     'pending' => 'bg-yellow-100 text-yellow-800',
                                     'confirmed' => 'bg-green-100 text-green-800',
                                     'cancelled' => 'bg-red-100 text-red-800',
-                                    'completed' => 'bg-blue-100 text-blue-800'
+                                    'completed' => 'bg-blue-100 text-blue-800',
+                                    'expired' => 'bg-gray-100 text-gray-800'
                                 ];
                                 $status_text = [
                                     'pending' => 'في الانتظار',
                                     'confirmed' => 'مؤكد',
                                     'cancelled' => 'ملغي',
-                                    'completed' => 'مكتمل'
+                                    'completed' => 'مكتمل',
+                                    'expired' => 'منتهي الصلاحية'
                                 ];
                                 $current_status = $booking['status'] ?? 'pending';
                                 ?>
@@ -268,6 +357,82 @@ try {
         <?php endif; ?>
     </div>
 
+    <!-- قسم حجوزات المواصلات المنتهية الصلاحية -->
+    <?php if(!empty($expired_transport_bookings)): ?>
+    <div class="mt-16">
+        <h2 class="text-2xl font-bold text-center text-red-800 mb-8">حجوزات المواصلات المنتهية الصلاحية</h2>
+
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-red-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                رقم الحجز
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                الفعالية
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                نقطة الانطلاق
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                موعد الانطلاق
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                عدد الركاب
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                المبلغ
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?> text-xs font-medium text-red-700 uppercase tracking-wider">
+                                الحالة
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <?php foreach($expired_transport_bookings as $booking): ?>
+                        <tr class="hover:bg-red-50 opacity-75">
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm font-medium text-gray-900 text-improved"><?php echo htmlspecialchars($booking['booking_code'] ?? 'غير محدد'); ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm font-medium text-gray-900 text-improved"><?php echo htmlspecialchars($booking['event_title'] ?? 'غير محدد'); ?></div>
+                                <div class="text-sm text-gray-500 text-improved"><?php echo date('Y-m-d H:i', strtotime($booking['event_date'] ?? 'now')); ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm text-gray-500 text-improved"><?php echo htmlspecialchars($booking['starting_point_name'] ?? 'غير محدد'); ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm text-gray-500 text-improved">
+                                    <?php
+                                    if ($booking['departure_time'] && $booking['departure_time'] != 'غير محدد') {
+                                        echo date('H:i', strtotime($booking['departure_time']));
+                                    } else {
+                                        echo 'غير محدد';
+                                    }
+                                    ?>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm font-medium text-gray-900 text-improved"><?php echo $booking['passengers_count'] ?? '1'; ?></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <div class="text-sm font-medium text-gray-900 text-improved"><?php echo ($booking['total_amount'] ?? '0'); ?> ₪</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-<?php echo ($selected_lang == 'en') ? 'left' : 'right'; ?>">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    منتهي الصلاحية
+                                </span>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 
 </div>
 

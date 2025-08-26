@@ -30,7 +30,7 @@ try {
     // تحديد مدة الانتظار بالثواني (30 ثانية)
     $wait_time = 30;
 
-    // تحديد صفحة إعادة التوجيه
+    // تحديد صفحة إعادة التوجيه باستخدام معرف الطلب الرقمي
     $redirect_url = "payment-success.php?order_id=" . urlencode($order_id);
 
 } catch (Exception $e) {
