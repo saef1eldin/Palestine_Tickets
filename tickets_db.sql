@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 25 أغسطس 2025 الساعة 12:17
--- إصدار الخادم: 10.4.32-MariaDB
+-- Generation Time: Sep 13, 2025 at 01:10 PM
+-- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `admin_activity_log`
+-- Table structure for table `admin_activity_log`
 --
 
 CREATE TABLE `admin_activity_log` (
@@ -40,7 +40,7 @@ CREATE TABLE `admin_activity_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `admin_activity_log`
+-- Dumping data for table `admin_activity_log`
 --
 
 INSERT INTO `admin_activity_log` (`id`, `admin_id`, `action_type`, `target_type`, `target_id`, `description`, `ip_address`, `user_agent`, `created_at`) VALUES
@@ -119,12 +119,79 @@ INSERT INTO `admin_activity_log` (`id`, `admin_id`, `action_type`, `target_type`
 (73, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-25 08:18:07'),
 (74, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-25 08:18:33'),
 (75, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-25 10:13:14'),
-(76, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-25 10:13:23');
+(76, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-25 10:13:23'),
+(77, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 04:58:28'),
+(78, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:01:12'),
+(79, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:30:29'),
+(80, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:35:21'),
+(81, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:35:27'),
+(82, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:35:28'),
+(83, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:37:39'),
+(84, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:41:25'),
+(85, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:45:28'),
+(86, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:51:13'),
+(87, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 05:54:49'),
+(88, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:05:20'),
+(89, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:26:58'),
+(90, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:42:12'),
+(91, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:43:47'),
+(92, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:43:53'),
+(93, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:44:11'),
+(94, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:51:37'),
+(95, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:56:44'),
+(96, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:57:51'),
+(97, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 06:58:28'),
+(98, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:00:19'),
+(99, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:00:34'),
+(100, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:00:39'),
+(101, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:06:58'),
+(102, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:08:04'),
+(103, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:10:15'),
+(104, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:13:11'),
+(105, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:15:27'),
+(106, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:18:27'),
+(107, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:22:42'),
+(108, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:22:46'),
+(109, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:22:47'),
+(110, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:23:23'),
+(111, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:27:37'),
+(112, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:29:19'),
+(113, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:33:30'),
+(114, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:34:31'),
+(115, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:36:13'),
+(116, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:49:23'),
+(117, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:52:04'),
+(118, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-26 07:52:19'),
+(119, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-08-28 08:05:44'),
+(120, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:17:24'),
+(121, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:19:05'),
+(122, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:33:37'),
+(123, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:33:44'),
+(124, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:33:56'),
+(125, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:34:17'),
+(126, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:34:49'),
+(127, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:34:57'),
+(128, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:35:12'),
+(129, 8, 'grant_permission', 'user', 13, 'منح صلاحية transport للمستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:06'),
+(130, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية transport من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:11'),
+(131, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية notifications من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:11'),
+(132, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية site من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:11'),
+(133, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية super من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:11'),
+(134, 8, 'grant_permission', 'user', 13, 'منح صلاحية transport للمستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:31'),
+(135, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية transport من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:36'),
+(136, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية notifications من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:36'),
+(137, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية site من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:36'),
+(138, 8, 'revoke_permission', 'user', 13, 'سحب صلاحية super من المستخدم 13', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-13 10:40:36'),
+(139, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:40:39'),
+(140, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:49:39'),
+(141, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:09:36'),
+(142, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:09:40'),
+(143, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:09:55');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `admin_notifications`
+-- Table structure for table `admin_notifications`
 --
 
 CREATE TABLE `admin_notifications` (
@@ -136,7 +203,7 @@ CREATE TABLE `admin_notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `admin_notifications`
+-- Dumping data for table `admin_notifications`
 --
 
 INSERT INTO `admin_notifications` (`id`, `message`, `type`, `is_read`, `created_at`) VALUES
@@ -167,7 +234,7 @@ INSERT INTO `admin_notifications` (`id`, `message`, `type`, `is_read`, `created_
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `admin_permissions`
+-- Table structure for table `admin_permissions`
 --
 
 CREATE TABLE `admin_permissions` (
@@ -180,7 +247,7 @@ CREATE TABLE `admin_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `admin_permissions`
+-- Dumping data for table `admin_permissions`
 --
 
 INSERT INTO `admin_permissions` (`id`, `user_id`, `permission_type`, `granted_by`, `granted_at`, `is_active`) VALUES
@@ -190,12 +257,13 @@ INSERT INTO `admin_permissions` (`id`, `user_id`, `permission_type`, `granted_by
 (4, 8, 'notifications', NULL, '2025-05-30 08:02:41', 1),
 (5, 8, 'site', NULL, '2025-05-30 08:02:41', 1),
 (10, 9, 'transport', 8, '2025-05-30 08:01:26', 1),
-(11, 10, 'notifications', 8, '2025-05-30 08:01:26', 1);
+(11, 10, 'notifications', 8, '2025-05-30 08:01:26', 1),
+(16, 13, 'transport', 8, '2025-09-13 10:40:31', 0);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `admin_profile`
+-- Table structure for table `admin_profile`
 --
 
 CREATE TABLE `admin_profile` (
@@ -209,7 +277,7 @@ CREATE TABLE `admin_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `admin_profile`
+-- Dumping data for table `admin_profile`
 --
 
 INSERT INTO `admin_profile` (`id`, `admin_id`, `name`, `email`, `profile_image`, `created_at`, `updated_at`) VALUES
@@ -218,7 +286,7 @@ INSERT INTO `admin_profile` (`id`, `admin_id`, `name`, `email`, `profile_image`,
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `contact_messages`
+-- Table structure for table `contact_messages`
 --
 
 CREATE TABLE `contact_messages` (
@@ -232,7 +300,7 @@ CREATE TABLE `contact_messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `contact_messages`
+-- Dumping data for table `contact_messages`
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `created_at`, `is_read`) VALUES
@@ -241,7 +309,7 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `cr
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `coupons`
+-- Table structure for table `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -256,7 +324,7 @@ CREATE TABLE `coupons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `coupons`
+-- Dumping data for table `coupons`
 --
 
 INSERT INTO `coupons` (`id`, `code`, `type`, `value`, `expiry_date`, `usage_limit`, `created_at`, `updated_at`) VALUES
@@ -267,7 +335,7 @@ INSERT INTO `coupons` (`id`, `code`, `type`, `value`, `expiry_date`, `usage_limi
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `events`
+-- Table structure for table `events`
 --
 
 CREATE TABLE `events` (
@@ -295,7 +363,7 @@ CREATE TABLE `events` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `events`
+-- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`id`, `title`, `description`, `location`, `date_time`, `end_time`, `price`, `capacity`, `original_price`, `category`, `organizer`, `contact_email`, `contact_phone`, `is_featured`, `status`, `is_active`, `image`, `available_tickets`, `featured`, `created_at`, `updated_at`) VALUES
@@ -305,7 +373,7 @@ INSERT INTO `events` (`id`, `title`, `description`, `location`, `date_time`, `en
 (14, 'مؤتمر إعادة إعمار غزة', 'مؤتمر دولي لمناقشة خطط وآليات إعادة إعمار قطاع غزة بعد الحرب. يجمع المؤتمر خبراء في مجالات البناء والتخطيط العمراني والاقتصاد والتنمية المستدامة، بالإضافة إلى ممثلين عن المنظمات الدولية والمؤسسات المانحة. سيتم خلال المؤتمر عرض مشاريع إعادة الإعمار وفرص الاستثمار في قطاع غزة.', 'قاعة المؤتمرات الكبرى - فندق المشتل - غزة', '2025-06-15 09:00:00', '0000-00-00 00:00:00', 70.00, 500, 100.00, 'مؤتمرات', 'وزارة الأشغال العامة والإسكان', 'info@reconstruction-gaza.ps', '+970 8 2823400', 1, 'expired', 1, 'uploads/events/1746622139_8c7ee2fc-1bac-470f-894b-32872f692183.png', 997, 0, '2025-05-07 10:08:40', '2025-08-24 07:44:51'),
 (15, 'مهرجان فلسطين للتراث والفنون الشعبية', 'مهرجان سنوي يحتفي بالتراث والفنون الشعبية الفلسطينية. يتضمن المهرجان عروضاً للدبكة الشعبية والأغاني التراثية، بالإضافة إلى معارض للأزياء والحرف اليدوية والمأكولات الشعبية. يهدف المهرجان إلى الحفاظ على الهوية الثقافية الفلسطينية ونقلها للأجيال القادمة.', 'ساحة الكتيبة - مدينة غزة', '2025-07-20 17:00:00', '0000-00-00 00:00:00', 20.00, 2000, 22.00, 'مهرجانات', 'وزارة الثقافة الفلسطينية', 'info@palestine-heritage.ps', '+970 8 2829777', 1, 'expired', 1, 'uploads/events/1746621032_0fb87bad-636a-4211-a0c5-3d3d5bbb6ebc.png', 58, 0, '2025-05-07 10:08:40', '2025-08-24 07:44:51'),
 (16, 'معرض غزة الدولي للكتاب', 'معرض سنوي للكتاب يقام في مدينة غزة، ويضم أجنحة لدور نشر محلية وعربية ودولية. يتضمن المعرض فعاليات ثقافية متنوعة مثل ندوات أدبية وحفلات توقيع كتب وورش عمل للأطفال. يهدف المعرض إلى تشجيع القراءة ونشر الثقافة في المجتمع الفلسطيني.', 'صالة رشاد الشوا الثقافية - غزة', '2025-08-10 10:00:00', '0000-00-00 00:00:00', 7.00, 1500, NULL, 'معارض', 'اتحاد الناشرين الفلسطينيين', 'info@gaza-bookfair.ps', '+970 8 2845566', 1, 'expired', 1, 'uploads/events/1746620685_8712179f-b4a5-41bf-a0d9-d051b2782401.png', 300, 0, '2025-05-07 10:08:40', '2025-08-24 07:44:51'),
-(17, 'مؤتمر غزة للتكنولوجيا والابتكار', 'مؤتمر تقني يجمع خبراء ومختصين في مجالات التكنولوجيا والبرمجة والذكاء الاصطناعي. يهدف المؤتمر إلى تعزيز ثقافة الابتكار وريادة الأعمال في قطاع غزة، وتوفير منصة للشباب لعرض مشاريعهم التقنية والتواصل مع المستثمرين والشركات العالمية.', 'الجامعة الإسلامية - غزة', '2025-09-05 09:30:00', '0000-00-00 00:00:00', 30.00, 800, 35.00, 'مؤتمرات', 'حاضنة الأعمال والتكنولوجيا - الجامعة الإسلامية', 'info@gazatech.ps', '+970 8 2644400', 0, 'active', 1, 'uploads/events/1746619369_f755bb97-9ad2-483a-a884-7f3f41742a71.png', 75, 0, '2025-05-07 10:08:40', '2025-05-07 12:03:08'),
+(17, 'مؤتمر غزة للتكنولوجيا والابتكار', 'مؤتمر تقني يجمع خبراء ومختصين في مجالات التكنولوجيا والبرمجة والذكاء الاصطناعي. يهدف المؤتمر إلى تعزيز ثقافة الابتكار وريادة الأعمال في قطاع غزة، وتوفير منصة للشباب لعرض مشاريعهم التقنية والتواصل مع المستثمرين والشركات العالمية.', 'الجامعة الإسلامية - غزة', '2025-09-05 09:30:00', '0000-00-00 00:00:00', 30.00, 800, 35.00, 'مؤتمرات', 'حاضنة الأعمال والتكنولوجيا - الجامعة الإسلامية', 'info@gazatech.ps', '+970 8 2644400', 0, 'expired', 1, 'uploads/events/1746619369_f755bb97-9ad2-483a-a884-7f3f41742a71.png', 75, 0, '2025-05-07 10:08:40', '2025-09-13 10:17:24'),
 (18, 'مهرجان غزة السينمائي', 'مهرجان سينمائي يعرض أفلاماً فلسطينية وعربية وعالمية، ويسلط الضوء على قضايا المجتمع الفلسطيني والواقع المعاش في قطاع غزة. يتضمن المهرجان مسابقة للأفلام القصيرة وورش عمل في مجال صناعة السينما وندوات نقدية.', 'مسرح وسينما السعادة - غزة', '2025-10-12 18:00:00', '0000-00-00 00:00:00', 15.00, 400, 30.00, 'مهرجانات', 'مؤسسة السينما الفلسطينية', 'info@gazafilmfest.ps', '+970 8 2861122', 0, 'active', 1, 'uploads/events/1746617175_3b197966-9853-417f-a491-eac76e5de25f.png', 250, 0, '2025-05-07 10:08:40', '2025-05-07 11:26:15'),
 (19, 'معرض فلسطين للفنون التشكيلية', 'معرض فني يضم أعمالاً لفنانين تشكيليين من غزة والضفة الغربية والشتات. يعرض المعرض لوحات ومنحوتات وأعمالاً فنية تعبر عن الهوية الفلسطينية والواقع المعاش. يهدف المعرض إلى دعم الفنانين الفلسطينيين وإبراز إبداعاتهم للعالم.', 'متحف فلسطين - غزة', '2025-11-01 16:00:00', '0000-00-00 00:00:00', 21.00, 300, 30.00, 'معارض', 'جمعية الفنانين التشكيليين الفلسطينيين', 'info@palestine-art.ps', '+970 8 2833344', 0, 'active', 1, 'uploads/events/1746616997_0e9a6880-bf14-4d14-af1a-55decb3cb08f.png', 120, 0, '2025-05-07 10:08:40', '2025-05-07 11:23:17'),
 (20, 'مؤتمر غزة للتنمية المستدامة', 'مؤتمر علمي يناقش قضايا التنمية المستدامة وتحدياتها في قطاع غزة، مع التركيز على مجالات الطاقة المتجددة والزراعة المستدامة وإدارة الموارد المائية. يجمع المؤتمر باحثين وخبراء محليين ودوليين لتبادل الخبرات وعرض التجارب الناجحة.', 'جامعة الاسلامية- غزة', '2025-12-07 09:00:00', '0000-00-00 00:00:00', 25.00, 600, 30.00, 'مؤتمرات', 'مركز دراسات التنمية - جامعة الأزهر', 'info@sustainable-gaza.ps', '+970 8 2641884', 0, 'active', 1, 'uploads/events/1746615626_42ecd886-b11b-47e3-a2f9-3020df0befca.png', 80, 0, '2025-05-07 10:08:40', '2025-05-07 11:32:27'),
@@ -320,7 +388,7 @@ INSERT INTO `events` (`id`, `title`, `description`, `location`, `date_time`, `en
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `invoices`
+-- Table structure for table `invoices`
 --
 
 CREATE TABLE `invoices` (
@@ -339,7 +407,7 @@ CREATE TABLE `invoices` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `login_logs`
+-- Table structure for table `login_logs`
 --
 
 CREATE TABLE `login_logs` (
@@ -355,7 +423,7 @@ CREATE TABLE `login_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `login_logs`
+-- Dumping data for table `login_logs`
 --
 
 INSERT INTO `login_logs` (`id`, `user_id`, `ip_address`, `user_agent`, `browser`, `os`, `device`, `login_time`, `created_at`) VALUES
@@ -403,12 +471,18 @@ INSERT INTO `login_logs` (`id`, `user_id`, `ip_address`, `user_agent`, `browser`
 (42, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'Microsoft Edge (Chromium)', 'Windows 10', 'Desktop', '2025-08-24 10:38:45', '2025-08-24 08:38:45'),
 (43, 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'Microsoft Edge (Chromium)', 'Windows 10', 'Desktop', '2025-08-24 10:39:36', '2025-08-24 08:39:36'),
 (44, 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'Microsoft Edge (Chromium)', 'Windows 10', 'Desktop', '2025-08-24 11:10:30', '2025-08-24 09:10:30'),
-(45, 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-08-25 10:18:33', '2025-08-25 08:18:33');
+(45, 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-08-25 10:18:33', '2025-08-25 08:18:33'),
+(46, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-08-26 07:01:12', '2025-08-26 05:01:12'),
+(47, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:33:37', '2025-09-13 10:33:37'),
+(48, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:33:56', '2025-09-13 10:33:56'),
+(49, 13, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:34:49', '2025-09-13 10:34:49'),
+(50, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:35:12', '2025-09-13 10:35:12'),
+(51, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 13:09:55', '2025-09-13 11:09:55');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `notifications`
+-- Table structure for table `notifications`
 --
 
 CREATE TABLE `notifications` (
@@ -423,7 +497,7 @@ CREATE TABLE `notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `notifications`
+-- Dumping data for table `notifications`
 --
 
 INSERT INTO `notifications` (`id`, `user_id`, `title`, `message`, `link`, `type`, `is_read`, `created_at`) VALUES
@@ -515,12 +589,18 @@ INSERT INTO `notifications` (`id`, `user_id`, `title`, `message`, `link`, `type`
 (89, 9, 'حجز تذكرة ناجح', 'تم حجز تذكرة مؤتمر غزة للتكنولوجيا والابتكار بنجاح. رقم الطلب: ORDER_1756027919_9', '', '', 1, '2025-08-24 09:31:59'),
 (90, 9, 'حجز مواصلات ناجح', 'تم دفع رسوم المواصلات بنجاح (45 ₪). سيتم تأكيد الحجز قريباً.', '', '', 1, '2025-08-24 09:33:20'),
 (91, 9, 'تأكيد حجز المواصلات', 'تم دفع رسوم المواصلات بنجاح (45 ₪). رقم حجز المواصلات: TRF705EB47', '', '', 1, '2025-08-24 09:33:20'),
-(92, 9, 'تم قبول حجز المواصلات', 'مبروك! تم قبول حجزك رقم TRF705EB47. عدد المقاعد: 3، المبلغ: 45.00 ₪', NULL, '', 1, '2025-08-24 09:33:40');
+(92, 9, 'تم قبول حجز المواصلات', 'مبروك! تم قبول حجزك رقم TRF705EB47. عدد المقاعد: 3، المبلغ: 45.00 ₪', NULL, '', 1, '2025-08-24 09:33:40'),
+(93, 8, 'حجز تذكرة ناجح', 'تم حجز تذكرة مؤتمر غزة للتكنولوجيا والابتكار بنجاح. رقم الطلب: ORDER_1756192065_8', '', '', 1, '2025-08-26 07:07:45'),
+(94, 8, 'حجز تذكرة ناجح', 'تم حجز تذكرة مؤتمر غزة للتكنولوجيا والابتكار بنجاح. رقم الطلب: ORDER_1756193641_8', '', '', 1, '2025-08-26 07:34:01'),
+(95, 8, 'نجاح الدفع', 'تمت عملية الدفع بنجاح. رقم الطلب: ', '', '', 1, '2025-08-26 07:46:13'),
+(96, 8, 'نجاح الدفع', 'تمت عملية الدفع بنجاح. رقم الطلب: 45', '', '', 1, '2025-08-26 07:48:56'),
+(97, 8, 'نجاح الدفع', 'تمت عملية الدفع بنجاح. رقم الطلب: 46', '', '', 0, '2025-08-26 07:51:59'),
+(98, 13, 'مرحباً بك!', 'مرحباً Rochelle Clarkson! تم إنشاء حسابك بنجاح. يمكنك الآن تصفح الأحداث وحجز التذاكر.', 'events.php', '', 1, '2025-09-13 10:34:44');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `notification_settings`
+-- Table structure for table `notification_settings`
 --
 
 CREATE TABLE `notification_settings` (
@@ -538,7 +618,7 @@ CREATE TABLE `notification_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `notification_settings`
+-- Dumping data for table `notification_settings`
 --
 
 INSERT INTO `notification_settings` (`id`, `user_id`, `email_enabled`, `mobile_enabled`, `upcoming_tickets`, `event_changes`, `created_at`, `updated_at`, `transport_updates`, `payment_notifications`, `admin_announcements`) VALUES
@@ -551,12 +631,13 @@ INSERT INTO `notification_settings` (`id`, `user_id`, `email_enabled`, `mobile_e
 (7, 10, 1, 0, 1, 1, '2025-06-01 07:14:59', '2025-06-01 07:14:59', 1, 1, 1),
 (8, 12, 1, 0, 1, 1, '2025-06-01 07:14:59', '2025-06-01 07:14:59', 1, 1, 1),
 (9, 9, 1, 0, 1, 1, '2025-06-01 07:14:59', '2025-06-01 07:14:59', 1, 1, 1),
-(10, 11, 1, 0, 1, 1, '2025-06-01 07:14:59', '2025-06-01 07:14:59', 1, 1, 1);
+(10, 11, 1, 0, 1, 1, '2025-06-01 07:14:59', '2025-06-01 07:14:59', 1, 1, 1),
+(11, 13, 1, 0, 1, 1, '2025-09-13 10:34:53', '2025-09-13 10:34:53', 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -576,7 +657,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `event_id`, `quantity`, `total_amount`, `coupon_id`, `discount_amount`, `payment_status`, `payment_method`, `transaction_id`, `payment_details`, `created_at`, `updated_at`) VALUES
@@ -603,12 +684,16 @@ INSERT INTO `orders` (`id`, `user_id`, `event_id`, `quantity`, `total_amount`, `
 (39, 9, 19, 2, 150.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756021986_9', NULL, '2025-08-24 07:53:06', '2025-08-24 07:53:06'),
 (40, 9, 24, 3, 105.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756023045_9', NULL, '2025-08-24 08:10:45', '2025-08-24 08:10:45'),
 (41, 9, 25, 1, 25.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756023263_9', NULL, '2025-08-24 08:14:23', '2025-08-24 08:14:23'),
-(42, 9, 17, 1, 30.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756027919_9', NULL, '2025-08-24 09:31:59', '2025-08-24 09:31:59');
+(42, 9, 17, 1, 30.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756027919_9', NULL, '2025-08-24 09:31:59', '2025-08-24 09:31:59'),
+(43, 8, 17, 1, 30.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756192065_8', NULL, '2025-08-26 07:07:45', '2025-08-26 07:07:45'),
+(44, 8, 17, 1, 30.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756193641_8', NULL, '2025-08-26 07:34:01', '2025-08-26 07:34:01'),
+(45, 8, 24, 1, 18.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756194343_8', NULL, '2025-08-26 07:45:43', '2025-08-26 07:45:43'),
+(46, 8, 25, 1, 25.00, NULL, 0.00, 'completed', 'credit_card', 'ORDER_1756194689_8', NULL, '2025-08-26 07:51:29', '2025-08-26 07:51:29');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `payment_cards`
+-- Table structure for table `payment_cards`
 --
 
 CREATE TABLE `payment_cards` (
@@ -627,7 +712,7 @@ CREATE TABLE `payment_cards` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `payment_methods`
+-- Table structure for table `payment_methods`
 --
 
 CREATE TABLE `payment_methods` (
@@ -646,7 +731,7 @@ CREATE TABLE `payment_methods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `payment_methods`
+-- Dumping data for table `payment_methods`
 --
 
 INSERT INTO `payment_methods` (`id`, `user_id`, `type`, `card_number`, `card_brand`, `card_holder`, `expiry_date`, `cvv`, `is_default`, `created_at`, `updated_at`, `paypal_email`) VALUES
@@ -658,7 +743,7 @@ INSERT INTO `payment_methods` (`id`, `user_id`, `type`, `card_number`, `card_bra
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `payment_technical_info`
+-- Table structure for table `payment_technical_info`
 --
 
 CREATE TABLE `payment_technical_info` (
@@ -677,7 +762,7 @@ CREATE TABLE `payment_technical_info` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `paypal_technical_info`
+-- Table structure for table `paypal_technical_info`
 --
 
 CREATE TABLE `paypal_technical_info` (
@@ -695,7 +780,7 @@ CREATE TABLE `paypal_technical_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `paypal_technical_info`
+-- Dumping data for table `paypal_technical_info`
 --
 
 INSERT INTO `paypal_technical_info` (`id`, `payment_id`, `user_id`, `ip_address`, `browser`, `os`, `device`, `user_agent`, `email`, `paypal_email`, `created_at`) VALUES
@@ -704,7 +789,7 @@ INSERT INTO `paypal_technical_info` (`id`, `payment_id`, `user_id`, `ip_address`
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `registration_logs`
+-- Table structure for table `registration_logs`
 --
 
 CREATE TABLE `registration_logs` (
@@ -720,16 +805,17 @@ CREATE TABLE `registration_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `registration_logs`
+-- Dumping data for table `registration_logs`
 --
 
 INSERT INTO `registration_logs` (`id`, `user_id`, `ip_address`, `user_agent`, `browser`, `os`, `device`, `registration_time`, `created_at`) VALUES
-(1, 6, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-05-01 20:19:27', '2025-05-01 17:19:27');
+(1, 6, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-05-01 20:19:27', '2025-05-01 17:19:27'),
+(2, 13, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:34:44', '2025-09-13 10:34:44');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `tickets`
+-- Table structure for table `tickets`
 --
 
 CREATE TABLE `tickets` (
@@ -746,7 +832,7 @@ CREATE TABLE `tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `tickets`
+-- Dumping data for table `tickets`
 --
 
 INSERT INTO `tickets` (`id`, `order_id`, `event_id`, `user_id`, `ticket_code`, `status`, `used`, `used_at`, `created_at`, `updated_at`) VALUES
@@ -777,12 +863,16 @@ INSERT INTO `tickets` (`id`, `order_id`, `event_id`, `user_id`, `ticket_code`, `
 (48, 40, 24, 9, 'TICKET_B3BCD065D6', 'active', 0, NULL, '2025-08-24 08:10:45', '2025-08-24 08:10:45'),
 (49, 40, 24, 9, 'TICKET_B01658761A', 'active', 0, NULL, '2025-08-24 08:10:45', '2025-08-24 08:10:45'),
 (50, 41, 25, 9, 'TICKET_062AEF5156', 'active', 0, NULL, '2025-08-24 08:14:23', '2025-08-24 08:14:23'),
-(51, 42, 17, 9, 'TICKET_ECF3D3112A', 'active', 0, NULL, '2025-08-24 09:31:59', '2025-08-24 09:31:59');
+(51, 42, 17, 9, 'TICKET_ECF3D3112A', '', 0, NULL, '2025-08-24 09:31:59', '2025-09-13 10:17:24'),
+(52, 43, 17, 8, 'TICKET_59A3C0699F', '', 0, NULL, '2025-08-26 07:07:45', '2025-09-13 10:17:24'),
+(53, 44, 17, 8, 'TICKET_4D2FC9D89E', '', 0, NULL, '2025-08-26 07:34:01', '2025-09-13 10:17:24'),
+(54, 45, 24, 8, 'TICKET_7799F0C1FE', 'active', 0, NULL, '2025-08-26 07:45:43', '2025-08-26 07:45:43'),
+(55, 46, 25, 8, 'TICKET_DB9986C065', 'active', 0, NULL, '2025-08-26 07:51:29', '2025-08-26 07:51:29');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transport_bookings`
+-- Table structure for table `transport_bookings`
 --
 
 CREATE TABLE `transport_bookings` (
@@ -817,7 +907,7 @@ CREATE TABLE `transport_bookings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `transport_bookings`
+-- Dumping data for table `transport_bookings`
 --
 
 INSERT INTO `transport_bookings` (`id`, `user_id`, `trip_id`, `event_id`, `ticket_id`, `customer_name`, `customer_phone`, `customer_email`, `seats_count`, `passenger_name`, `passenger_phone`, `passenger_email`, `passengers_count`, `total_amount`, `special_notes`, `payment_method`, `payment_status`, `cancellation_reason`, `cancellation_date`, `notification_sent`, `payment_details`, `booking_code`, `status`, `rejection_reason`, `response_date`, `admin_id`, `created_at`, `updated_at`) VALUES
@@ -828,12 +918,12 @@ INSERT INTO `transport_bookings` (`id`, `user_id`, `trip_id`, `event_id`, `ticke
 (17, 9, 46, 19, NULL, 'عبد الكريم', '0596621455', NULL, 1, '', '', NULL, 2, 150.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TR568FFF0E', 'rejected', 'تم إلغاء الرحلة لظروف طارئة', '2025-08-24 10:54:00', 1, '2025-08-24 07:53:06', '2025-08-24 07:54:00'),
 (18, 9, 45, 24, NULL, 'عبد الكريم', '0596621455', NULL, 1, '', '', NULL, 3, 105.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TRF4CC53E6', 'confirmed', NULL, '2025-08-24 11:11:27', 1, '2025-08-24 08:10:45', '2025-08-24 08:11:27'),
 (19, 9, 21, 25, NULL, 'محمد عبد', '0596621455', NULL, 1, '', '', NULL, 3, 102.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TR673578D7', 'rejected', 'عدم توفر وسيلة النقل المطلوبة', '2025-08-24 11:16:56', 1, '2025-08-24 08:16:11', '2025-08-24 08:16:56'),
-(20, 9, 145, 17, NULL, 'محمد عبد', '0596621455', NULL, 1, '', '', NULL, 3, 45.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TRF705EB47', 'confirmed', NULL, '2025-08-24 12:33:40', 1, '2025-08-24 09:33:20', '2025-08-24 09:33:40');
+(20, 9, 145, 17, NULL, 'محمد عبد', '0596621455', NULL, 1, '', '', NULL, 3, 45.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TRF705EB47', '', NULL, '2025-08-24 12:33:40', 1, '2025-08-24 09:33:20', '2025-09-13 10:17:24');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transport_drivers`
+-- Table structure for table `transport_drivers`
 --
 
 CREATE TABLE `transport_drivers` (
@@ -857,7 +947,7 @@ CREATE TABLE `transport_drivers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `transport_drivers`
+-- Dumping data for table `transport_drivers`
 --
 
 INSERT INTO `transport_drivers` (`id`, `name`, `phone`, `license_number`, `license_type`, `license_expiry`, `address`, `governorate`, `city`, `region`, `status`, `experience_years`, `rating`, `photo`, `is_active`, `created_at`, `updated_at`) VALUES
@@ -866,12 +956,13 @@ INSERT INTO `transport_drivers` (`id`, `name`, `phone`, `license_number`, `licen
 (4, 'يوسف عبدالله', '0596543210', 'DL004321', 'private', NULL, '', 'غزة', 'غزة', 'center', 'available', 10, 4.90, 'uploads/drivers/driver3.jpg', 1, '2025-05-26 06:03:12', '2025-08-24 09:05:20'),
 (5, 'عمر سالم', '0595432109', 'DL008765', 'private', NULL, NULL, 'غزة', 'غزة', 'center', 'available', 5, 4.60, 'uploads/drivers/driver4.jpg', 1, '2025-05-26 06:03:12', '2025-08-24 09:05:20'),
 (16, 'أحمد محمد', '0599123456', 'DL001234', 'private', NULL, NULL, 'غزة', 'غزة', 'center', 'available', 8, 4.80, 'uploads/drivers/driver5.jpg', 1, '2025-05-26 06:08:17', '2025-08-24 09:05:20'),
-(18, 'محمد محمود الخال', '4929977584', '111111111', 'private', NULL, 'رفح', 'غزة', 'غزة', 'center', 'available', 3, 5.00, 'uploads/drivers/driver6.jpg', 1, '2025-08-23 07:09:45', '2025-08-24 09:05:20');
+(18, 'محمد محمود الخال', '4929977584', '111111111', 'private', NULL, 'رفح', 'غزة', 'غزة', 'center', 'available', 3, 5.00, 'uploads/drivers/driver6.jpg', 1, '2025-08-23 07:09:45', '2025-08-24 09:05:20'),
+(20, 'kmdkal', '9595959', 'dh454', 'private', '2026-12-12', '', 'غزة', 'خانيونس', '', 'available', 10, 5.00, NULL, 1, '2025-08-26 05:20:22', '2025-08-26 05:20:22');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transport_prices`
+-- Table structure for table `transport_prices`
 --
 
 CREATE TABLE `transport_prices` (
@@ -887,7 +978,7 @@ CREATE TABLE `transport_prices` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transport_starting_points`
+-- Table structure for table `transport_starting_points`
 --
 
 CREATE TABLE `transport_starting_points` (
@@ -902,7 +993,7 @@ CREATE TABLE `transport_starting_points` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `transport_starting_points`
+-- Dumping data for table `transport_starting_points`
 --
 
 INSERT INTO `transport_starting_points` (`id`, `name`, `region`, `icon`, `description`, `is_active`, `created_at`, `updated_at`) VALUES
@@ -922,7 +1013,7 @@ INSERT INTO `transport_starting_points` (`id`, `name`, `region`, `icon`, `descri
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transport_trips`
+-- Table structure for table `transport_trips`
 --
 
 CREATE TABLE `transport_trips` (
@@ -946,20 +1037,19 @@ CREATE TABLE `transport_trips` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `transport_trips`
+-- Dumping data for table `transport_trips`
 --
 
 INSERT INTO `transport_trips` (`id`, `event_id`, `starting_point_id`, `transport_type_id`, `driver_id`, `transport_price_id`, `vehicle_id`, `departure_time`, `arrival_time`, `price`, `total_seats`, `available_seats`, `features`, `description`, `is_active`, `created_at`, `updated_at`) VALUES
 (21, 25, 9, 3, 3, NULL, 3, '2025-10-10 08:00:00', '09:56:00', 34.00, 4, 4, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 10:05:20'),
 (45, 24, 5, 2, 2, NULL, 2, '2025-09-15 12:12:00', '14:14:00', 17.00, 12, 9, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 07:12:16'),
 (46, 19, 5, 4, 16, NULL, 7, '2025-11-01 12:13:00', '13:30:00', 25.00, 50, 50, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 10:05:20'),
-(66, 24, 12, 4, 5, NULL, 5, '2025-09-15 12:46:00', '14:01:00', 27.00, 15, 15, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 07:12:07'),
-(145, 17, 2, 21, 18, NULL, 8, '2025-09-05 12:55:00', '13:15:00', 15.00, 12, 9, NULL, '', 1, '2025-08-24 09:31:15', '2025-08-25 10:05:20');
+(66, 24, 12, 4, 5, NULL, 5, '2025-09-15 12:46:00', '14:01:00', 27.00, 15, 15, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 07:12:07');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transport_types`
+-- Table structure for table `transport_types`
 --
 
 CREATE TABLE `transport_types` (
@@ -972,7 +1062,7 @@ CREATE TABLE `transport_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `transport_types`
+-- Dumping data for table `transport_types`
 --
 
 INSERT INTO `transport_types` (`id`, `name`, `description`, `icon`, `is_active`, `created_at`) VALUES
@@ -992,7 +1082,7 @@ INSERT INTO `transport_types` (`id`, `name`, `description`, `icon`, `is_active`,
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transport_vehicles`
+-- Table structure for table `transport_vehicles`
 --
 
 CREATE TABLE `transport_vehicles` (
@@ -1012,7 +1102,7 @@ CREATE TABLE `transport_vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `transport_vehicles`
+-- Dumping data for table `transport_vehicles`
 --
 
 INSERT INTO `transport_vehicles` (`id`, `driver_id`, `transport_type_id`, `plate_number`, `model`, `year`, `color`, `capacity`, `photo`, `features`, `is_active`, `created_at`, `updated_at`) VALUES
@@ -1021,12 +1111,13 @@ INSERT INTO `transport_vehicles` (`id`, `driver_id`, `transport_type_id`, `plate
 (4, 4, 1, 'غ ن 4321', 'إيفيكو ديلي', 2018, 'أزرق', 30, 'vehicles/bus2.jpg', '[\"ac\", \"comfortable_seats\"]', 1, '2025-05-26 06:03:12', '2025-05-26 06:03:12'),
 (5, 5, 4, 'غ ن 8765', 'كيا بونجو', 2017, 'أحمر', 15, 'vehicles/minibus1.jpg', '[\"ac\", \"basic_comfort\"]', 1, '2025-05-26 06:03:12', '2025-05-26 06:03:12'),
 (7, 16, 4, '225985356', 'ي', 2012, 'احمر', 50, NULL, NULL, 1, '2025-08-24 09:11:51', '2025-08-24 09:11:51'),
-(8, 18, 21, '325889511', 'k', 2016, 'اسود', 45, NULL, NULL, 1, '2025-08-24 09:13:58', '2025-08-24 09:13:58');
+(8, 18, 21, '325889511', 'k', 2016, 'اسود', 45, NULL, NULL, 1, '2025-08-24 09:13:58', '2025-08-24 09:13:58'),
+(9, 20, 32, '215151515', 'mmkjnj', 2022, 'mnkl', 10, NULL, NULL, 1, '2025-08-26 05:30:04', '2025-08-26 05:30:04');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -1052,19 +1143,20 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `password_hashed`, `role`, `reset_token`, `reset_expires`, `created_at`, `updated_at`, `profile_image`, `last_login`, `last_login_ip`, `timezone`, `preferred_language`, `two_factor_enabled`, `status`, `email_verified`) VALUES
 (1, 'Admin', 'admin@example.com', '$2y$10$fMgeeCfcZ7nhHWFWKNbCK.SVauLNd3DA50oopV/YYAr6MRh4INu0.', '0501234567', '$2y$10$fMgeeCfcZ7nhHWFWKNbCK.SVauLNd3DA50oopV/YYAr6MRh4INu0.', '', NULL, NULL, '2025-04-21 09:41:54', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
 (2, 'ahamd', 'asdwqd@sdfd.fs', '$2y$10$i0CEnCjXipNZLxwfg14il.eF93nxFb6W8RnPIKo0/7.63A9uITiIq', '+64033550355', '$2y$10$i0CEnCjXipNZLxwfg14il.eF93nxFb6W8RnPIKo0/7.63A9uITiIq', 'user', NULL, NULL, '2025-04-21 12:35:58', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
 (5, 'Admin User', 'admin@admin.com', '$2y$10$dpMa8.2MV.j6nP4jujkfreYkwMtsrD1mo5MMC3ab8MQHIxGNzqZdK', '0501234567', '$2y$10$dpMa8.2MV.j6nP4jujkfreYkwMtsrD1mo5MMC3ab8MQHIxGNzqZdK', '', NULL, NULL, '2025-04-28 07:44:13', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
-(6, 'tran', 'tran@gmail.com', 'tran123', '25412114521', 'tran123', 'transport_admin', NULL, NULL, '2025-05-01 17:19:27', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
-(8, 'المدير العام', 'superadmin@palestine-tickets.com', 'SuperAdmin2024!', '0599123456', 'SuperAdmin2024!', 'super_admin', NULL, NULL, '2025-05-30 07:59:41', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
-(9, 'المدير11', 'admin@transport.com', 'Transport2024!', '0599000000', 'Transport2024!', 'transport_admin', NULL, NULL, '2025-05-30 08:01:26', '2025-08-25 10:10:34', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
-(10, 'مدير الإشعارات', 'notifications@palestine-tickets.com', 'Notifications2024!', '0599000000', 'Notifications2024!', 'notifications_admin', NULL, NULL, '2025-05-30 08:01:26', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
-(11, 'مستخدم عادي', 'user@palestine-tickets.com', 'User2024!', '0599000000', 'User2024!', 'user', NULL, NULL, '2025-05-30 08:01:26', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
-(12, 'مستخدم تجريبي', 'test@example.com', '$2y$10$EVbgwGwaLHGQDLkzRXRwLuzHRT8pGDXrMZtDoCSrNX.fIcEksfPSe', '', '', 'user', NULL, NULL, '2025-05-31 08:13:45', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 1);
+(6, 'tran', 'tran@gmail.com', 'tran123', '25412114521', '$2y$10$kZ1oEenwUMJxoHFRk3cl7ur83N63NMbN0kaZq86XIDAKzINNg2veW', 'transport_admin', NULL, NULL, '2025-05-01 17:19:27', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
+(8, 'المدير العام', 'superadmin@palestine-tickets.com', 'SuperAdmin2024!', '0599123456', '$2y$10$M0y3O6OFAdEtZQwqXjhGsexL6jsD5pqZdrE/INzuFjvniE3R8JGvC', 'super_admin', NULL, NULL, '2025-05-30 07:59:41', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
+(9, 'المدير11', 'admin@transport.com', 'Transport2024!', '0599000000', '$2y$10$5.Mb3VO8i9M.U4frECd3qe/btwRGTZRHmuZzmkGyDjh5yiXYKAM.u', 'transport_admin', NULL, NULL, '2025-05-30 08:01:26', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
+(10, 'مدير الإشعارات', 'notifications@palestine-tickets.com', 'Notifications2024!', '0599000000', '$2y$10$hERO5Stzn9.Gy0/pqsJVwOlIK5hvEOUNFbGJW3AatbG5BPPkmGOMG', 'notifications_admin', NULL, NULL, '2025-05-30 08:01:26', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
+(11, 'مستخدم عادي', 'user@palestine-tickets.com', 'User2024!', '0599000000', '$2y$10$QgG3.GxX6.bzxGyNXjQ.Neo9ukZN0nP7i4/vA0FqgxmAtvDiJmlSC', 'user', NULL, NULL, '2025-05-30 08:01:26', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
+(12, 'مستخدم تجريبي', 'test@example.com', '$2y$10$EVbgwGwaLHGQDLkzRXRwLuzHRT8pGDXrMZtDoCSrNX.fIcEksfPSe', '', '$2y$10$w60AhtdcjW0IrJgHIhrhGeSF1pgCTSMs/F221jyLCMxXMjohTbGHa', 'user', NULL, NULL, '2025-05-31 08:13:45', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 1),
+(13, 'Rochelle Clarkson', 'a1dfe5b662@emaily.pro', '', '+1 843-338-3827', '$2y$10$zm.s8r1l31Qs6ZRq5X5xlONOxGQ71Kaj0Y5bOmBjOznAD/z49QLSe', 'user', NULL, NULL, '2025-09-13 10:34:44', '2025-09-13 10:40:36', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0);
 
 --
 -- Indexes for dumped tables
@@ -1282,7 +1374,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_activity_log`
 --
 ALTER TABLE `admin_activity_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `admin_notifications`
@@ -1294,7 +1386,7 @@ ALTER TABLE `admin_notifications`
 -- AUTO_INCREMENT for table `admin_permissions`
 --
 ALTER TABLE `admin_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `admin_profile`
@@ -1330,25 +1422,25 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `notification_settings`
 --
 ALTER TABLE `notification_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `payment_cards`
@@ -1378,13 +1470,13 @@ ALTER TABLE `paypal_technical_info`
 -- AUTO_INCREMENT for table `registration_logs`
 --
 ALTER TABLE `registration_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `transport_bookings`
@@ -1396,7 +1488,7 @@ ALTER TABLE `transport_bookings`
 -- AUTO_INCREMENT for table `transport_drivers`
 --
 ALTER TABLE `transport_drivers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `transport_prices`
@@ -1426,78 +1518,78 @@ ALTER TABLE `transport_types`
 -- AUTO_INCREMENT for table `transport_vehicles`
 --
 ALTER TABLE `transport_vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- قيود الجداول المُلقاة.
+-- Constraints for dumped tables
 --
 
 --
--- قيود الجداول `admin_activity_log`
+-- Constraints for table `admin_activity_log`
 --
 ALTER TABLE `admin_activity_log`
   ADD CONSTRAINT `admin_activity_log_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `admin_permissions`
+-- Constraints for table `admin_permissions`
 --
 ALTER TABLE `admin_permissions`
   ADD CONSTRAINT `admin_permissions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `admin_permissions_ibfk_2` FOREIGN KEY (`granted_by`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
--- قيود الجداول `invoices`
+-- Constraints for table `invoices`
 --
 ALTER TABLE `invoices`
   ADD CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `invoices_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `notifications`
+-- Constraints for table `notifications`
 --
 ALTER TABLE `notifications`
   ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `notification_settings`
+-- Constraints for table `notification_settings`
 --
 ALTER TABLE `notification_settings`
   ADD CONSTRAINT `notification_settings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `payment_cards`
+-- Constraints for table `payment_cards`
 --
 ALTER TABLE `payment_cards`
   ADD CONSTRAINT `payment_cards_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `payment_cards_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `payment_methods`
+-- Constraints for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
   ADD CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `payment_technical_info`
+-- Constraints for table `payment_technical_info`
 --
 ALTER TABLE `payment_technical_info`
   ADD CONSTRAINT `payment_technical_info_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `payment_cards` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `tickets`
+-- Constraints for table `tickets`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
@@ -1505,21 +1597,21 @@ ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `transport_bookings`
+-- Constraints for table `transport_bookings`
 --
 ALTER TABLE `transport_bookings`
   ADD CONSTRAINT `transport_bookings_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `transport_bookings_ibfk_4` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`) ON DELETE SET NULL;
 
 --
--- قيود الجداول `transport_prices`
+-- Constraints for table `transport_prices`
 --
 ALTER TABLE `transport_prices`
   ADD CONSTRAINT `transport_prices_ibfk_1` FOREIGN KEY (`transport_type_id`) REFERENCES `transport_types` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `transport_prices_ibfk_2` FOREIGN KEY (`starting_point_id`) REFERENCES `transport_starting_points` (`id`) ON DELETE CASCADE;
 
 --
--- قيود الجداول `transport_trips`
+-- Constraints for table `transport_trips`
 --
 ALTER TABLE `transport_trips`
   ADD CONSTRAINT `fk_trip_driver` FOREIGN KEY (`driver_id`) REFERENCES `transport_drivers` (`id`) ON DELETE SET NULL,
@@ -1531,7 +1623,7 @@ ALTER TABLE `transport_trips`
   ADD CONSTRAINT `transport_trips_ibfk_6` FOREIGN KEY (`transport_price_id`) REFERENCES `transport_prices` (`id`) ON DELETE SET NULL;
 
 --
--- قيود الجداول `transport_vehicles`
+-- Constraints for table `transport_vehicles`
 --
 ALTER TABLE `transport_vehicles`
   ADD CONSTRAINT `transport_vehicles_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `transport_drivers` (`id`) ON DELETE CASCADE,
