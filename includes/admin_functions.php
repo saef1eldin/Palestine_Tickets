@@ -74,12 +74,29 @@ function grant_admin_permission($user_id, $permission_type, $granted_by) {
             return false;
         }
         
-        $db->query("INSERT INTO admin_permissions (user_id, permission_type, granted_by, is_active) 
-                   VALUES (:user_id, :permission_type, :granted_by, 1)
-                   ON DUPLICATE KEY UPDATE is_active = 1, granted_by = :granted_by, granted_at = NOW()");
+        // التحقق من وجود الصلاحية مسبقاً
+        $db->query("SELECT id FROM admin_permissions 
+                   WHERE user_id = :user_id AND permission_type = :permission_type");
         $db->bind(':user_id', $user_id);
         $db->bind(':permission_type', $permission_type);
-        $db->bind(':granted_by', $granted_by);
+        $existing = $db->single();
+        
+        if ($existing) {
+            // تحديث الصلاحية الموجودة
+            $db->query("UPDATE admin_permissions 
+                       SET is_active = 1, granted_by = :granted_by, granted_at = NOW() 
+                       WHERE user_id = :user_id AND permission_type = :permission_type");
+            $db->bind(':user_id', $user_id);
+            $db->bind(':permission_type', $permission_type);
+            $db->bind(':granted_by', $granted_by);
+        } else {
+            // إدراج صلاحية جديدة
+            $db->query("INSERT INTO admin_permissions (user_id, permission_type, granted_by, is_active) 
+                       VALUES (:user_id, :permission_type, :granted_by, 1)");
+            $db->bind(':user_id', $user_id);
+            $db->bind(':permission_type', $permission_type);
+            $db->bind(':granted_by', $granted_by);
+        }
         
         $result = $db->execute();
         
