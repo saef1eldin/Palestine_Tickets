@@ -44,10 +44,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $permission_type = $_POST['permission_type'] ?? '';
                 
                 if ($user_id && $permission_type) {
-                    if (revoke_admin_permission($user_id, $permission_type, $_SESSION['user_id'])) {
-                        $success = 'تم سحب الصلاحية بنجاح';
+                    if ($permission_type === 'all') {
+                        // سحب جميع الصلاحيات
+                        $permissions = ['transport', 'notifications', 'site', 'super'];
+                        $revoked_count = 0;
+                        
+                        foreach ($permissions as $perm) {
+                            if (revoke_admin_permission($user_id, $perm, $_SESSION['user_id'])) {
+                                $revoked_count++;
+                            }
+                        }
+                        
+                        if ($revoked_count > 0) {
+                            $success = 'تم سحب جميع الصلاحيات بنجاح';
+                        } else {
+                            $error = 'فشل في سحب الصلاحيات';
+                        }
                     } else {
-                        $error = 'فشل في سحب الصلاحية';
+                        // سحب صلاحية محددة
+                        if (revoke_admin_permission($user_id, $permission_type, $_SESSION['user_id'])) {
+                            $success = 'تم سحب الصلاحية بنجاح';
+                        } else {
+                            $error = 'فشل في سحب الصلاحية';
+                        }
                     }
                 } else {
                     $error = 'بيانات غير صحيحة';
