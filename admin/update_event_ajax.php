@@ -1,22 +1,28 @@
 <?php
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+// Include functions
+$root_path = dirname(__DIR__) . '/';
+require_once $root_path . 'includes/init.php';
+require_once $root_path . 'includes/functions.php';
+require_once $root_path . 'includes/auth.php';
+require_once $root_path . 'includes/admin_functions.php';
+
+$auth = new Auth();
+
+// Check if user is logged in
+if (!$auth->isLoggedIn()) {
+    http_response_code(401);
+    echo json_encode(['success' => false, 'message' => 'غير مصرح لك بالوصول']);
+    exit;
 }
 
-// Include database connection
-require_once '../config/database.php';
-
-// Include functions
-require_once '../includes/functions.php';
-require_once '../includes/auth_functions.php';
-
-// إنشاء اتصال قاعدة البيانات
-$db = new Database();
-$pdo = $db->getConnection();
-
-// Require admin
-requireAdmin();
+// التحقق من صلاحيات إدارة الأحداث
+try {
+    require_admin_permission('events');
+} catch (Exception $e) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'ليس لديك صلاحية لإدارة الأحداث']);
+    exit;
+}
 
 // Set default response
 $response = [

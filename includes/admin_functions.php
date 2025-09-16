@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 /**
  * دوال إدارة صلاحيات المدراء
@@ -10,27 +11,34 @@ function check_admin_permission($user_id, $permission_type) {
     $db = new Database();
     
     try {
-        // التحقق من السوبر أدمن (له جميع الصلاحيات)
-        $db->query("SELECT role FROM users WHERE id = :user_id AND role = 'super_admin'");
+        // الحصول على دور المستخدم
+        $db->query("SELECT role FROM users WHERE id = :user_id AND status = 'active'");
         $db->bind(':user_id', $user_id);
-        $super_admin = $db->single();
+        $user = $db->single();
         
-        if ($super_admin) {
+        if (!$user || empty($user['role'])) {
+            return false;
+        }
+        
+        $user_role = $user['role'];
+        
+        // السوبر أدمن له جميع الصلاحيات
+        if ($user_role === 'super_admin') {
             return true;
         }
         
-        // التحقق من الصلاحية المحددة
-        $db->query("SELECT ap.* FROM admin_permissions ap 
-                   JOIN users u ON ap.user_id = u.id 
-                   WHERE ap.user_id = :user_id 
-                   AND ap.permission_type = :permission_type 
-                   AND ap.is_active = 1 
-                   AND u.status = 'active'");
-        $db->bind(':user_id', $user_id);
-        $db->bind(':permission_type', $permission_type);
-        $permission = $db->single();
+        // تحديد الصلاحيات حسب نوع الإذن المطلوب
+        switch ($permission_type) {
+            case 'site':
+                return in_array($user_role, ['super_admin', 'site_admin']);
+            case 'transport':
+                return in_array($user_role, ['super_admin', 'transport_admin']);
+            case 'notifications':
+                return in_array($user_role, ['super_admin', 'notifications_admin']);
+            default:
+                return $user_role === 'super_admin';
+        }
         
-        return $permission ? true : false;
     } catch (Exception $e) {
         error_log("Error checking admin permission: " . $e->getMessage());
         return false;
@@ -256,12 +264,13 @@ function get_admin_activity_log($limit = 50, $admin_id = null) {
 }
 
 // التحقق من إمكانية الوصول لصفحة إدارية
-function require_admin_permission($permission_type, $redirect_url = 'index.php') {
+function require_admin_permission($permission_type, $redirect_url = '../login.php') {
     if (!isset($_SESSION['user_id'])) {
-        redirect('login.php');
+        redirect('../login.php');
     }
     
     if (!check_admin_permission($_SESSION['user_id'], $permission_type)) {
+        $_SESSION['error_message'] = 'ليس لديك صلاحية للوصول إلى هذه الصفحة';
         redirect($redirect_url);
     }
 }

@@ -1,15 +1,26 @@
 <?php
+// Include functions
+$root_path = dirname(__DIR__) . '/';
+require_once $root_path . 'includes/init.php';
+require_once $root_path . 'includes/functions.php';
+require_once $root_path . 'includes/auth.php';
+require_once $root_path . 'includes/admin_functions.php';
+
+$auth = new Auth();
+
+// Check if user is logged in
+if (!$auth->isLoggedIn()) {
+    redirect('../login.php');
+}
+
+// التحقق من صلاحيات إدارة التذاكر
+require_admin_permission('tickets');
+
 // Set page title
 $page_title = 'Manage Tickets';
 
 // Include admin header
 include 'includes/admin_header.php';
-
-// Include auth functions
-require_once '../includes/auth_functions.php';
-
-// Require admin
-requireAdmin();
 
 // AJAX processing moved to update_ticket_status.php
 
@@ -39,7 +50,7 @@ $csrf_token = generateCSRFToken();
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1><?php echo $lang['manage_tickets']; ?></h1>
-        <a href="update_tickets_table.php" class="btn btn-outline-secondary">Check/Fix Database Structure</a>
+        
     </div>
 
     <!-- Admin Navigation -->
@@ -76,12 +87,7 @@ $csrf_token = generateCSRFToken();
                         <?php echo $lang['manage_discounts']; ?>
                     </a>
                 </div>
-                <div class="col-md-2 text-center">
-                    <a href="payment_cards.php" class="btn btn-outline-primary w-100 mb-2">
-                        <i class="fas fa-credit-card"></i><br>
-                        Payment Cards
-                    </a>
-                </div>
+
                 <div class="col-md-2 text-center">
                     <a href="../index.php" class="btn btn-outline-secondary w-100 mb-2">
                         <i class="fas fa-home"></i><br>

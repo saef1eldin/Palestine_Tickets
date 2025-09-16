@@ -16,7 +16,12 @@ function isLoggedIn() {
  * @return bool
  */
 function isAdmin() {
-    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+    if (!isset($_SESSION['user_role']) || empty($_SESSION['user_role'])) {
+        return false;
+    }
+    
+    $admin_roles = ['super_admin', 'transport_admin', 'notifications_admin', 'site_admin'];
+    return in_array($_SESSION['user_role'], $admin_roles);
 }
 
 /**
@@ -36,7 +41,8 @@ function requireLogin() {
 function requireAdmin() {
     if (!isLoggedIn() || !isAdmin()) {
         $_SESSION['error_message'] = 'ليس لديك صلاحية للوصول إلى هذه الصفحة';
-        header('Location: ' . APP_URL . 'login.php');
+        // استخدام مسار نسبي بسيط بدلاً من getBaseUrl()
+        header('Location: ../login.php');
         exit;
     }
 }

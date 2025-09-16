@@ -135,7 +135,7 @@ class Auth {
 
     public function isAdmin() {
         // التحقق من وجود متغير الجلسة user_role
-        if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+        if(isset($_SESSION['user_role']) && in_array($_SESSION['user_role'], ['admin', 'super_admin', 'transport_admin', 'notifications_admin', 'site_admin'])) {
             return true;
         }
 
@@ -145,9 +145,9 @@ class Auth {
             $this->db->bind(':id', $_SESSION['user_id']);
             $user = $this->db->single();
 
-            if($user && $user['role'] === 'admin') {
+            if($user && in_array($user['role'], ['admin', 'super_admin', 'transport_admin', 'notifications_admin', 'site_admin'])) {
                 // تعيين متغير الجلسة
-                $_SESSION['user_role'] = 'admin';
+                $_SESSION['user_role'] = $user['role'];
                 return true;
             }
         }

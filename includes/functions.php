@@ -2,16 +2,30 @@
 require_once __DIR__ . '/config.php';
 
 function redirect($url) {
+    // تحديد الرابط الكامل
+    if (strpos($url, 'http') === 0) {
+        // إذا كان الرابط كاملاً، استخدمه كما هو
+        $full_url = $url;
+    } elseif (strpos($url, '/') === 0) {
+        // إذا كان الرابط يبدأ بـ /، أضف النطاق فقط
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+        $host = $_SERVER['HTTP_HOST'];
+        $full_url = $protocol . $host . $url;
+    } else {
+        // إذا كان الرابط نسبياً، أضف APP_URL
+        $full_url = APP_URL . $url;
+    }
+    
     // Check if headers have been sent
     if (!headers_sent()) {
         // If headers have not been sent, use header() for redirection
-        header("Location: " . APP_URL . $url);
+        header("Location: " . $full_url);
         exit();
     } else {
         // If headers have been sent, use JavaScript for redirection
-        echo '<script>window.location.href="' . APP_URL . $url . '";</script>';
-        echo '<noscript><meta http-equiv="refresh" content="0;url=' . APP_URL . $url . '"></noscript>';
-        echo 'If you are not redirected automatically, please <a href="' . APP_URL . $url . '">click here</a>.';
+        echo '<script>window.location.href="' . $full_url . '";</script>';
+        echo '<noscript><meta http-equiv="refresh" content="0;url=' . $full_url . '"></noscript>';
+        echo 'If you are not redirected automatically, please <a href="' . $full_url . '">click here</a>.';
         exit();
     }
 }

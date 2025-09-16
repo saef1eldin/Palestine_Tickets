@@ -1,26 +1,26 @@
 <?php
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Include functions
+$root_path = dirname(__DIR__) . '/';
+require_once $root_path . 'includes/init.php';
+require_once $root_path . 'includes/functions.php';
+require_once $root_path . 'includes/auth.php';
+require_once $root_path . 'includes/admin_functions.php';
+
+$auth = new Auth();
+
+// Check if user is logged in
+if (!$auth->isLoggedIn()) {
+    redirect('../login.php');
+}
+
+// التحقق من صلاحيات إدارة الأحداث
+require_admin_permission('events');
 
 // Set page title
 $page_title = 'Add Event';
 
-// Include auth functions and general functions
-try {
-    require_once '../includes/auth_functions.php';
-    require_once '../includes/functions.php';
-
-    // Include admin header
-    include 'includes/admin_header.php';
-} catch (Exception $e) {
-    echo "<div style='background: #f8d7da; padding: 10px; margin: 10px 0; border: 1px solid #f5c6cb;'>Error loading required files: " . $e->getMessage() . "</div>";
-    exit;
-}
-
-// Require admin
-requireAdmin();
+// Include admin header
+include 'includes/admin_header.php';
 
 // Form processing moved to add_event_ajax.php via AJAX
 

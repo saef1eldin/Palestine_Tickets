@@ -10,15 +10,25 @@ $eventId = (int)$_GET['id'];
 // Set page title
 $page_title = 'Edit Event';
 
+// Include functions
+$root_path = dirname(__DIR__) . '/';
+require_once $root_path . 'includes/init.php';
+require_once $root_path . 'includes/functions.php';
+require_once $root_path . 'includes/auth.php';
+require_once $root_path . 'includes/admin_functions.php';
+
+$auth = new Auth();
+
+// Check if user is logged in
+if (!$auth->isLoggedIn()) {
+    redirect('../login.php');
+}
+
+// التحقق من صلاحيات إدارة الأحداث
+require_admin_permission('events');
+
 // Include admin header
 include 'includes/admin_header.php';
-
-// Include auth functions and general functions
-require_once '../includes/auth_functions.php';
-require_once '../includes/functions.php';
-
-// Require admin
-requireAdmin();
 
 // Get event details
 $stmt = $pdo->prepare("SELECT * FROM events WHERE id = :id");

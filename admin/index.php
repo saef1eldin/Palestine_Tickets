@@ -157,12 +157,7 @@ try {
                         <?php echo $lang['manage_discounts']; ?>
                     </a>
                 </div>
-                <div class="col-md-2 text-center">
-                    <a href="payment_cards.php" class="btn btn-outline-primary w-100 mb-2">
-                        <i class="fas fa-credit-card"></i><br>
-                        Payment Cards
-                    </a>
-                </div>
+
                 <div class="col-md-2 text-center">
                     <a href="messages.php" class="btn btn-outline-primary w-100 mb-2">
                         <i class="fas fa-envelope"></i><br>

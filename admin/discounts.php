@@ -1,15 +1,26 @@
 <?php
+// Include functions
+$root_path = dirname(__DIR__) . '/';
+require_once $root_path . 'includes/init.php';
+require_once $root_path . 'includes/functions.php';
+require_once $root_path . 'includes/auth.php';
+require_once $root_path . 'includes/admin_functions.php';
+
+$auth = new Auth();
+
+// Check if user is logged in
+if (!$auth->isLoggedIn()) {
+    redirect('../login.php');
+}
+
+// التحقق من صلاحيات إدارة الخصومات
+require_admin_permission('discounts');
+
 // Set page title
 $page_title = 'Manage Discounts';
 
 // Include admin header
 include 'includes/admin_header.php';
-
-// Include auth functions
-require_once '../includes/auth_functions.php';
-
-// Require admin
-requireAdmin();
 
 // Process form submission for delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_discount'])) {
@@ -104,12 +115,7 @@ $csrf_token = generateCSRFToken();
                         <?php echo $lang['manage_discounts']; ?>
                     </a>
                 </div>
-                <div class="col-md-2 text-center">
-                    <a href="payment_cards.php" class="btn btn-outline-primary w-100 mb-2">
-                        <i class="fas fa-credit-card"></i><br>
-                        Payment Cards
-                    </a>
-                </div>
+
                 <div class="col-md-2 text-center">
                     <a href="../index.php" class="btn btn-outline-secondary w-100 mb-2">
                         <i class="fas fa-home"></i><br>

@@ -13,6 +13,9 @@ require_once dirname(__DIR__, 2) . '/includes/functions.php';
 require_once dirname(__DIR__, 2) . '/includes/auth_functions.php';
 require_once dirname(__DIR__, 2) . '/includes/formatPrice.php';
 
+// التحقق من صلاحيات الإدارة يتم في الصفحة الرئيسية
+// requireAdmin(); // تم تعطيل هذا الاستدعاء لتجنب التضارب
+
 // Include language files
 $lang_dir = dirname(__DIR__, 2) . '/lang/';
 $default_lang = 'en';
@@ -112,9 +115,7 @@ $dir = ($current_lang == 'ar' || $current_lang == 'he') ? 'rtl' : 'ltr';
                     <li class="nav-item">
                         <a class="nav-link" href="discounts.php"><i class="fas fa-percent"></i> <?php echo $lang['manage_discounts'] ?? 'Discounts'; ?></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="payment_cards.php"><i class="fas fa-credit-card"></i> <?php echo $lang['payment_cards'] ?? 'Payment Cards'; ?></a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="login_logs.php"><i class="fas fa-sign-in-alt"></i> <?php echo $lang['login_logs'] ?? 'Login Logs'; ?></a>
                     </li>
@@ -168,4 +169,4 @@ $dir = ($current_lang == 'ar' || $current_lang == 'he') ? 'rtl' : 'ltr';
     <?php endif; ?>
 
     <!-- Main Content -->
-    <main class="py-4">
+     <main class="py-4">
