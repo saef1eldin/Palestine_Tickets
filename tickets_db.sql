@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2025 at 01:10 PM
+-- Generation Time: Sep 16, 2025 at 09:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -186,7 +186,117 @@ INSERT INTO `admin_activity_log` (`id`, `admin_id`, `action_type`, `target_type`
 (140, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 10:49:39'),
 (141, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:09:36'),
 (142, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:09:40'),
-(143, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:09:55');
+(143, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:09:55'),
+(144, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:14:11'),
+(145, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-13 11:14:12'),
+(146, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:12:26'),
+(147, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:14:20'),
+(148, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:14:25'),
+(149, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:18:06'),
+(150, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:37:06'),
+(151, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:37:27'),
+(152, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:38:46'),
+(153, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:38:50'),
+(154, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:38:56'),
+(155, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:46:48'),
+(156, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:50:26'),
+(157, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:51:14'),
+(158, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:52:02'),
+(159, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:52:06'),
+(160, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:52:17'),
+(161, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:52:34'),
+(162, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:52:36'),
+(163, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:52:37'),
+(164, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:52:39'),
+(165, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:52:39'),
+(166, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:56:07'),
+(167, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:56:09'),
+(168, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:56:11'),
+(169, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:56:13'),
+(170, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:56:15'),
+(171, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:56:16'),
+(172, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 07:56:19'),
+(173, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 07:56:22'),
+(174, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:00:12'),
+(175, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:00:28'),
+(176, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:00:30'),
+(177, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:01:27'),
+(178, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:01:30'),
+(179, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:01:31'),
+(180, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:01:40'),
+(181, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:01:50'),
+(182, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:08:12'),
+(183, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:08:19'),
+(184, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:09:11'),
+(185, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:09:13'),
+(186, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:09:15'),
+(187, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:12:32'),
+(188, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:15:41'),
+(189, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:15:45'),
+(190, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 08:16:03'),
+(191, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 08:16:06'),
+(192, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 16:46:16'),
+(193, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 16:47:49'),
+(194, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-15 16:47:52'),
+(195, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 16:47:53'),
+(196, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-15 16:51:19'),
+(197, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 05:57:16'),
+(198, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 05:58:53'),
+(199, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:00:56'),
+(200, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:00:58'),
+(201, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:01:02'),
+(202, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:01:10'),
+(203, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:11:52'),
+(204, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:11:53'),
+(205, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:11:56'),
+(206, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:12:00'),
+(207, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:19:26'),
+(208, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:20:38'),
+(209, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:20:40'),
+(210, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:20:43'),
+(211, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:21:05'),
+(212, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:21:08'),
+(213, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:21:09'),
+(214, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:31:11'),
+(215, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:38:25'),
+(216, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:38:28'),
+(217, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:38:32'),
+(218, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:38:43'),
+(219, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:38:52'),
+(220, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:38:53'),
+(221, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:39:00'),
+(222, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:39:10'),
+(223, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:39:21'),
+(224, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:39:24'),
+(225, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:39:26'),
+(226, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:41:17'),
+(227, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:41:19'),
+(228, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:42:40'),
+(229, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:42:41'),
+(230, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:48:13'),
+(231, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:51:02'),
+(232, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:51:06'),
+(233, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:51:07'),
+(234, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:53:14'),
+(235, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:53:15'),
+(236, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:53:17'),
+(237, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:53:18'),
+(238, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:53:21'),
+(239, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:53:23'),
+(240, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:57:26'),
+(241, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:57:27'),
+(242, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 06:59:03'),
+(243, 1, 'system_cleanup', NULL, NULL, 'تم تنظيف 1 فعالية، 2 رحلة، 1 تذكرة، 2 حجز مواصلات', NULL, NULL, '2025-09-16 06:59:03'),
+(244, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36', '2025-09-16 07:00:54'),
+(245, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36', '2025-09-16 07:03:35'),
+(246, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36', '2025-09-16 07:04:33'),
+(247, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 07:05:54'),
+(248, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 07:06:27'),
+(249, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 07:06:32'),
+(250, 1, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36', '2025-09-16 07:12:29'),
+(251, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 07:12:57'),
+(252, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 07:12:59'),
+(253, 8, 'access_dashboard', 'admin_panel', NULL, 'دخول لوحة تحكم الموقع', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', '2025-09-16 07:14:59');
 
 -- --------------------------------------------------------
 
@@ -258,7 +368,11 @@ INSERT INTO `admin_permissions` (`id`, `user_id`, `permission_type`, `granted_by
 (5, 8, 'site', NULL, '2025-05-30 08:02:41', 1),
 (10, 9, 'transport', 8, '2025-05-30 08:01:26', 1),
 (11, 10, 'notifications', 8, '2025-05-30 08:01:26', 1),
-(16, 13, 'transport', 8, '2025-09-13 10:40:31', 0);
+(16, 13, 'transport', 8, '2025-09-13 10:40:31', 0),
+(22, 1, 'super', 1, '2025-09-15 08:15:38', 1),
+(23, 1, 'site', 1, '2025-09-15 08:15:38', 1),
+(24, 1, 'transport', 1, '2025-09-15 08:15:38', 1),
+(25, 1, 'notifications', 1, '2025-09-15 08:15:38', 1);
 
 -- --------------------------------------------------------
 
@@ -380,7 +494,7 @@ INSERT INTO `events` (`id`, `title`, `description`, `location`, `date_time`, `en
 (21, 'مهرجان غزة للأطفال', 'مهرجان سنوي مخصص للأطفال في قطاع غزة، يتضمن فعاليات ترفيهية وتعليمية متنوعة. يشمل المهرجان عروض مسرحية وألعاب تفاعلية وورش رسم وأنشطة رياضية. يهدف المهرجان إلى إدخال البهجة على قلوب الأطفال وتنمية مهاراتهم الإبداعية والاجتماعية في ظل الظروف الصعبة التي يعيشونها.', 'حديقة البلدية المركزية - غزة', '2025-06-01 10:00:00', '0000-00-00 00:00:00', 5.00, 1000, 7.00, 'مهرجانات', 'مؤسسة تامر للتعليم المجتمعي', 'info@children-festival.ps', '+970 8 2822494', 1, 'expired', 1, 'uploads/events/1746622368_dda97cd3-37bf-4b85-af09-8511e526388a.png', 0, 0, '2025-05-07 10:21:06', '2025-08-24 07:44:51'),
 (22, 'معرض غزة للصناعات اليدوية', 'معرض يجمع الحرفيين والفنانين من مختلف أنحاء قطاع غزة لعرض منتجاتهم اليدوية التقليدية والمعاصرة. يضم المعرض أقساماً متنوعة للتطريز الفلسطيني والخزف والنحت على الخشب والزجاج والصدف وصناعة السجاد والبسط. يهدف المعرض إلى الحفاظ على الحرف التقليدية الفلسطينية ودعم الحرفيين اقتصادياً.', 'قاعة المعارض - جامعة فلسطين - غزة', '2025-07-05 11:00:00', '0000-00-00 00:00:00', 10.00, 500, 13.00, 'معارض', 'اتحاد الحرفيين الفلسطينيين', 'info@gaza-crafts.ps', '+970 8 2865577', 0, 'expired', 1, 'uploads/events/1746621493_796806aa-bc85-4c51-a00e-17b46243bbbf.png', 68, 0, '2025-05-07 10:21:06', '2025-08-24 07:44:51'),
 (23, 'مؤتمر غزة للطب والصحة', 'مؤتمر علمي يجمع الأطباء والباحثين في المجال الصحي لمناقشة آخر المستجدات والتحديات الصحية في قطاع غزة. يتضمن المؤتمر محاضرات وورش عمل في مختلف التخصصات الطبية، بالإضافة إلى معرض للأجهزة والمستلزمات الطبية. يهدف المؤتمر إلى تبادل الخبرات وتطوير القطاع الصحي في ظل الظروف الصعبة.', 'مستشفى الشفاء - غزة', '2025-08-20 09:00:00', '0000-00-00 00:00:00', 40.00, 400, 70.00, 'مؤتمرات', 'نقابة الأطباء الفلسطينيين', 'info@medical-conference.ps', '+970 8 2866990', 1, 'expired', 1, 'uploads/events/1746620534_30960317-0416-49f7-8e1c-d48488b22295.png', 35, 0, '2025-05-07 10:21:06', '2025-08-24 07:44:51'),
-(24, 'مهرجان غزة للمأكولات الشعبية', 'مهرجان يحتفي بالمطبخ الفلسطيني التقليدي ويعرض مجموعة متنوعة من الأطباق والحلويات الشعبية. يشارك في المهرجان طهاة محترفون وربات بيوت من مختلف مناطق قطاع غزة، ويتضمن مسابقات طهي وعروض تحضير الأطباق الشهيرة مثل المسخن والمقلوبة والكنافة. يهدف المهرجان إلى الحفاظ على التراث الغذائي الفلسطيني.', 'ساحة السرايا - وسط مدينة غزة', '2025-09-15 16:00:00', '0000-00-00 00:00:00', 18.00, 1500, 20.00, 'مهرجانات', 'جمعية الطهاة الفلسطينيين', 'info@gaza-food.ps', '+970 8 2877788', 1, 'active', 1, 'uploads/events/1746617783_a5de241b-5e8a-4fb8-8be6-f190a9776ccc.png', 68, 0, '2025-05-07 10:21:06', '2025-05-07 11:36:23'),
+(24, 'مهرجان غزة للمأكولات الشعبية', 'مهرجان يحتفي بالمطبخ الفلسطيني التقليدي ويعرض مجموعة متنوعة من الأطباق والحلويات الشعبية. يشارك في المهرجان طهاة محترفون وربات بيوت من مختلف مناطق قطاع غزة، ويتضمن مسابقات طهي وعروض تحضير الأطباق الشهيرة مثل المسخن والمقلوبة والكنافة. يهدف المهرجان إلى الحفاظ على التراث الغذائي الفلسطيني.', 'ساحة السرايا - وسط مدينة غزة', '2025-09-15 16:00:00', '0000-00-00 00:00:00', 18.00, 1500, 20.00, 'مهرجانات', 'جمعية الطهاة الفلسطينيين', 'info@gaza-food.ps', '+970 8 2877788', 1, 'expired', 1, 'uploads/events/1746617783_a5de241b-5e8a-4fb8-8be6-f190a9776ccc.png', 68, 0, '2025-05-07 10:21:06', '2025-09-15 16:46:16'),
 (25, 'مؤتمر غزة للزراعة المستدامة', 'مؤتمر متخصص في مجال الزراعة المستدامة وتقنيات الزراعة الحديثة المناسبة لظروف قطاع غزة. يناقش المؤتمر قضايا الأمن الغذائي وإدارة الموارد المائية الشحيحة وطرق زيادة الإنتاج الزراعي. يشارك في المؤتمر خبراء محليون ودوليون لتبادل الخبرات والتجارب الناجحة في مجال الزراعة في المناطق ذات الظروف المشابهة.', 'كلية الزراعة - جامعة الاسلامية - غزة', '2025-10-10 09:30:00', '0000-00-00 00:00:00', 25.00, 300, NULL, 'مؤتمرات', 'وزارة الزراعة الفلسطينية', 'info@sustainable-agriculture.ps', '+970 8 2855566', 0, 'active', 1, 'uploads/events/1746617521_17829497-5919-4575-a236-7955951739c8.png', 300, 0, '2025-05-07 10:21:06', '2025-05-07 11:32:01'),
 (26, 'معرض غزة للفنون المعاصرة', 'معرض فني يضم أعمالاً لفنانين شباب من قطاع غزة في مجالات الرسم والنحت والتصوير الفوتوغرافي والفن الرقمي. يسلط المعرض الضوء على الإبداعات الفنية المعاصرة التي تعبر عن الواقع والتحديات والطموحات في غزة. يهدف المعرض إلى دعم الفنانين الشباب وتوفير منصة لعرض أعمالهم وتبادل الخبرات.', 'مركز رشاد الشوا الثقافي - غزة', '2025-11-15 17:00:00', '0000-00-00 00:00:00', 15.00, 250, 20.00, 'معارض', 'مجموعة الفنانين الشباب', 'info@gaza-art.ps', '+970 8 2833344', 0, 'active', 1, 'uploads/events/1746616718_6f72ac15-0da1-4305-aaac-c4ce1d63a3b3.png', 75, 0, '2025-05-07 10:21:06', '2025-05-07 11:18:38'),
 (27, 'مهرجان غزة للموسيقى والغناء', 'مهرجان موسيقي يجمع فرقاً وفنانين من قطاع غزة والضفة الغربية لتقديم عروض موسيقية وغنائية متنوعة. يشمل المهرجان أمسيات للموسيقى الشرقية والغربية والفلكلور الفلسطيني، بالإضافة إلى ورش موسيقية للأطفال والشباب. يهدف المهرجان إلى إحياء التراث الموسيقي الفلسطيني وتشجيع المواهب الشابة.', 'مسرح وسينما السعادة - غزة', '2025-12-20 18:00:00', '0000-00-00 00:00:00', 22.00, 600, 30.00, 'مهرجانات', 'فرقة العاشقين للفنون الشعبية', 'info@gaza-music.ps', '+970 8 2844455', 1, 'active', 1, 'uploads/events/1746614744_e58e1dee-a17e-4837-bb1b-1a6be3d4bd9b.png', 29, 0, '2025-05-07 10:21:06', '2025-05-30 10:14:57');
@@ -477,7 +591,17 @@ INSERT INTO `login_logs` (`id`, `user_id`, `ip_address`, `user_agent`, `browser`
 (48, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:33:56', '2025-09-13 10:33:56'),
 (49, 13, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:34:49', '2025-09-13 10:34:49'),
 (50, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 12:35:12', '2025-09-13 10:35:12'),
-(51, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 13:09:55', '2025-09-13 11:09:55');
+(51, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-13 13:09:55', '2025-09-13 11:09:55'),
+(52, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-15 09:14:20', '2025-09-15 07:14:20'),
+(53, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-15 09:50:26', '2025-09-15 07:50:26'),
+(54, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-15 09:51:29', '2025-09-15 07:51:29'),
+(55, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-15 09:52:34', '2025-09-15 07:52:34'),
+(56, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-15 10:09:11', '2025-09-15 08:09:11'),
+(57, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-15 18:47:49', '2025-09-15 16:47:49'),
+(58, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-16 07:58:53', '2025-09-16 05:58:53'),
+(59, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-16 08:21:05', '2025-09-16 06:21:05'),
+(60, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-16 08:38:43', '2025-09-16 06:38:43'),
+(61, 8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'Google Chrome', 'Windows 10', 'Desktop', '2025-09-16 08:39:09', '2025-09-16 06:39:09');
 
 -- --------------------------------------------------------
 
@@ -514,13 +638,13 @@ INSERT INTO `notifications` (`id`, `user_id`, `title`, `message`, `link`, `type`
 (14, 11, 'تم دفع رسوم المواصلات', 'تم دفع رسوم المواصلات بنجاح (32 ₪). سيتم تأكيد الحجز قريباً.', 'my-tickets.php', '', 1, '2025-05-31 08:32:57'),
 (15, 11, 'تم حجز التذكرة بنجاح', 'تم حجز تذكرة مهرجان غزة للموسيقى والغناء بنجاح. رقم الطلب: 24', 'my-tickets.php', '', 1, '2025-05-31 08:34:26'),
 (16, 11, 'تم حجز التذكرة والمواصلات', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 70 ₪', 'my-tickets.php', '', 1, '2025-05-31 09:43:33'),
-(17, 1, 'اختبار الإشعارات', 'هذا إشعار تجريبي للتأكد من عمل النظام', '', '', 0, '2025-05-31 10:31:04'),
-(18, 1, 'حجز تذكرة ناجح', 'تم حجز تذكرة مهرجان غزة للموسيقى والغناء بنجاح. رقم الطلب: ORDER_1748687981_1', '', '', 0, '2025-05-31 10:39:41'),
-(19, 1, 'حجز تذكرة ومواصلات ناجح', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 70 ₪', '', '', 0, '2025-05-31 11:00:27'),
-(20, 1, 'خطأ في حجز المواصلات', 'تم الدفع بنجاح ولكن حدث خطأ في حجز المواصلات: حدث خطأ في النظام: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`tickets_db`.`transport_bookings`, CONSTRAINT `transport_bookings_ibfk_2` FOREIGN KEY (`trip_id`) REFERENCES `transport_trips` (`id`) ON DELETE CASCADE)', '', '', 0, '2025-05-31 11:00:27'),
-(21, 1, 'حجز تذكرة ومواصلات ناجح', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 70 ₪', '', '', 0, '2025-05-31 11:01:45'),
-(22, 1, 'خطأ في حجز المواصلات', 'تم الدفع بنجاح ولكن حدث خطأ في حجز المواصلات: حدث خطأ في النظام: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`tickets_db`.`transport_bookings`, CONSTRAINT `transport_bookings_ibfk_2` FOREIGN KEY (`trip_id`) REFERENCES `transport_trips` (`id`) ON DELETE CASCADE)', '', '', 0, '2025-05-31 11:01:45'),
-(23, 1, 'حجز تذكرة ناجح', 'تم حجز تذكرة مؤتمر إعادة إعمار غزة بنجاح. رقم الطلب: ORDER_1748695378_1', '', '', 0, '2025-05-31 12:42:58'),
+(17, 1, 'اختبار الإشعارات', 'هذا إشعار تجريبي للتأكد من عمل النظام', '', '', 1, '2025-05-31 10:31:04'),
+(18, 1, 'حجز تذكرة ناجح', 'تم حجز تذكرة مهرجان غزة للموسيقى والغناء بنجاح. رقم الطلب: ORDER_1748687981_1', '', '', 1, '2025-05-31 10:39:41'),
+(19, 1, 'حجز تذكرة ومواصلات ناجح', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 70 ₪', '', '', 1, '2025-05-31 11:00:27'),
+(20, 1, 'خطأ في حجز المواصلات', 'تم الدفع بنجاح ولكن حدث خطأ في حجز المواصلات: حدث خطأ في النظام: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`tickets_db`.`transport_bookings`, CONSTRAINT `transport_bookings_ibfk_2` FOREIGN KEY (`trip_id`) REFERENCES `transport_trips` (`id`) ON DELETE CASCADE)', '', '', 1, '2025-05-31 11:00:27'),
+(21, 1, 'حجز تذكرة ومواصلات ناجح', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 70 ₪', '', '', 1, '2025-05-31 11:01:45'),
+(22, 1, 'خطأ في حجز المواصلات', 'تم الدفع بنجاح ولكن حدث خطأ في حجز المواصلات: حدث خطأ في النظام: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`tickets_db`.`transport_bookings`, CONSTRAINT `transport_bookings_ibfk_2` FOREIGN KEY (`trip_id`) REFERENCES `transport_trips` (`id`) ON DELETE CASCADE)', '', '', 1, '2025-05-31 11:01:45'),
+(23, 1, 'حجز تذكرة ناجح', 'تم حجز تذكرة مؤتمر إعادة إعمار غزة بنجاح. رقم الطلب: ORDER_1748695378_1', '', '', 1, '2025-05-31 12:42:58'),
 (24, 11, 'حجز تذكرة ومواصلات ناجح', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 150 ₪', '', '', 1, '2025-05-31 13:28:22'),
 (25, 11, 'تأكيد حجز التذكرة والمواصلات', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 150 ₪. رقم حجز المواصلات: TRAD18B7EC', '', '', 1, '2025-05-31 13:28:22'),
 (26, 11, 'حجز تذكرة ومواصلات ناجح', 'تم حجز تذكرة الحدث والمواصلات بنجاح. المبلغ الإجمالي: 78 ₪', '', '', 1, '2025-06-01 07:09:17'),
@@ -859,14 +983,14 @@ INSERT INTO `tickets` (`id`, `order_id`, `event_id`, `user_id`, `ticket_code`, `
 (44, 38, 22, 11, 'TICKET_0F7AB0DF04', '', 0, NULL, '2025-08-24 05:22:38', '2025-08-24 07:44:51'),
 (45, 39, 19, 9, 'TICKET_84928DA406', 'active', 0, NULL, '2025-08-24 07:53:06', '2025-08-24 07:53:06'),
 (46, 39, 19, 9, 'TICKET_5609A9F9F6', 'active', 0, NULL, '2025-08-24 07:53:06', '2025-08-24 07:53:06'),
-(47, 40, 24, 9, 'TICKET_91968DF11A', 'active', 0, NULL, '2025-08-24 08:10:45', '2025-08-24 08:10:45'),
-(48, 40, 24, 9, 'TICKET_B3BCD065D6', 'active', 0, NULL, '2025-08-24 08:10:45', '2025-08-24 08:10:45'),
-(49, 40, 24, 9, 'TICKET_B01658761A', 'active', 0, NULL, '2025-08-24 08:10:45', '2025-08-24 08:10:45'),
+(47, 40, 24, 9, 'TICKET_91968DF11A', '', 0, NULL, '2025-08-24 08:10:45', '2025-09-15 16:46:16'),
+(48, 40, 24, 9, 'TICKET_B3BCD065D6', '', 0, NULL, '2025-08-24 08:10:45', '2025-09-15 16:46:16'),
+(49, 40, 24, 9, 'TICKET_B01658761A', '', 0, NULL, '2025-08-24 08:10:45', '2025-09-15 16:46:16'),
 (50, 41, 25, 9, 'TICKET_062AEF5156', 'active', 0, NULL, '2025-08-24 08:14:23', '2025-08-24 08:14:23'),
 (51, 42, 17, 9, 'TICKET_ECF3D3112A', '', 0, NULL, '2025-08-24 09:31:59', '2025-09-13 10:17:24'),
 (52, 43, 17, 8, 'TICKET_59A3C0699F', '', 0, NULL, '2025-08-26 07:07:45', '2025-09-13 10:17:24'),
 (53, 44, 17, 8, 'TICKET_4D2FC9D89E', '', 0, NULL, '2025-08-26 07:34:01', '2025-09-13 10:17:24'),
-(54, 45, 24, 8, 'TICKET_7799F0C1FE', 'active', 0, NULL, '2025-08-26 07:45:43', '2025-08-26 07:45:43'),
+(54, 45, 24, 8, 'TICKET_7799F0C1FE', '', 0, NULL, '2025-08-26 07:45:43', '2025-09-15 16:46:16'),
 (55, 46, 25, 8, 'TICKET_DB9986C065', 'active', 0, NULL, '2025-08-26 07:51:29', '2025-08-26 07:51:29');
 
 -- --------------------------------------------------------
@@ -916,7 +1040,7 @@ INSERT INTO `transport_bookings` (`id`, `user_id`, `trip_id`, `event_id`, `ticke
 (15, 9, 142, 22, NULL, 'يوسف عبدالله', '0596543210', NULL, 3, '', '', NULL, 1, 195.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TR8281E54D', '', NULL, NULL, NULL, '2025-08-23 09:14:19', '2025-08-24 07:44:51'),
 (16, 11, 142, 22, NULL, 'محمد عبد', '0596621455', NULL, 1, '', '', NULL, 2, 130.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TR0BD4C168', '', NULL, '2025-08-24 08:26:21', 1, '2025-08-24 05:22:38', '2025-08-24 07:44:51'),
 (17, 9, 46, 19, NULL, 'عبد الكريم', '0596621455', NULL, 1, '', '', NULL, 2, 150.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TR568FFF0E', 'rejected', 'تم إلغاء الرحلة لظروف طارئة', '2025-08-24 10:54:00', 1, '2025-08-24 07:53:06', '2025-08-24 07:54:00'),
-(18, 9, 45, 24, NULL, 'عبد الكريم', '0596621455', NULL, 1, '', '', NULL, 3, 105.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TRF4CC53E6', 'confirmed', NULL, '2025-08-24 11:11:27', 1, '2025-08-24 08:10:45', '2025-08-24 08:11:27'),
+(18, 9, 45, 24, NULL, 'عبد الكريم', '0596621455', NULL, 1, '', '', NULL, 3, 105.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TRF4CC53E6', '', NULL, '2025-08-24 11:11:27', 1, '2025-08-24 08:10:45', '2025-09-15 16:46:16'),
 (19, 9, 21, 25, NULL, 'محمد عبد', '0596621455', NULL, 1, '', '', NULL, 3, 102.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TR673578D7', 'rejected', 'عدم توفر وسيلة النقل المطلوبة', '2025-08-24 11:16:56', 1, '2025-08-24 08:16:11', '2025-08-24 08:16:56'),
 (20, 9, 145, 17, NULL, 'محمد عبد', '0596621455', NULL, 1, '', '', NULL, 3, 45.00, NULL, 'credit_card', 'pending', NULL, NULL, 0, NULL, 'TRF705EB47', '', NULL, '2025-08-24 12:33:40', 1, '2025-08-24 09:33:20', '2025-09-13 10:17:24');
 
@@ -1042,9 +1166,7 @@ CREATE TABLE `transport_trips` (
 
 INSERT INTO `transport_trips` (`id`, `event_id`, `starting_point_id`, `transport_type_id`, `driver_id`, `transport_price_id`, `vehicle_id`, `departure_time`, `arrival_time`, `price`, `total_seats`, `available_seats`, `features`, `description`, `is_active`, `created_at`, `updated_at`) VALUES
 (21, 25, 9, 3, 3, NULL, 3, '2025-10-10 08:00:00', '09:56:00', 34.00, 4, 4, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 10:05:20'),
-(45, 24, 5, 2, 2, NULL, 2, '2025-09-15 12:12:00', '14:14:00', 17.00, 12, 9, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 07:12:16'),
-(46, 19, 5, 4, 16, NULL, 7, '2025-11-01 12:13:00', '13:30:00', 25.00, 50, 50, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 10:05:20'),
-(66, 24, 12, 4, 5, NULL, 5, '2025-09-15 12:46:00', '14:01:00', 27.00, 15, 15, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 07:12:07');
+(46, 19, 5, 4, 16, NULL, 7, '2025-11-01 12:13:00', '13:30:00', 25.00, 50, 50, NULL, '', 1, '2025-05-30 09:01:44', '2025-08-25 10:05:20');
 
 -- --------------------------------------------------------
 
@@ -1147,9 +1269,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `password_hashed`, `role`, `reset_token`, `reset_expires`, `created_at`, `updated_at`, `profile_image`, `last_login`, `last_login_ip`, `timezone`, `preferred_language`, `two_factor_enabled`, `status`, `email_verified`) VALUES
-(1, 'Admin', 'admin@example.com', '$2y$10$fMgeeCfcZ7nhHWFWKNbCK.SVauLNd3DA50oopV/YYAr6MRh4INu0.', '0501234567', '$2y$10$fMgeeCfcZ7nhHWFWKNbCK.SVauLNd3DA50oopV/YYAr6MRh4INu0.', '', NULL, NULL, '2025-04-21 09:41:54', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
+(1, 'Admin', 'admin@example.com', '$2y$10$fMgeeCfcZ7nhHWFWKNbCK.SVauLNd3DA50oopV/YYAr6MRh4INu0.', '0501234567', '$2y$10$fMgeeCfcZ7nhHWFWKNbCK.SVauLNd3DA50oopV/YYAr6MRh4INu0.', 'super_admin', NULL, NULL, '2025-04-21 09:41:54', '2025-09-15 08:15:38', NULL, '2025-09-15 11:15:38', '::1', 'Asia/Jerusalem', 'ar', 0, 'active', 0),
 (2, 'ahamd', 'asdwqd@sdfd.fs', '$2y$10$i0CEnCjXipNZLxwfg14il.eF93nxFb6W8RnPIKo0/7.63A9uITiIq', '+64033550355', '$2y$10$i0CEnCjXipNZLxwfg14il.eF93nxFb6W8RnPIKo0/7.63A9uITiIq', 'user', NULL, NULL, '2025-04-21 12:35:58', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
-(5, 'Admin User', 'admin@admin.com', '$2y$10$dpMa8.2MV.j6nP4jujkfreYkwMtsrD1mo5MMC3ab8MQHIxGNzqZdK', '0501234567', '$2y$10$dpMa8.2MV.j6nP4jujkfreYkwMtsrD1mo5MMC3ab8MQHIxGNzqZdK', '', NULL, NULL, '2025-04-28 07:44:13', '2025-05-31 08:13:45', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
+(5, 'Admin User', 'admin@admin.com', '$2y$10$dpMa8.2MV.j6nP4jujkfreYkwMtsrD1mo5MMC3ab8MQHIxGNzqZdK', '0501234567', '$2y$10$dpMa8.2MV.j6nP4jujkfreYkwMtsrD1mo5MMC3ab8MQHIxGNzqZdK', 'super_admin', NULL, NULL, '2025-04-28 07:44:13', '2025-09-16 06:19:18', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
 (6, 'tran', 'tran@gmail.com', 'tran123', '25412114521', '$2y$10$kZ1oEenwUMJxoHFRk3cl7ur83N63NMbN0kaZq86XIDAKzINNg2veW', 'transport_admin', NULL, NULL, '2025-05-01 17:19:27', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
 (8, 'المدير العام', 'superadmin@palestine-tickets.com', 'SuperAdmin2024!', '0599123456', '$2y$10$M0y3O6OFAdEtZQwqXjhGsexL6jsD5pqZdrE/INzuFjvniE3R8JGvC', 'super_admin', NULL, NULL, '2025-05-30 07:59:41', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
 (9, 'المدير11', 'admin@transport.com', 'Transport2024!', '0599000000', '$2y$10$5.Mb3VO8i9M.U4frECd3qe/btwRGTZRHmuZzmkGyDjh5yiXYKAM.u', 'transport_admin', NULL, NULL, '2025-05-30 08:01:26', '2025-09-13 10:32:59', NULL, NULL, NULL, 'Asia/Jerusalem', 'ar', 0, 'active', 0),
@@ -1374,7 +1496,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_activity_log`
 --
 ALTER TABLE `admin_activity_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
 
 --
 -- AUTO_INCREMENT for table `admin_notifications`
@@ -1386,7 +1508,7 @@ ALTER TABLE `admin_notifications`
 -- AUTO_INCREMENT for table `admin_permissions`
 --
 ALTER TABLE `admin_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `admin_profile`
@@ -1422,7 +1544,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `notifications`
