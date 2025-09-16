@@ -54,15 +54,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_discount'])) {
     exit;
 }
 
-// Get discounts
+// Pagination settings
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 5; // Display 5 rows per page
+$offset = ($page - 1) * $limit;
+
+// Get total count of discounts
 try {
-    $stmt = $pdo->query("
+    $stmt = $pdo->query("SELECT COUNT(*) FROM coupons");
+    $total_discounts = $stmt->fetchColumn();
+} catch (PDOException $e) {
+    error_log("SQL Error: " . $e->getMessage());
+    $total_discounts = 0;
+}
+
+$total_pages = ceil($total_discounts / $limit);
+
+// Get discounts with pagination
+try {
+    $stmt = $pdo->prepare("
         SELECT *,
         0 as usage_count,
         expiry_date as expiration_date
         FROM coupons
         ORDER BY created_at DESC
+        LIMIT :limit OFFSET :offset
     ");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
     $discounts = $stmt->fetchAll();
 } catch (PDOException $e) {
     error_log("SQL Error: " . $e->getMessage());
@@ -217,6 +237,33 @@ $csrf_token = generateCSRFToken();
                 </table>
             </div>
         </div>
+        
+        <!-- Pagination -->
+        <?php if ($total_pages > 1): ?>
+        <div class="card-footer">
+            <nav aria-label="Discounts pagination">
+                <ul class="pagination justify-content-center mb-0">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page - 1; ?>"><?php echo $lang['previous'] ?? 'Previous'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                    
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page + 1; ?>"><?php echo $lang['next'] ?? 'Next'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 

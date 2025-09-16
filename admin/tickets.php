@@ -24,9 +24,29 @@ include 'includes/admin_header.php';
 
 // AJAX processing moved to update_ticket_status.php
 
-// Get tickets
+// Pagination settings
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 5;
+$offset = ($page - 1) * $limit;
+
+// Get total tickets count
 try {
-    $stmt = $pdo->query("
+    $count_stmt = $pdo->query("SELECT COUNT(*) FROM tickets t
+                              JOIN users u ON t.user_id = u.id
+                              JOIN events e ON t.event_id = e.id
+                              JOIN orders o ON t.order_id = o.id");
+    $total_tickets = $count_stmt->fetchColumn();
+    $total_pages = ceil($total_tickets / $limit);
+} catch (PDOException $e) {
+    $error_message = "SQL Error in count query: " . $e->getMessage();
+    error_log($error_message);
+    $total_tickets = 0;
+    $total_pages = 0;
+}
+
+// Get tickets with pagination
+try {
+    $stmt = $pdo->prepare("
         SELECT t.*, u.name as user_name, u.email as user_email, e.title as event_title, e.date_time,
         t.created_at as purchase_date, o.payment_status, o.quantity, o.total_amount as total_price
         FROM tickets t
@@ -34,7 +54,11 @@ try {
         JOIN events e ON t.event_id = e.id
         JOIN orders o ON t.order_id = o.id
         ORDER BY t.created_at DESC
+        LIMIT ? OFFSET ?
     ");
+    $stmt->bindParam(1, $limit, PDO::PARAM_INT);
+    $stmt->bindParam(2, $offset, PDO::PARAM_INT);
+    $stmt->execute();
     $tickets = $stmt->fetchAll();
 } catch (PDOException $e) {
     $error_message = "SQL Error in tickets query: " . $e->getMessage();
@@ -187,6 +211,33 @@ $csrf_token = generateCSRFToken();
                 </table>
             </div>
         </div>
+        
+        <!-- Pagination -->
+        <?php if ($total_pages > 1): ?>
+        <div class="card-footer">
+            <nav aria-label="Tickets pagination">
+                <ul class="pagination justify-content-center mb-0">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page - 1; ?>"><?php echo $lang['previous'] ?? 'Previous'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                    
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page + 1; ?>"><?php echo $lang['next'] ?? 'Next'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 

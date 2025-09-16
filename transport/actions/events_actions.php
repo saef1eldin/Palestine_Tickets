@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../includes/Database.php';
+require_once '../../config/database.php';
 
 // التحقق من تسجيل الدخول
 if (!isset($_SESSION['user_id'])) {

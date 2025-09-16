@@ -1,6 +1,11 @@
 <?php
+// بدء الجلسة إذا لم تكن نشطة
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Set page title
-$page_title = 'Add Discount';
+$page_title = 'إضافة خصم';
 
 // Include admin header
 include 'includes/admin_header.php';
@@ -8,10 +13,15 @@ include 'includes/admin_header.php';
 // Include auth functions
 require_once '../includes/auth_functions.php';
 
-// Require admin
-requireAdmin();
+// Include functions
+require_once '../includes/functions.php';
 
-// Form processing moved to add_discount_ajax.php via AJAX
+// Include admin functions
+require_once '../includes/admin_functions.php';
+
+// التحقق من صلاحيات إدارة الموقع
+require_admin_permission('site');
+
 
 // Generate CSRF token
 $csrf_token = generateCSRFToken();
@@ -19,15 +29,15 @@ $csrf_token = generateCSRFToken();
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><?php echo $lang['add_discount']; ?></h1>
+        <h1>إضافة خصم</h1>
         <a href="discounts.php" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> <?php echo $lang['back_to_discounts']; ?>
+            <i class="fas fa-arrow-left"></i> العودة للخصومات
         </a>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0"><?php echo $lang['discount_details']; ?></h5>
+            <h5 class="mb-0">تفاصيل الخصم</h5>
         </div>
         <div class="card-body">
             <form id="addDiscountForm">
@@ -36,23 +46,23 @@ $csrf_token = generateCSRFToken();
 
                 <!-- Code -->
                 <div class="mb-3">
-                    <label for="code" class="form-label"><?php echo $lang['discount_code']; ?> *</label>
+                    <label for="code" class="form-label">كود الخصم *</label>
                     <input type="text" class="form-control" id="code" name="code" required>
                 </div>
 
                 <div class="row">
                     <!-- Type -->
                     <div class="col-md-6 mb-3">
-                        <label for="type" class="form-label"><?php echo $lang['discount_type']; ?> *</label>
+                        <label for="type" class="form-label">نوع الخصم *</label>
                         <select class="form-select" id="type" name="type" required>
-                            <option value="percentage"><?php echo $lang['discount_percentage']; ?></option>
-                            <option value="fixed"><?php echo $lang['discount_fixed']; ?></option>
+                            <option value="percentage">نسبة مئوية</option>
+                            <option value="fixed">مبلغ ثابت</option>
                         </select>
                     </div>
 
                     <!-- Value -->
                     <div class="col-md-6 mb-3">
-                        <label for="value" class="form-label"><?php echo $lang['discount_value']; ?> *</label>
+                        <label for="value" class="form-label">قيمة الخصم *</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="value" name="value" min="0" step="0.01" required>
                             <span class="input-group-text" id="value-addon">%</span>
@@ -63,16 +73,16 @@ $csrf_token = generateCSRFToken();
                 <div class="row">
                     <!-- Usage Limit -->
                     <div class="col-md-6 mb-3">
-                        <label for="usage-limit" class="form-label"><?php echo $lang['usage_limit']; ?></label>
+                        <label for="usage-limit" class="form-label">حد الاستخدام</label>
                         <input type="number" class="form-control" id="usage-limit" name="usage_limit" min="1">
-                        <div class="form-text"><?php echo $lang['leave_empty_for_unlimited']; ?></div>
+                        <div class="form-text">اتركه فارغاً للاستخدام غير المحدود</div>
                     </div>
 
                     <!-- Expiration Date -->
                     <div class="col-md-6 mb-3">
-                        <label for="expiration-date" class="form-label"><?php echo $lang['expiration_date']; ?></label>
+                        <label for="expiration-date" class="form-label">تاريخ الانتهاء</label>
                         <input type="date" class="form-control" id="expiration-date" name="expiration_date">
-                        <div class="form-text"><?php echo $lang['leave_empty_for_no_expiration']; ?></div>
+                        <div class="form-text">اتركه فارغاً لعدم الانتهاء</div>
                     </div>
                 </div>
 
@@ -82,7 +92,7 @@ $csrf_token = generateCSRFToken();
 
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" id="saveDiscountBtn" class="btn btn-primary"><?php echo $lang['save_discount']; ?></button>
+                    <button type="button" id="saveDiscountBtn" class="btn btn-primary">حفظ الخصم</button>
                 </div>
 
                 <!-- Status Message -->
@@ -112,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle form submission via AJAX
     saveBtn.addEventListener('click', function() {
         // Show loading message
-        statusMessage.innerHTML = '<div class="spinner-border spinner-border-sm text-primary" role="status"><span class="visually-hidden">Loading...</span></div> Saving...';
+        statusMessage.innerHTML = '<div class="spinner-border spinner-border-sm text-primary" role="status"><span class="visually-hidden">جاري التحميل...</span></div> جاري الحفظ...';
 
         // Create form data
         const formData = new FormData(form);
@@ -139,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error:', error);
-            statusMessage.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
+            statusMessage.innerHTML = '<div class="alert alert-danger">حدث خطأ. يرجى المحاولة مرة أخرى.</div>';
         });
     });
 });

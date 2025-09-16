@@ -24,15 +24,35 @@ include 'includes/admin_header.php';
 
 // Delete functionality moved to delete_event_ajax.php
 
-// Get events
+// Pagination settings
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 5; // Display 5 rows per page
+$offset = ($page - 1) * $limit;
+
+// Get total count of events
 try {
-    $stmt = $pdo->query("
+    $stmt = $pdo->query("SELECT COUNT(*) FROM events");
+    $total_events = $stmt->fetchColumn();
+} catch (PDOException $e) {
+    error_log("SQL Error: " . $e->getMessage());
+    $total_events = 0;
+}
+
+$total_pages = ceil($total_events / $limit);
+
+// Get events with pagination
+try {
+    $stmt = $pdo->prepare("
         SELECT *,
         featured as is_featured,
         1 as is_active
         FROM events
         ORDER BY date_time DESC
+        LIMIT :limit OFFSET :offset
     ");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
     $events = $stmt->fetchAll();
 } catch (PDOException $e) {
     error_log("SQL Error: " . $e->getMessage());
@@ -182,6 +202,33 @@ $csrf_token = generateCSRFToken();
                 </table>
             </div>
         </div>
+        
+        <!-- Pagination -->
+        <?php if ($total_pages > 1): ?>
+        <div class="card-footer">
+            <nav aria-label="Events pagination">
+                <ul class="pagination justify-content-center mb-0">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page - 1; ?>"><?php echo $lang['previous'] ?? 'Previous'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                    
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page + 1; ?>"><?php echo $lang['next'] ?? 'Next'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 

@@ -72,7 +72,7 @@ try {
 // جلب الإحصائيات من قاعدة البيانات
 try {
     // إجمالي الإيرادات
-    $db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE status = 'confirmed'");
+    $db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE payment_status = 'confirmed'");
     $revenue_result = $db->single();
     $total_revenue = $revenue_result['total_revenue'] ?? 0;
 
@@ -709,13 +709,13 @@ function getDriverStatusBadge($status, $is_active = true) {
 
                 <?php
                 // جلب إحصائيات الإيرادات
-                $db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE status = 'confirmed'");
+                $db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE payment_status = 'confirmed'");
                 $revenue_total = $db->single()['total_revenue'] ?? 0;
 
-                $db->query("SELECT COUNT(*) as confirmed_bookings FROM transport_bookings WHERE status = 'confirmed'");
+                $db->query("SELECT COUNT(*) as confirmed_bookings FROM transport_bookings WHERE payment_status = 'confirmed'");
                 $revenue_confirmed_bookings = $db->single()['confirmed_bookings'];
 
-                $db->query("SELECT AVG(total_amount) as avg_revenue FROM transport_bookings WHERE status = 'confirmed'");
+                $db->query("SELECT AVG(total_amount) as avg_revenue FROM transport_bookings WHERE payment_status = 'confirmed'");
                 $revenue_avg = $db->single()['avg_revenue'] ?? 0;
 
                 // الإيرادات الشهرية
@@ -1498,10 +1498,10 @@ function getDriverStatusBadge($status, $is_active = true) {
                 $db->query("SELECT COUNT(*) as total_bookings FROM transport_bookings");
                 $analytics_total_bookings = $db->single()['total_bookings'];
 
-                $db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE status = 'confirmed'");
+                $db->query("SELECT SUM(total_amount) as total_revenue FROM transport_bookings WHERE payment_status = 'confirmed'");
                 $analytics_total_revenue = $db->single()['total_revenue'] ?? 0;
 
-                $db->query("SELECT AVG(total_amount) as avg_booking_value FROM transport_bookings WHERE status = 'confirmed'");
+                $db->query("SELECT AVG(total_amount) as avg_booking_value FROM transport_bookings WHERE payment_status = 'confirmed'");
                 $analytics_avg_booking_value = $db->single()['avg_booking_value'] ?? 0;
 
                 // معدل الإشغال
@@ -1511,7 +1511,7 @@ function getDriverStatusBadge($status, $is_active = true) {
                         SUM(t.total_seats) as total_seats
                     FROM transport_bookings tb
                     JOIN transport_trips t ON tb.trip_id = t.id
-                    WHERE tb.status = 'confirmed'
+                    WHERE tb.payment_status = 'confirmed'
                 ");
                 $analytics_occupancy_data = $db->single();
                 $analytics_occupancy_rate = $analytics_occupancy_data['total_seats'] > 0 ?
@@ -2815,7 +2815,12 @@ function getDriverStatusBadge($status, $is_active = true) {
 
         // إضافة مستمعين للأحداث لتحديث الحقل المخفي
         document.addEventListener('DOMContentLoaded', function() {
+            const departureDateInput = document.getElementById('tripDepartureDate');
             const departureTimeInput = document.getElementById('tripDepartureTime');
+            
+            if (departureDateInput) {
+                departureDateInput.addEventListener('change', updateFullDateTime);
+            }
             if (departureTimeInput) {
                 departureTimeInput.addEventListener('change', updateFullDateTime);
             }
@@ -2867,21 +2872,22 @@ function getDriverStatusBadge($status, $is_active = true) {
                 }
 
                 // التحقق من أن وقت الوصول بعد وقت المغادرة
-                if (arrivalTime <= departureTime) {
+                const departureMinutes = parseInt(departureTime.split(':')[0]) * 60 + parseInt(departureTime.split(':')[1]);
+                const arrivalMinutes = parseInt(arrivalTime.split(':')[0]) * 60 + parseInt(arrivalTime.split(':')[1]);
+                
+                if (arrivalMinutes <= departureMinutes) {
                     return { valid: false, message: 'وقت الوصول يجب أن يكون بعد وقت المغادرة' };
                 }
 
                 // التحقق من أن وقت المغادرة قبل بداية الفعالية بـ 15 دقيقة على الأقل
                 const eventTimeOnly = eventDate.toTimeString().split(' ')[0].substring(0, 5); // HH:MM
                 const eventMinutes = parseInt(eventTimeOnly.split(':')[0]) * 60 + parseInt(eventTimeOnly.split(':')[1]);
-                const departureMinutes = parseInt(departureTime.split(':')[0]) * 60 + parseInt(departureTime.split(':')[1]);
 
                 if (departureMinutes >= (eventMinutes - 15)) {
                     return { valid: false, message: 'وقت المغادرة يجب أن يكون قبل بداية الفعالية بـ 15 دقيقة على الأقل' };
                 }
 
                 // التحقق من أن وقت الوصول قبل بداية الفعالية بـ 15 دقيقة على الأقل
-                const arrivalMinutes = parseInt(arrivalTime.split(':')[0]) * 60 + parseInt(arrivalTime.split(':')[1]);
 
                 if (arrivalMinutes >= (eventMinutes - 15)) {
                     return { valid: false, message: 'وقت الوصول يجب أن يكون قبل بداية الفعالية بـ 15 دقيقة على الأقل' };

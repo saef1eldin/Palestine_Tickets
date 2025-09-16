@@ -55,7 +55,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
 
 // Get messages with pagination
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$limit = 10;
+$limit = 5;
 $offset = ($page - 1) * $limit;
 
 // Get total count

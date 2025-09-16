@@ -13,8 +13,8 @@ if (!$auth->isLoggedIn()) {
     redirect('../login.php');
 }
 
-// التحقق من صلاحيات إدارة الأحداث
-require_admin_permission('events');
+// Check event management permissions
+require_admin_permission('site');
 
 // Set page title
 $page_title = 'Add Event';
@@ -35,15 +35,15 @@ try {
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><?php echo $lang['add_event']; ?></h1>
+        <h1>Add Event</h1>
         <a href="events.php" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> <?php echo $lang['back_to_events']; ?>
+            <i class="fas fa-arrow-left"></i> Back to Events
         </a>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0"><?php echo $lang['event_details']; ?></h5>
+            <h5 class="mb-0">Event Details</h5>
         </div>
         <div class="card-body">
             <form id="addEventForm" enctype="multipart/form-data">
@@ -54,36 +54,36 @@ try {
                     <div class="col-md-8">
                         <!-- Title -->
                         <div class="mb-3">
-                            <label for="title" class="form-label"><?php echo $lang['event_title']; ?> *</label>
+                            <label for="title" class="form-label">Event Title *</label>
                             <input type="text" class="form-control" id="title" name="title" required>
                         </div>
 
                         <!-- Description -->
                         <div class="mb-3">
-                            <label for="description" class="form-label"><?php echo $lang['event_description']; ?></label>
+                            <label for="description" class="form-label">Event Description</label>
                             <textarea class="form-control" id="description" name="description" rows="5"></textarea>
                         </div>
 
                         <div class="row">
                             <!-- Start Date -->
                             <div class="col-md-3 mb-3">
-                                <label for="date" class="form-label"><?php echo $lang['event_date']; ?> (Start) *</label>
+                                <label for="date" class="form-label">Event Date (Start) *</label>
                                 <input type="date" class="form-control" id="date" name="date" required>
                             </div>
 
                             <!-- Start Time -->
                             <div class="col-md-3 mb-3">
-                                <label for="time" class="form-label"><?php echo $lang['event_time']; ?> (Start) *</label>
+                                <label for="time" class="form-label">Event Time (Start) *</label>
                                 <input type="time" class="form-control" id="time" name="time" required>
                             </div>
 
-                            <!-- End Date (same as start date by default) -->
+                            <!-- End Date -->
                             <div class="col-md-3 mb-3">
                                 <label for="end_date" class="form-label">End Date</label>
                                 <input type="date" class="form-control" id="end_date" name="end_date">
                             </div>
-
-                            <!-- End Time (1 hour after start time by default) -->
+                            
+                            <!-- End Time -->
                             <div class="col-md-3 mb-3">
                                 <label for="end_time" class="form-label">End Time</label>
                                 <input type="time" class="form-control" id="end_time" name="end_time">
@@ -93,7 +93,7 @@ try {
                         <div class="row">
                             <!-- Location -->
                             <div class="col-md-12 mb-3">
-                                <label for="location" class="form-label"><?php echo $lang['event_location']; ?> *</label>
+                                <label for="location" class="form-label">Event Location *</label>
                                 <input type="text" class="form-control" id="location" name="location" required>
                             </div>
                         </div>
@@ -101,27 +101,27 @@ try {
                         <div class="row">
                             <!-- Original Price -->
                             <div class="col-md-4 mb-3">
-                                <label for="original-price" class="form-label">السعر الأصلي</label>
+                                <label for="original-price" class="form-label">Original Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text">₪</span>
                                     <input type="number" class="form-control" id="original-price" name="original_price" min="0" step="0.01">
-                                    <div class="form-text">اترك فارغاً إذا لم يكن هناك خصم</div>
+                                    <div class="form-text">Leave empty if no discount</div>
                                 </div>
                             </div>
 
                             <!-- Price (Discounted) -->
                             <div class="col-md-4 mb-3">
-                                <label for="price" class="form-label"><?php echo $lang['event_price']; ?> *</label>
+                                <label for="price" class="form-label">Price *</label>
                                 <div class="input-group">
                                     <span class="input-group-text">₪</span>
                                     <input type="number" class="form-control" id="price" name="price" min="0" step="0.01" required>
-                                    <div class="form-text">السعر بعد الخصم (إذا كان هناك خصم)</div>
+                                    <div class="form-text">Price after discount (if applicable)</div>
                                 </div>
                             </div>
 
                             <!-- Category (Type) -->
                             <div class="col-md-4 mb-3">
-                                <label for="type" class="form-label"><?php echo $lang['event_type']; ?> (Category) *</label>
+                                <label for="type" class="form-label">Event Type (Category) *</label>
                                 <input type="text" class="form-control" id="type" name="type" required>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ try {
                         <div class="row">
                             <!-- Available Tickets -->
                             <div class="col-md-4 mb-3">
-                                <label for="available-tickets" class="form-label"><?php echo $lang['available_tickets']; ?> *</label>
+                                <label for="available-tickets" class="form-label">Available Tickets *</label>
                                 <input type="number" class="form-control" id="available-tickets" name="available_tickets" min="1" required>
                             </div>
                         </div>
@@ -138,26 +138,26 @@ try {
                     <div class="col-md-4">
                         <!-- Image -->
                         <div class="mb-3">
-                            <label for="image" class="form-label"><?php echo $lang['event_image']; ?></label>
+                            <label for="image" class="form-label">Event Image</label>
                             <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                            <div class="form-text"><?php echo $lang['image_requirements']; ?></div>
+                            <div class="form-text">Image should be at least 800x600px and less than 2MB</div>
                         </div>
 
                         <!-- Image Preview -->
                         <div class="mb-3">
-                            <img id="image-preview" src="#" alt="<?php echo $lang['image_preview']; ?>" class="img-fluid rounded" style="display: none;">
+                            <img id="image-preview" src="#" alt="Image Preview" class="img-fluid rounded" style="display: none;">
                         </div>
 
                         <!-- Featured -->
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is-featured" name="is_featured">
-                            <label class="form-check-label" for="is-featured"><?php echo $lang['is_featured']; ?> (Featured)</label>
+                            <label class="form-check-label" for="is-featured">Featured Event</label>
                         </div>
 
                         <!-- Is Active field removed as it doesn't exist in the database -->
                         <!-- <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is-active" name="is_active" checked>
-                            <label class="form-check-label" for="is-active"><?php echo $lang['is_active']; ?></label>
+                            <label class="form-check-label" for="is-active">Active</label>
                         </div> -->
                     </div>
                 </div>
@@ -166,7 +166,7 @@ try {
 
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" id="saveEventBtn" class="btn btn-primary"><?php echo $lang['save_event']; ?></button>
+                    <button type="button" id="saveEventBtn" class="btn btn-primary">Save Event</button>
                 </div>
 
                 <!-- Status Message -->

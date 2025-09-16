@@ -5,8 +5,11 @@ require_once '../config/config.php';
 // Include auth functions
 require_once '../includes/auth.php';
 
-// Require admin
-requireAdmin();
+// Include admin functions
+require_once '../includes/admin_functions.php';
+
+// Check site management permissions
+require_admin_permission('site');
 
 // Set content type to JSON
 header('Content-Type: application/json');

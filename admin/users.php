@@ -69,12 +69,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
     exit;
 }
 
-// Get users
-$stmt = $pdo->query("
-    SELECT * FROM users
-    ORDER BY created_at DESC
-");
-$users = $stmt->fetchAll();
+// Pagination settings
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 5; // Display 5 rows per page
+$offset = ($page - 1) * $limit;
+
+// Get total count of users
+try {
+    $stmt = $pdo->query("SELECT COUNT(*) FROM users");
+    $total_users = $stmt->fetchColumn();
+} catch (PDOException $e) {
+    error_log("SQL Error: " . $e->getMessage());
+    $total_users = 0;
+}
+
+$total_pages = ceil($total_users / $limit);
+
+// Get users with pagination
+try {
+    $stmt = $pdo->prepare("
+        SELECT *, IFNULL(created_at, NOW()) as created_at FROM users
+        ORDER BY created_at DESC
+        LIMIT :limit OFFSET :offset
+    ");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log("SQL Error: " . $e->getMessage());
+    $users = [];
+}
 
 // Generate CSRF token
 $csrf_token = generateCSRFToken();
@@ -139,12 +164,12 @@ $csrf_token = generateCSRFToken();
                 <table class="table table-striped table-hover mb-0">
                     <thead>
                         <tr>
-                            <th><?php echo $lang['name']; ?></th>
-                            <th><?php echo $lang['email']; ?></th>
-                            <th><?php echo $lang['phone']; ?></th>
-                            <th><?php echo $lang['role']; ?></th>
-                            <th><?php echo $lang['created_at']; ?></th>
-                            <th><?php echo $lang['actions']; ?></th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Role</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -159,19 +184,36 @@ $csrf_token = generateCSRFToken();
                                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                                     <td><?php echo htmlspecialchars($user['phone']); ?></td>
                                     <td>
-                                        <?php if ($user['role'] === 'admin'): ?>
-                                            <span class="badge bg-danger"><?php echo $lang['admin']; ?></span>
-                                        <?php else: ?>
-                                            <span class="badge bg-secondary"><?php echo $lang['user']; ?></span>
-                                        <?php endif; ?>
+                                        <?php 
+                                        switch($user['role']) {
+                                            case 'super_admin':
+                                                echo '<span class="badge bg-danger">Super Admin</span>';
+                                                break;
+                                            case 'site_admin':
+                                                echo '<span class="badge bg-danger">Site Admin</span>';
+                                                break;
+                                            case 'transport_admin':
+                                                echo '<span class="badge bg-warning">Transport Admin</span>';
+                                                break;
+                                            case 'notifications_admin':
+                                                echo '<span class="badge bg-info">Notifications Admin</span>';
+                                                break;
+                                            case 'user':
+                                                echo '<span class="badge bg-secondary">User</span>';
+                                                break;
+                                            default:
+                                                echo '<span class="badge bg-secondary">User</span>';
+                                                break;
+                                        }
+                                        ?>
                                     </td>
-                                    <td><?php echo formatDate($user['created_at']); ?></td>
+                                    <td><?php echo isset($user['created_at']) ? formatDate($user['created_at']) : 'N/A'; ?></td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
                                             <a href="edit-user.php?id=<?php echo $user['id']; ?>" class="btn btn-outline-secondary">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <?php if ($user['role'] !== 'admin'): ?>
+                                            <?php if ($user['role'] !== 'super_admin' && $user['role'] !== 'site_admin'): ?>
                                                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $user['id']; ?>">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -209,6 +251,33 @@ $csrf_token = generateCSRFToken();
                 </table>
             </div>
         </div>
+        
+        <!-- Pagination -->
+        <?php if ($total_pages > 1): ?>
+        <div class="card-footer">
+            <nav aria-label="Users pagination">
+                <ul class="pagination justify-content-center mb-0">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page - 1; ?>"><?php echo $lang['previous'] ?? 'Previous'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                    
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $page + 1; ?>"><?php echo $lang['next'] ?? 'Next'; ?></a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 
