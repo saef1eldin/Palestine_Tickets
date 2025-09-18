@@ -1708,7 +1708,7 @@ function getDriverStatusBadge($status, $is_active = true) {
         <!-- Footer -->
         <footer class="bg-gray-100 border-t border-gray-200 py-4">
             <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
-                <p>© 2024 لوحة تحكم المواصلات. جميع الحقوق محفوظة.</p>
+                <p>© 2025 لوحة تحكم المواصلات. جميع الحقوق محفوظة.</p>
             </div>
         </footer>
     </div>

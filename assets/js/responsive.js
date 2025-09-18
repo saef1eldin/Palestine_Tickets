@@ -198,8 +198,12 @@ function initResponsiveImages() {
         
         // تحسين عرض الصور عند الخطأ
         img.addEventListener('error', function() {
-            this.src = 'assets/img/placeholder.jpg';
-            this.alt = 'صورة غير متوفرة';
+            // منع الحلقة اللا نهائية للطلبات
+            if (!this.hasAttribute('data-error-handled')) {
+                this.setAttribute('data-error-handled', 'true');
+                this.src = 'assets/img/placeholder.svg';
+                this.alt = 'صورة غير متوفرة';
+            }
         });
         
         // تحسين تحميل الصور

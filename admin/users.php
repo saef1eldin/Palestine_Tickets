@@ -5,6 +5,11 @@ require_once $root_path . 'includes/init.php';
 require_once $root_path . 'includes/functions.php';
 require_once $root_path . 'includes/auth.php';
 require_once $root_path . 'includes/admin_functions.php';
+require_once $root_path . 'config/database.php';
+
+// إنشاء اتصال قاعدة البيانات
+$db = new Database();
+$pdo = $db->getConnection();
 
 $auth = new Auth();
 
@@ -18,9 +23,6 @@ require_admin_permission('users');
 
 // Set page title
 $page_title = 'إدارة المستخدمين';
-
-// Include admin header
-include 'includes/admin_header.php';
 
 // Process form submission for delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
@@ -68,6 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
     header('Location: users.php');
     exit;
 }
+
+// Include admin header
+include 'includes/admin_header.php';
 
 // Pagination settings
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;

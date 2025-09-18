@@ -7,17 +7,19 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 
 $discountId = (int)$_GET['id'];
 
+// Include necessary files first
+require_once '../includes/init.php';
+require_once '../includes/auth_functions.php';
+require_once '../includes/admin_functions.php';
+
+// Require admin permission
+require_admin_permission('discounts', 'admin/discounts.php');
+
 // Set page title
 $page_title = 'Edit Discount';
 
 // Include admin header
 include 'includes/admin_header.php';
-
-// Include auth functions
-require_once '../includes/auth_functions.php';
-
-// Require admin
-requireAdmin();
 
 // Get discount details
 $stmt = $pdo->prepare("SELECT *, expiry_date as expiration_date, 0 as usage_count, 1 as is_active FROM coupons WHERE id = :id");
@@ -39,15 +41,15 @@ $csrf_token = generateCSRFToken();
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><?php echo $lang['edit_discount']; ?></h1>
+        <h1>Edit Discount</h1>
         <a href="discounts.php" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> <?php echo $lang['back_to_discounts']; ?>
+            <i class="fas fa-arrow-left"></i> Back to Discounts
         </a>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0"><?php echo $lang['discount_details']; ?></h5>
+            <h5 class="mb-0">Discount Details</h5>
         </div>
         <div class="card-body">
             <form id="editDiscountForm">
@@ -56,23 +58,23 @@ $csrf_token = generateCSRFToken();
 
                 <!-- Code -->
                 <div class="mb-3">
-                    <label for="code" class="form-label"><?php echo $lang['discount_code']; ?> *</label>
+                    <label for="code" class="form-label">Discount Code *</label>
                     <input type="text" class="form-control" id="code" name="code" value="<?php echo htmlspecialchars($discount['code']); ?>" required>
                 </div>
 
                 <div class="row">
                     <!-- Type -->
                     <div class="col-md-6 mb-3">
-                        <label for="type" class="form-label"><?php echo $lang['discount_type']; ?> *</label>
+                        <label for="type" class="form-label">Discount Type *</label>
                         <select class="form-select" id="type" name="type" required>
-                            <option value="percentage" <?php echo $discount['type'] === 'percentage' ? 'selected' : ''; ?>><?php echo $lang['discount_percentage']; ?></option>
-                            <option value="fixed" <?php echo $discount['type'] === 'fixed' ? 'selected' : ''; ?>><?php echo $lang['discount_fixed']; ?></option>
+                            <option value="percentage" <?php echo $discount['type'] === 'percentage' ? 'selected' : ''; ?>>Percentage</option>
+                            <option value="fixed" <?php echo $discount['type'] === 'fixed' ? 'selected' : ''; ?>>Fixed Amount</option>
                         </select>
                     </div>
 
                     <!-- Value -->
                     <div class="col-md-6 mb-3">
-                        <label for="value" class="form-label"><?php echo $lang['discount_value']; ?> *</label>
+                        <label for="value" class="form-label">Discount Value *</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="value" name="value" min="0" step="0.01" value="<?php echo $discount['value']; ?>" required>
                             <span class="input-group-text" id="value-addon"><?php echo $discount['type'] === 'percentage' ? '%' : '₪'; ?></span>
@@ -83,22 +85,22 @@ $csrf_token = generateCSRFToken();
                 <div class="row">
                     <!-- Usage Limit -->
                     <div class="col-md-6 mb-3">
-                        <label for="usage-limit" class="form-label"><?php echo $lang['usage_limit']; ?></label>
+                        <label for="usage-limit" class="form-label">Usage Limit</label>
                         <input type="number" class="form-control" id="usage-limit" name="usage_limit" min="1" value="<?php echo $discount['usage_limit']; ?>">
-                        <div class="form-text"><?php echo $lang['leave_empty_for_unlimited']; ?></div>
+                        <div class="form-text">Leave empty for unlimited</div>
                     </div>
 
                     <!-- Expiration Date -->
                     <div class="col-md-6 mb-3">
-                        <label for="expiration-date" class="form-label"><?php echo $lang['expiration_date']; ?></label>
+                        <label for="expiration-date" class="form-label">Expiration Date</label>
                         <input type="date" class="form-control" id="expiration-date" name="expiration_date" value="<?php echo $discount['expiry_date']; ?>">
-                        <div class="form-text"><?php echo $lang['leave_empty_for_no_expiration']; ?></div>
+                        <div class="form-text">Leave empty for no expiration</div>
                     </div>
                 </div>
 
                 <!-- Usage Count (readonly) -->
                 <div class="mb-3">
-                    <label for="usage-count" class="form-label"><?php echo $lang['usage_count']; ?></label>
+                    <label for="usage-count" class="form-label">Usage Count</label>
                     <input type="number" class="form-control" id="usage-count" value="<?php echo $discount['usage_count']; ?>" readonly>
                 </div>
 
@@ -108,7 +110,7 @@ $csrf_token = generateCSRFToken();
 
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" id="saveDiscountBtn" class="btn btn-primary"><?php echo $lang['save_discount']; ?></button>
+                    <button type="button" id="saveDiscountBtn" class="btn btn-primary">Save Discount</button>
                 </div>
 
                 <!-- Status Message -->

@@ -10,14 +10,17 @@ $userId = (int)$_GET['id'];
 // Set page title
 $page_title = 'Edit User';
 
+// Include initialization files
+require_once '../includes/init.php';
+require_once '../includes/functions.php';
+require_once '../includes/auth.php';
+require_once '../includes/admin_functions.php';
+
+// Require admin permission
+require_admin_permission('users');
+
 // Include admin header
 include 'includes/admin_header.php';
-
-// Include auth functions
-require_once '../includes/auth_functions.php';
-
-// Require admin
-requireAdmin();
 
 // Get user details
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
@@ -59,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Password is optional, but if provided, validate it
     if (!empty($password) && strlen($password) < 6) {
-        $errors[] = $lang['password_length'];
+        $errors[] = 'Password must be at least 6 characters';
     }
 
     // If no errors, update the user
@@ -84,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->execute($params);
 
         if ($result) {
-            $_SESSION['success_message'] = $lang['user_updated'];
+            $_SESSION['success_message'] = 'User updated successfully';
             header('Location: users.php');
             exit;
         } else {
@@ -103,13 +106,13 @@ $csrf_token = generateCSRFToken();
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1><?php echo $lang['edit_user']; ?></h1>
         <a href="users.php" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> <?php echo $lang['back_to_users']; ?>
+            <i class="fas fa-arrow-left"></i> Back to Users
         </a>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0"><?php echo $lang['user_details']; ?></h5>
+            <h5 class="mb-0">User Details</h5>
         </div>
         <div class="card-body">
             <form action="edit-user.php?id=<?php echo $userId; ?>" method="post">
@@ -153,7 +156,7 @@ $csrf_token = generateCSRFToken();
                 <div class="mb-3">
                     <label for="password" class="form-label"><?php echo $lang['new_password']; ?></label>
                     <input type="password" class="form-control" id="password" name="password">
-                    <div class="form-text"><?php echo $lang['password_length']; ?></div>
+                    <div class="form-text">Password must be at least 6 characters</div>
                 </div>
 
                 <hr>
@@ -169,19 +172,31 @@ $csrf_token = generateCSRFToken();
     <!-- User Tickets -->
     <div class="card mt-4">
         <div class="card-header">
-            <h5 class="mb-0"><?php echo $lang['user_tickets']; ?></h5>
+            <h5 class="mb-0">User Tickets</h5>
         </div>
         <div class="card-body p-0">
             <?php
-            // Get user tickets
+            // Get current page for pagination
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $page = max(1, $page); // Ensure page is at least 1
+            $perPage = 5; // Items per page
+            $offset = ($page - 1) * $perPage;
+            
+            // Get user tickets with pagination
             $stmt = $pdo->prepare("
-                SELECT t.*, e.title as event_title, e.date_time
+                SELECT t.*, e.title as event_title, e.date_time, 
+                t.created_at as purchase_date, o.payment_status, o.quantity, o.total_amount as total_price
                 FROM tickets t
                 JOIN events e ON t.event_id = e.id
+                LEFT JOIN orders o ON t.order_id = o.id
                 WHERE t.user_id = :user_id
-                ORDER BY t.purchase_date DESC
+                ORDER BY t.created_at DESC
+                LIMIT :limit OFFSET :offset
             ");
-            $stmt->execute([':user_id' => $userId]);
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $perPage, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
             $tickets = $stmt->fetchAll();
             ?>
 
@@ -189,34 +204,34 @@ $csrf_token = generateCSRFToken();
                 <table class="table table-striped table-hover mb-0">
                     <thead>
                         <tr>
-                            <th><?php echo $lang['event']; ?></th>
-                            <th><?php echo $lang['date']; ?></th>
-                            <th><?php echo $lang['ticket_quantity']; ?></th>
-                            <th><?php echo $lang['total_price']; ?></th>
-                            <th><?php echo $lang['purchase_date']; ?></th>
-                            <th><?php echo $lang['payment_status']; ?></th>
+                            <th>Event</th>
+                            <th>Date</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Purchase Date</th>
+                            <th>Payment Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (empty($tickets)): ?>
                             <tr>
-                                <td colspan="6" class="text-center"><?php echo $lang['no_tickets_found']; ?></td>
+                                <td colspan="6" class="text-center">No tickets found</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($tickets as $ticket): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($ticket['event_title']); ?></td>
-                                    <td><?php echo formatDate($ticket['date_time']); ?></td>
+                                    <td><?php echo date('Y-m-d H:i', strtotime($ticket['date_time'])); ?></td>
                                     <td><?php echo $ticket['quantity']; ?></td>
                                     <td><?php echo formatPrice($ticket['total_price']); ?></td>
-                                    <td><?php echo formatDate($ticket['purchase_date']); ?></td>
+                                    <td><?php echo date('Y-m-d H:i', strtotime($ticket['purchase_date'])); ?></td>
                                     <td>
                                         <?php if ($ticket['payment_status'] === 'completed'): ?>
-                                            <span class="badge bg-success"><?php echo $lang['completed']; ?></span>
+                                            <span class="badge bg-success">Completed</span>
                                         <?php elseif ($ticket['payment_status'] === 'pending'): ?>
-                                            <span class="badge bg-warning"><?php echo $lang['pending']; ?></span>
+                                            <span class="badge bg-warning">Pending</span>
                                         <?php else: ?>
-                                            <span class="badge bg-danger"><?php echo $lang['cancelled']; ?></span>
+                                            <span class="badge bg-danger">Cancelled</span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -225,6 +240,32 @@ $csrf_token = generateCSRFToken();
                     </tbody>
                 </table>
             </div>
+            
+            <!-- Pagination -->
+            <?php
+            // Count total tickets for this user
+            $countStmt = $pdo->prepare("SELECT COUNT(*) FROM tickets WHERE user_id = :user_id");
+            $countStmt->execute([':user_id' => $userId]);
+            $totalTickets = $countStmt->fetchColumn();
+            
+            // Calculate total pages
+            $totalPages = ceil($totalTickets / 5);
+            
+            // Only show pagination if we have more than 5 tickets
+            if ($totalTickets > 5):
+            ?>
+            <div class="card-footer">
+                <nav aria-label="Tickets pagination">
+                    <ul class="pagination justify-content-center mb-0">
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                            <li class="page-item <?php echo ($i === $page) ? 'active' : ''; ?>">
+                                <a class="page-link" href="edit-user.php?id=<?php echo $userId; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </nav>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

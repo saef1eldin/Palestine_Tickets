@@ -19,8 +19,8 @@ require_once '../includes/functions.php';
 // Include admin functions
 require_once '../includes/admin_functions.php';
 
-// التحقق من صلاحيات إدارة الموقع
-require_admin_permission('site');
+// التحقق من صلاحيات إدارة الخصومات
+require_admin_permission('discounts', 'admin/discounts.php');
 
 
 // Generate CSRF token

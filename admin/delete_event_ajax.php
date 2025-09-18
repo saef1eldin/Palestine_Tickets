@@ -5,6 +5,11 @@ require_once $root_path . 'includes/init.php';
 require_once $root_path . 'includes/functions.php';
 require_once $root_path . 'includes/auth.php';
 require_once $root_path . 'includes/admin_functions.php';
+require_once $root_path . 'config/database.php';
+
+// إنشاء اتصال قاعدة البيانات
+$db = new Database();
+$pdo = $db->getConnection();
 
 $auth = new Auth();
 

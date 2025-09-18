@@ -193,7 +193,7 @@ $csrf_token = generateCSRFToken();
                                     </td>
                                     <td><?php echo $discount['usage_count']; ?></td>
                                     <td>
-                                        <?php echo $discount['expiration_date'] ? formatDate($discount['expiration_date'], 'd/m/Y') : $lang['never']; ?>
+                                        <?php echo $discount['expiration_date'] ? date('d/m/Y', strtotime($discount['expiration_date'])) : $lang['never']; ?>
                                     </td>
                                     <!-- is_active column is not in the coupons table -->
                                     <td>

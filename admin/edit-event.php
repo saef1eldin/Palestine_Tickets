@@ -54,15 +54,15 @@ $csrf_token = generateCSRFToken();
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><?php echo $lang['edit_event']; ?></h1>
+        <h1>Edit Event</h1>
         <a href="events.php" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> <?php echo $lang['back_to_events']; ?>
+            <i class="fas fa-arrow-left"></i> Back to Events
         </a>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0"><?php echo $lang['event_details']; ?></h5>
+            <h5 class="mb-0">Event Details</h5>
         </div>
         <div class="card-body">
             <form id="editEventForm" enctype="multipart/form-data">
@@ -73,26 +73,26 @@ $csrf_token = generateCSRFToken();
                     <div class="col-md-8">
                         <!-- Title -->
                         <div class="mb-3">
-                            <label for="title" class="form-label"><?php echo $lang['event_title']; ?> *</label>
+                            <label for="title" class="form-label">Event Title *</label>
                             <input type="text" class="form-control" id="title" name="title" value="<?php echo htmlspecialchars($event['title']); ?>" required>
                         </div>
 
                         <!-- Description -->
                         <div class="mb-3">
-                            <label for="description" class="form-label"><?php echo $lang['event_description']; ?></label>
+                            <label for="description" class="form-label">Event Description</label>
                             <textarea class="form-control" id="description" name="description" rows="5"><?php echo htmlspecialchars($event['description']); ?></textarea>
                         </div>
 
                         <div class="row">
                             <!-- Date -->
                             <div class="col-md-6 mb-3">
-                                <label for="date" class="form-label"><?php echo $lang['event_date']; ?> *</label>
+                                <label for="date" class="form-label">Event Date *</label>
                                 <input type="date" class="form-control" id="date" name="date" value="<?php echo $eventDate; ?>" required>
                             </div>
 
                             <!-- Time -->
                             <div class="col-md-6 mb-3">
-                                <label for="time" class="form-label"><?php echo $lang['event_time']; ?> *</label>
+                                <label for="time" class="form-label">Event Time *</label>
                                 <input type="time" class="form-control" id="time" name="time" value="<?php echo $eventTime; ?>" required>
                             </div>
                         </div>
@@ -100,7 +100,7 @@ $csrf_token = generateCSRFToken();
                         <div class="row">
                             <!-- Location -->
                             <div class="col-md-12 mb-3">
-                                <label for="location" class="form-label"><?php echo $lang['event_location']; ?> *</label>
+                                <label for="location" class="form-label">Location *</label>
                                 <input type="text" class="form-control" id="location" name="location" value="<?php echo htmlspecialchars($event['location']); ?>" required>
                             </div>
                         </div>
@@ -108,27 +108,27 @@ $csrf_token = generateCSRFToken();
                         <div class="row">
                             <!-- Original Price -->
                             <div class="col-md-4 mb-3">
-                                <label for="original-price" class="form-label">السعر الأصلي</label>
+                                <label for="original-price" class="form-label">Original Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text">₪</span>
                                     <input type="number" class="form-control" id="original-price" name="original_price" min="0" step="0.01" value="<?php echo isset($event['original_price']) ? $event['original_price'] : ''; ?>">
-                                    <div class="form-text">اترك فارغاً إذا لم يكن هناك خصم</div>
+                                    <div class="form-text">Leave empty if no discount</div>
                                 </div>
                             </div>
 
                             <!-- Price (Discounted) -->
                             <div class="col-md-4 mb-3">
-                                <label for="price" class="form-label"><?php echo $lang['event_price']; ?> *</label>
+                                <label for="price" class="form-label">Event Price *</label>
                                 <div class="input-group">
                                     <span class="input-group-text">₪</span>
                                     <input type="number" class="form-control" id="price" name="price" min="0" step="0.01" value="<?php echo $event['price']; ?>" required>
-                                    <div class="form-text">السعر بعد الخصم (إذا كان هناك خصم)</div>
+                                    <div class="form-text">Price after discount (if applicable)</div>
                                 </div>
                             </div>
 
                             <!-- Type -->
                             <div class="col-md-4 mb-3">
-                                <label for="type" class="form-label"><?php echo $lang['event_type']; ?> *</label>
+                                <label for="type" class="form-label">Event Type *</label>
                                 <input type="text" class="form-control" id="type" name="type" value="<?php echo htmlspecialchars($event['category']); ?>" required>
                             </div>
                         </div>
@@ -136,7 +136,7 @@ $csrf_token = generateCSRFToken();
                         <div class="row">
                             <!-- Available Tickets -->
                             <div class="col-md-4 mb-3">
-                                <label for="available-tickets" class="form-label"><?php echo $lang['available_tickets']; ?> *</label>
+                                <label for="available-tickets" class="form-label">Available Tickets *</label>
                                 <input type="number" class="form-control" id="available-tickets" name="available_tickets" min="0" value="<?php echo $event['available_tickets']; ?>" required>
                             </div>
                         </div>
@@ -146,27 +146,27 @@ $csrf_token = generateCSRFToken();
                         <!-- Current Image -->
                         <?php if (!empty($event['image'])): ?>
                             <div class="mb-3">
-                                <label class="form-label"><?php echo $lang['current_image']; ?></label>
+                                <label class="form-label">Current Image</label>
                                 <img src="../<?php echo htmlspecialchars($event['image']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" class="img-fluid rounded">
                             </div>
                         <?php endif; ?>
 
                         <!-- Image -->
                         <div class="mb-3">
-                            <label for="image" class="form-label"><?php echo $lang['event_image']; ?></label>
+                            <label for="image" class="form-label">Event Image</label>
                             <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                            <div class="form-text"><?php echo $lang['image_requirements']; ?></div>
+                            <div class="form-text">Upload an image for the event (JPG, PNG, GIF)</div>
                         </div>
 
                         <!-- Image Preview -->
                         <div class="mb-3">
-                            <img id="image-preview" src="#" alt="<?php echo $lang['image_preview']; ?>" class="img-fluid rounded" style="display: none;">
+                            <img id="image-preview" src="#" alt="Image Preview" class="img-fluid rounded" style="display: none;">
                         </div>
 
                         <!-- Is Featured -->
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is-featured" name="is_featured" <?php echo $event['featured'] ? 'checked' : ''; ?>>
-                            <label class="form-check-label" for="is-featured"><?php echo $lang['is_featured']; ?></label>
+                            <label class="form-check-label" for="is-featured">Featured</label>
                         </div>
 
                         <!-- Note: is_active field is not present in the events table -->
@@ -177,7 +177,7 @@ $csrf_token = generateCSRFToken();
 
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" id="saveEventBtn" class="btn btn-primary"><?php echo $lang['save_event']; ?></button>
+                    <button type="button" id="saveEventBtn" class="btn btn-primary">Save Event</button>
                 </div>
 
                 <!-- Status Message -->

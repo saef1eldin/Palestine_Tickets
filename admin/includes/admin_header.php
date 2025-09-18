@@ -16,17 +16,7 @@ require_once dirname(__DIR__, 2) . '/includes/formatPrice.php';
 // التحقق من صلاحيات الإدارة يتم في الصفحة الرئيسية
 // requireAdmin(); // تم تعطيل هذا الاستدعاء لتجنب التضارب
 
-// Include language files
-$lang_dir = dirname(__DIR__, 2) . '/lang/';
-$default_lang = 'en';
-$current_lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : $default_lang;
-
-// Load language file
-if (file_exists($lang_dir . $current_lang . '.php')) {
-    $lang = require_once $lang_dir . $current_lang . '.php';
-} else {
-    $lang = require_once $lang_dir . $default_lang . '.php';
-}
+// Language is now static English
 
 // Check for messages
 $success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : '';
@@ -40,11 +30,9 @@ if (isset($_SESSION['error_message'])) {
     unset($_SESSION['error_message']);
 }
 
-// Set direction based on language
-$dir = ($current_lang == 'ar' || $current_lang == 'he') ? 'rtl' : 'ltr';
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $current_lang; ?>" dir="<?php echo $dir; ?>">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,10 +48,7 @@ $dir = ($current_lang == 'ar' || $current_lang == 'he') ? 'rtl' : 'ltr';
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
-    <?php if ($dir === 'rtl'): ?>
-    <!-- RTL Support -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    <?php endif; ?>
+
 
     <style>
         .dashboard-card {
@@ -101,26 +86,26 @@ $dir = ($current_lang == 'ar' || $current_lang == 'he') ? 'rtl' : 'ltr';
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i> <?php echo $lang['dashboard'] ?? 'Dashboard'; ?></a>
+                        <a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="events.php"><i class="fas fa-calendar-alt"></i> <?php echo $lang['manage_events'] ?? 'Events'; ?></a>
+                        <a class="nav-link" href="events.php"><i class="fas fa-calendar-alt"></i> Events</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="users.php"><i class="fas fa-users"></i> <?php echo $lang['manage_users'] ?? 'Users'; ?></a>
+                        <a class="nav-link" href="users.php"><i class="fas fa-users"></i> Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tickets.php"><i class="fas fa-ticket-alt"></i> <?php echo $lang['manage_tickets'] ?? 'Tickets'; ?></a>
+                        <a class="nav-link" href="tickets.php"><i class="fas fa-ticket-alt"></i> Tickets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="discounts.php"><i class="fas fa-percent"></i> <?php echo $lang['manage_discounts'] ?? 'Discounts'; ?></a>
+                        <a class="nav-link" href="discounts.php"><i class="fas fa-percent"></i> Discounts</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="login_logs.php"><i class="fas fa-sign-in-alt"></i> <?php echo $lang['login_logs'] ?? 'Login Logs'; ?></a>
+                        <a class="nav-link" href="login_logs.php"><i class="fas fa-sign-in-alt"></i> Login Logs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="messages.php"><i class="fas fa-envelope"></i> <?php echo $lang['contact_messages'] ?? 'Contact Messages'; ?></a>
+                        <a class="nav-link" href="messages.php"><i class="fas fa-envelope"></i> Contact Messages</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -129,21 +114,12 @@ $dir = ($current_lang == 'ar' || $current_lang == 'he') ? 'rtl' : 'ltr';
                             <i class="fas fa-user"></i> <?php echo isset($_SESSION['user_name']) ? htmlspecialchars($_SESSION['user_name']) : 'Account'; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../index.php"><i class="fas fa-home"></i> <?php echo $lang['back_to_site'] ?? 'Back to Site'; ?></a></li>
+                            <li><a class="dropdown-item" href="../index.php"><i class="fas fa-home"></i> Back to Site</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt"></i> <?php echo $lang['logout'] ?? 'Logout'; ?></a></li>
+                            <li><a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-globe"></i> <?php echo strtoupper($current_lang); ?>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-                            <li><a class="dropdown-item" href="../change-language.php?lang=en&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>">English</a></li>
-                            <li><a class="dropdown-item" href="../change-language.php?lang=ar&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>">العربية</a></li>
-                            <li><a class="dropdown-item" href="../change-language.php?lang=he&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>">עברית</a></li>
-                        </ul>
-                    </li>
+
                 </ul>
             </div>
         </div>

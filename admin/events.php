@@ -144,7 +144,7 @@ $csrf_token = generateCSRFToken();
                             <?php foreach ($events as $event): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($event['title']); ?></td>
-                                    <td><?php echo formatDate($event['date_time']); ?></td>
+                                    <td><?php echo date('Y-m-d H:i', strtotime($event['date_time'])); ?></td>
                                     <td><?php echo htmlspecialchars($event['location']); ?></td>
                                     <td><?php echo formatPrice($event['price']); ?></td>
                                     <td><?php echo $event['available_tickets']; ?></td>
@@ -164,7 +164,7 @@ $csrf_token = generateCSRFToken();
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <a href="../event.php?id=<?php echo $event['id']; ?>" class="btn btn-outline-primary" target="_blank">
+                                            <a href="event-view.php?id=<?php echo $event['id']; ?>" class="btn btn-outline-primary">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <a href="edit-event.php?id=<?php echo $event['id']; ?>" class="btn btn-outline-secondary">
