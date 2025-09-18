@@ -124,7 +124,7 @@ require_once 'includes/header.php';
             </ul>
 
             <p class="mt-8 text-sm text-gray-600">
-                <?php echo $lang['last_updated'] ?? 'آخر تحديث'; ?>: 25/4/2024
+                <?php echo $lang['last_updated'] ?? 'آخر تحديث'; ?>: 25/4/2025
             </p>
         </div>
     </div>

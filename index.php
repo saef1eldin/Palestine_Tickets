@@ -54,7 +54,7 @@ try {
                          alt="<?php echo htmlspecialchars($event['title']); ?>"
                          loading="lazy">
                     <?php if(strtotime($event['date_time']) < strtotime('+7 days')): ?>
-                    <div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">قريباً</div>
+                    <div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full"><?php echo $lang['coming_soon'] ?? 'قريباً'; ?></div>
                     <?php endif; ?>
                 </div>
                 <div class="p-6 flex-1 flex flex-col">
@@ -66,7 +66,7 @@ try {
                     </div>
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mt-2">
                         <span class="font-bold text-lg text-blue-700"><?php echo $event['price']; ?> ₪</span>
-                        <a href="event-details.php?id=<?php echo $event['id']; ?>" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-bold transition-all duration-300 hover:shadow-lg w-full sm:w-auto text-center">تفاصيل الفعالية</a>
+                        <a href="event-details.php?id=<?php echo $event['id']; ?>" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-bold transition-all duration-300 hover:shadow-lg w-full sm:w-auto text-center"><?php echo $lang['event_details_button'] ?? 'تفاصيل الفعالية'; ?></a>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@ try {
         </div>
         <div class="text-center mt-10">
             <a href="events.php" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-bold inline-flex items-center transition-all duration-300 hover:shadow-xl">
-                <span>عرض جميع الفعاليات</span>
+                <span><?php echo $lang['view_all_events'] ?? 'عرض جميع الفعاليات'; ?></span>
                 <i class="fas fa-arrow-left mr-2"></i>
             </a>
         </div>
@@ -91,18 +91,18 @@ try {
         <div class="grid md:grid-cols-3 gap-10">
             <div class="bg-white rounded-xl shadow-xl p-8 flex flex-col items-center text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-t-4 border-purple-500">
                 <div class="bg-purple-100 text-purple-700 rounded-full w-20 h-20 flex items-center justify-center mb-6 text-3xl shadow-md"><i class="fas fa-search"></i></div>
-                <h3 class="font-bold text-2xl mb-3 text-purple-700">استعرض الفعاليات</h3>
-                <p class="text-gray-600"><?php echo $lang['how_it_works_step1_desc'] ?? 'استعرض مجموعة متنوعة من الحفلات الموسيقية والمسرحيات والمعارض الفنية والفعاليات الثقافية المميزة.'; ?></p>
+                <h3 class="font-bold text-2xl mb-3 text-purple-700"><?php echo $lang['browse_events'] ?? 'استعرض الفعاليات'; ?></h3>
+                <p class="text-gray-600 text-wrap"><?php echo $lang['how_it_works_step1_desc'] ?? 'استعرض مجموعة متنوعة من الحفلات الموسيقية والمسرحيات والمعارض الفنية والفعاليات الثقافية المميزة.'; ?></p>
             </div>
             <div class="bg-white rounded-xl shadow-xl p-8 flex flex-col items-center text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-t-4 border-purple-600">
                 <div class="bg-purple-100 text-purple-700 rounded-full w-20 h-20 flex items-center justify-center mb-6 text-3xl shadow-md"><i class="fas fa-ticket-alt"></i></div>
-                <h3 class="font-bold text-2xl mb-3 text-purple-700">احجز تذكرتك</h3>
-                <p class="text-gray-600"><?php echo $lang['how_it_works_step2_desc'] ?? 'اختر الفعالية المفضلة لديك واحجز تذاكرك بسهولة وسرعة من خلال نظام حجز آمن ومبسط.'; ?></p>
+                <h3 class="font-bold text-2xl mb-3 text-purple-700"><?php echo $lang['book_ticket'] ?? 'احجز تذكرتك'; ?></h3>
+                <p class="text-gray-600 text-wrap"><?php echo $lang['how_it_works_step2_desc'] ?? 'اختر الفعالية المفضلة لديك واحجز تذاكرك بسهولة وسرعة من خلال نظام حجز آمن ومبسط.'; ?></p>
             </div>
             <div class="bg-white rounded-xl shadow-xl p-8 flex flex-col items-center text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-t-4 border-purple-700">
                 <div class="bg-purple-100 text-purple-700 rounded-full w-20 h-20 flex items-center justify-center mb-6 text-3xl shadow-md"><i class="fas fa-envelope-open-text"></i></div>
-                <h3 class="font-bold text-2xl mb-3 text-purple-700">استلم تذكرتك</h3>
-                <p class="text-gray-600"><?php echo $lang['how_it_works_step3_desc'] ?? 'استلم تذاكرك الإلكترونية فوراً على بريدك الإلكتروني واحفظها على هاتفك للدخول السريع إلى الفعالية.'; ?></p>
+                <h3 class="font-bold text-2xl mb-3 text-purple-700"><?php echo $lang['receive_ticket'] ?? 'استلم تذكرتك'; ?></h3>
+                <p class="text-gray-600 text-wrap"><?php echo $lang['how_it_works_step3_desc'] ?? 'استلم تذاكرك الإلكترونية فوراً على بريدك الإلكتروني واحفظها على هاتفك للدخول السريع إلى الفعالية.'; ?></p>
             </div>
         </div>
     </div>
@@ -123,23 +123,23 @@ try {
                 <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     <div class="flex items-center gap-4 mb-2">
                         <div class="bg-purple-100 text-purple-700 rounded-full w-10 h-10 flex items-center justify-center text-xl shadow-sm">1</div>
-                        <h3 class="font-bold text-xl text-purple-700">البحث عن الفعاليات</h3>
+                        <h3 class="font-bold text-xl text-purple-700"><?php echo $lang['search_events_step'] ?? 'البحث عن الفعاليات'; ?></h3>
                     </div>
-                    <p class="text-gray-600 pr-14">تصفح بسهولة واكتشف أحدث الفعاليات والعروض المميزة حسب التاريخ أو الموقع أو النوع، واعثر على ما يناسب ذوقك واهتماماتك.</p>
+                    <p class="text-gray-600 pr-14"><?php echo $lang['search_events_desc'] ?? 'تصفح بسهولة واكتشف أحدث الفعاليات والعروض المميزة حسب التاريخ أو الموقع أو النوع، واعثر على ما يناسب ذوقك واهتماماتك.'; ?></p>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     <div class="flex items-center gap-4 mb-2">
                         <div class="bg-purple-100 text-purple-700 rounded-full w-10 h-10 flex items-center justify-center text-xl shadow-sm">2</div>
-                        <h3 class="font-bold text-xl text-purple-700">اختيار المقاعد</h3>
+                        <h3 class="font-bold text-xl text-purple-700"><?php echo $lang['choose_seats_step'] ?? 'اختيار المقاعد'; ?></h3>
                     </div>
-                    <p class="text-gray-600 pr-14">اختر أفضل المقاعد المتاحة من خلال مخطط القاعة التفاعلي واستمتع بأفضل رؤية وتجربة مميزة للعرض.</p>
+                    <p class="text-gray-600 pr-14"><?php echo $lang['choose_seats_desc'] ?? 'اختر أفضل المقاعد المتاحة من خلال مخطط القاعة التفاعلي واستمتع بأفضل رؤية وتجربة مميزة للعرض.'; ?></p>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     <div class="flex items-center gap-4 mb-2">
                         <div class="bg-purple-100 text-purple-700 rounded-full w-10 h-10 flex items-center justify-center text-xl shadow-sm">3</div>
-                        <h3 class="font-bold text-xl text-purple-700">إتمام عملية الدفع</h3>
+                        <h3 class="font-bold text-xl text-purple-700"><?php echo $lang['complete_payment_step'] ?? 'إتمام عملية الدفع'; ?></h3>
                     </div>
-                    <p class="text-gray-600 pr-14">أتمم عملية الدفع بسهولة وأمان من خلال بوابة دفع آمنة بنسبة 100٪ واحصل على تذاكرك فوراً على بريدك الإلكتروني.</p>
+                    <p class="text-gray-600 pr-14"><?php echo $lang['complete_payment_desc'] ?? 'أتمم عملية الدفع بسهولة وأمان من خلال بوابة دفع آمنة بنسبة 100٪ واحصل على تذاكرك فوراً على بريدك الإلكتروني.'; ?></p>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@ try {
             <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="mb-4">
                     <div>
-                        <h4 class="font-bold text-lg">محمد الخطيب</h4>
+                        <h4 class="font-bold text-lg"><?php echo $lang['customer1_name'] ?? 'سمر الغزالي'; ?></h4>
                         <div class="flex text-yellow-400">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -167,12 +167,12 @@ try {
                         </div>
                     </div>
                 </div>
-                <p class="text-gray-600">"موقع ممتاز لحجز التذاكر! واجهة المستخدم سهلة وبسيطة، وعملية الدفع آمنة وسريعة. أحب كيف يمكنني تصفية الفعاليات حسب التاريخ والموقع. سأستخدم هذا الموقع دائماً لحجز تذاكري!"</p>
+                <p class="text-gray-600">"<?php echo $lang['customer1_review'] ?? 'تجربة رائعة من البداية إلى النهاية! حجزت تذاكر لحفلة موسيقية وكانت العملية سلسة جداً. أحببت خاصية اختيار المقاعد التفاعلية والتي مكنتني من اختيار أفضل مكان في القاعة. سأوصي بهذا الموقع لجميع أصدقائي.'; ?>"</p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="mb-4">
                     <div>
-                        <h4 class="font-bold text-lg">ليلى عبد الكريم</h4>
+                        <h4 class="font-bold text-lg"><?php echo $lang['customer2_name'] ?? 'خالد النجار'; ?></h4>
                         <div class="flex text-yellow-400">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -182,12 +182,12 @@ try {
                         </div>
                     </div>
                 </div>
-                <p class="text-gray-600">"أنا سعيدة جداً بالأسعار التنافسية على هذا الموقع. لقد وفرت الكثير مقارنة بمنصات التذاكر الأخرى. خدمة العملاء ممتازة وسريعة الاستجابة، والموقع يوفر خيارات متنوعة من الفعاليات."</p>
+                <p class="text-gray-600">"<?php echo $lang['customer2_review'] ?? 'استخدمت الموقع لحجز تذاكر لعائلتي بأكملها لحضور مسرحية، وكانت التجربة ممتازة. الأسعار معقولة والخيارات متنوعة. أعجبني أيضاً نظام الإشعارات الذي يذكرني بموعد الفعالية قبل يوم من انعقادها.'; ?>"</p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="mb-4">
                     <div>
-                        <h4 class="font-bold text-lg">أحمد الشوا</h4>
+                        <h4 class="font-bold text-lg"><?php echo $lang['customer3_name'] ?? 'رنا الحسيني'; ?></h4>
                         <div class="flex text-yellow-400">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -197,7 +197,7 @@ try {
                         </div>
                     </div>
                 </div>
-                <p class="text-gray-600">"أحب العروض الخاصة للمجموعات التي يقدمها هذا الموقع. التطبيق المحمول سهل الاستخدام ويمكنني عرض تذاكري الرقمية بسهولة عند الدخول. التعليمات واضحة والدعم الفني ممتاز."</p>
+                <p class="text-gray-600">"<?php echo $lang['customer3_review'] ?? 'موقع تذاكر فلسطين هو الخيار الأمثل لحجز تذاكر الفعاليات الثقافية والفنية. أحب تنوع الفعاليات المعروضة وسهولة البحث. خدمة العملاء ممتازة وسريعة الاستجابة. سعيدة جداً بتجربتي معهم.'; ?>"</p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="mb-4">
@@ -252,20 +252,20 @@ try {
     <div class="container mx-auto px-4">
         <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div class="w-full lg:w-2/3 text-center lg:text-right">
-                <h2 class="text-2xl md:text-3xl font-bold mb-2 text-wrap">اشترك في نشرتنا البريدية واحصل على خصم 10٪</h2>
-                <p class="opacity-90 text-wrap">كن أول من يعلم بالفعاليات الجديدة والعروض الحصرية والخصومات الخاصة لمشتركي النشرة البريدية</p>
+                <h2 class="text-2xl md:text-3xl font-bold mb-2 text-wrap"><?php echo $lang['newsletter_subscribe'] ?? 'اشترك في نشرتنا البريدية واحصل على خصم 10٪'; ?></h2>
+                <p class="opacity-90 text-wrap"><?php echo $lang['newsletter_description'] ?? 'كن أول من يعلم بالفعاليات الجديدة والعروض الحصرية والخصومات الخاصة لمشتركي النشرة البريدية'; ?></p>
             </div>
             <div class="w-full lg:w-1/3">
                 <form class="newsletter-form flex-responsive">
                     <input type="email"
-                           placeholder="أدخل بريدك الإلكتروني"
+                           placeholder="<?php echo $lang['newsletter_placeholder'] ?? 'أدخل بريدك الإلكتروني'; ?>"
                            class="flex-1 py-3 px-4 rounded-lg focus:outline-none text-gray-700 text-right"
                            required
                            style="font-size: 16px;">
                     <button type="submit"
                             class="bg-purple-900 hover:bg-purple-950 py-3 px-6 rounded-lg transition-colors duration-300 whitespace-nowrap"
-                            data-original-text="اشترك">
-                        اشترك
+                            data-original-text="<?php echo $lang['newsletter_button'] ?? 'اشترك'; ?>">
+                        <?php echo $lang['newsletter_button'] ?? 'اشترك'; ?>
                     </button>
                 </form>
             </div>
